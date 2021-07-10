@@ -1,5 +1,7 @@
+import Login from './views/Login'
+
 function App() {
-  return <></>
+  return <Login />
 }
 
 export default App

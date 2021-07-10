@@ -1,0 +1,19 @@
+@import "_variables.scss";
+img {
+  vertical-align: bottom;
+  object-fit: cover;
+}
+
+html,
+body,
+#root,
+main {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: $fontRoboto;
+}
