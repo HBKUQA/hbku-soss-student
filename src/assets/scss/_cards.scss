@@ -11,8 +11,15 @@
   .professor-card-container {
     display: grid;
     gap: 40px;
-    grid-template-columns: 116px auto;
+    grid-template-columns: 1fr;
+    @media screen and (min-width: $break-point-md) {
+      grid-template-columns: 116px auto;
+    }
     & > img {
+      margin: auto;
+      @media screen and (min-width: $break-point-md) {
+        margin: 0px;
+      }
       width: 112px;
       height: 112px;
       object-fit: cover;
@@ -22,17 +29,26 @@
     & > div {
       padding-top: 12px;
       .name {
-        font: normal normal bold 16px/26px $fontRoboto;
+        font: normal normal bold 1rem/1.5rem $fontRoboto;
         letter-spacing: 0px;
         color: $primary-dark;
         text-transform: uppercase;
       }
       .professor-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        @media screen and (min-width: $break-point-md) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        @media screen and (min-width: $break-point-lg) {
+          grid-template-columns: 1fr;
+        }
+        @media screen and (min-width: $break-point-xl) {
+          grid-template-columns: repeat(2, 1fr);
+        }
         color: $primary-light;
         grid-row-gap: 8px !important;
         margin-bottom: 10px;
-        font: normal normal normal 16px/26px $fontRoboto;
+        font: normal normal normal 1rem/1.5rem $fontRoboto;
         letter-spacing: 0px;
         opacity: 1;
       }
@@ -61,8 +77,14 @@
     padding: 20px;
     margin: 5px 0px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
+
+    flex-direction: column;
+    @media screen and (min-width: $break-point-sm) {
+      justify-content: space-between;
+      flex-direction: row;
+    }
     .title {
       color: $primary-dark;
       &:hover {
@@ -83,7 +105,7 @@
       }
     }
     .time {
-      font: normal normal bold 16px/26px $fontRoboto;
+      font: normal normal bold 1rem/1.5rem $fontRoboto;
       letter-spacing: 0px;
       color: $primary;
     }
@@ -93,11 +115,12 @@
 .card {
   border: 2px solid rgba($gray-border, 0.1);
   padding: 20px;
+  width: 100%;
   border-radius: 10px;
   .card-header {
     font: {
       family: $fontRoboto;
-      size: 28px;
+      size: 1.6rem;
     }
     color: $primary-dark;
     border-bottom: 2px solid $primary-dark;
@@ -105,11 +128,11 @@
   .card-body {
     font: {
       family: $fontRoboto;
-      size: 16px;
+      size: 1rem;
     }
     color: $gray;
     & > div {
-      margin: 20px 0px;
+      margin: $default-gap 0px;
     }
   }
 }
@@ -195,25 +218,7 @@
             object-fit: contain;
           }
         }
-        //   if (props.locked)
-        //   return (
-        //     <span className='overlay locked'>
-        //       <img src={lock} alt='locked' />
-        //     </span>
-        //   )
-        // return (
-        //   <span className='overlay'>
-        //     <Link to='/' className='thumbnail-icon'>
-        //       <svg
-        //         xmlns='http://www.w3.org/2000/svg'
-        //         width='16'
-        //         height='16'
-        //         fill='currentColor'
-        //         viewBox='0 0 16 16'>
-        //         <path d='m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z' />
-        //       </svg>
-        //     </Link>
-        //   </span>
+
         position: absolute;
         width: 100%;
         height: 100%;

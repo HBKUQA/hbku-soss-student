@@ -12,8 +12,10 @@ import {
   programTopData,
   description,
   requirements,
+  cardsRelated,
 } from './data'
 import Cards from './Cards'
+import Card from './Cards'
 import Professor from './Professor'
 
 function ProgramIntro() {
@@ -25,7 +27,7 @@ function ProgramIntro() {
         <div className='is-grid front-grid'>
           <Cards items={cards} />
 
-          <div>
+          <div className='main-frame'>
             <h2>{outcomes.title}</h2>
             <ul className='checks'>
               {outcomes.items.map((e, k) => (
@@ -40,6 +42,7 @@ function ProgramIntro() {
 
             <Professor {...professorData} />
           </div>
+          <Cards isRelated items={cardsRelated} />
         </div>
       </div>
       <Footer />

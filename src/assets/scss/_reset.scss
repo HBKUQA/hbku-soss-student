@@ -2,9 +2,13 @@
 @import "_variables.scss";
 
 :root {
-  font-size: $default-font-size;
+  font-size: $default-font-size-xs;
 }
-
+@media screen and(min-width: $break-point-md) {
+  :root {
+    font-size: $default-font-size;
+  }
+}
 img {
   vertical-align: bottom;
   object-fit: cover;

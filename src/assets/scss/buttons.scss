@@ -58,6 +58,10 @@ button {
 }
 .filter-buttons {
   display: flex;
+  flex-direction: column;
+  @media screen and (min-width: $break-point-md) {
+    flex-direction: row;
+  }
   gap: $default-gap;
 }
 

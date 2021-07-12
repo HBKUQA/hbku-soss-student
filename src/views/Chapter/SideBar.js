@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 
 function SideBar(props) {
-  const formatTime = seconds => seconds
+  const formatTime = seconds => {
+    const m = parseInt(seconds / 60)
+    return `${m} min`
+  }
   return (
     <>
       <button id='sidebar-toogler' onClick={props.toogler}>
@@ -27,11 +30,6 @@ function SideBar(props) {
           </Link>
         </div>
         <div>
-          {/* ={courseSections} currentChapter={currentChapter}  */}
-          {/* 
-            { id: '1', : 'Welcome Note by HBKU Leadership', time: 675, done: true },
-            { id: '2', title: 'What you should known about HBKU', time: 1211, done: true },
-          */}
           <div className='header'>
             <div>
               <span>Section content</span>
