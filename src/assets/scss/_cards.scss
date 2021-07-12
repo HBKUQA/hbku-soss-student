@@ -39,3 +39,44 @@
     }
   }
 }
+.orientation {
+  .header {
+    margin: 2rem 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2 {
+      margin: 0px;
+    }
+    & > div {
+      font: normal normal normal 16px/26px $fontRoboto;
+      letter-spacing: 0px;
+      color: $primary-light;
+      opacity: 1;
+    }
+  }
+  .lesson {
+    background: rgba($gray, 0.12);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 5px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+      &::before {
+        padding-inline-end: 20px;
+        font-family: $fontAwesome;
+        font-weight: 700;
+        font-size: 14px;
+        color: $primary;
+        content: "\f067";
+      }
+    }
+    .time {
+      font: normal normal bold 16px/26px $fontRoboto;
+      letter-spacing: 0px;
+      color: $primary;
+    }
+  }
+}

@@ -17,6 +17,10 @@ button {
 #top {
   scroll-margin-top: 105px;
 }
+
+html {
+  scroll-behavior: smooth;
+}
 html,
 body,
 #root,
@@ -104,4 +108,17 @@ $spacer: 1rem;
 }
 .gap-y-0 {
   grid-row-gap: 0px !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+.text-start {
+  text-align: start !important;
+}
+.text-end {
+  text-align: end !important;
+}
+.text-justify {
+  text-align: justify !important;
 }

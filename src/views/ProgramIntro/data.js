@@ -83,3 +83,15 @@ export const programTopData = {
   primaryAction: { text: 'Start the orientation now', link: '/' },
   secondaryAction: { text: 'Orientation website', link: '/' },
 }
+
+export const orientation = {
+  title: 'Orientation program',
+  items: [
+    { title: 'Welcome Note by HBKU Leadership', time: 675 },
+    { title: 'What you should known about HBKU', time: 1211 },
+    { title: 'The Student Services at HBKU', time: 1211 },
+    { title: 'How to engage in student life ?', time: 1211 },
+    { title: 'Research activities at HBKU', time: 1211 },
+    { title: 'Next steps', time: 1211 },
+  ],
+}
