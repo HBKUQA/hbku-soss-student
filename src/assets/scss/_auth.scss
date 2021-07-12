@@ -4,41 +4,44 @@
   color: $white;
   height: 100vh;
   grid-template-columns: repeat(2, 1fr);
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: $break-point-md) {
     grid-template-columns: 1fr;
   }
 
   .auth-form-loading {
-    gap: 1.5rem;
-    padding-left: 100px;
-    display: flex;
+    width: 100%;
+    padding: 0px;
     height: 100%;
-    width: clamp(350px, 50%, 600px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     color: $white;
+
     i {
       color: $primary;
     }
   }
   form {
     gap: 1.5rem;
-    padding-left: 100px;
     display: flex;
     height: 100%;
-    width: clamp(350px, 50%, 600px);
+    margin: auto;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
+    padding: 1em;
     align-items: center;
-    @media screen and (max-width: 720px) {
-      width: 100%;
+    @media screen and (min-width: $break-point-sm) {
+      width: clamp(350px, 50%, 600px);
+    }
+    @media screen and (min-width: $break-point-md) {
+      width: clamp(350px, 50%, 600px);
+    }
+
+    @media screen and (min-width: $break-point-xl) {
       margin: 0px;
-      padding: 100px;
+      padding: 0px;
+      padding-left: 100px;
+      width: 500px;
     }
-    @media screen and (max-width: 500px) {
-      padding: 10px;
-    }
+
     .input-actions {
       width: 100%;
       position: relative;
@@ -87,9 +90,12 @@
       font-weight: 700;
       display: flex;
       text-transform: uppercase;
-      border: none;
-      border-radius: 5px;
+      border: 0px;
       padding: 1em 5em;
+      border-radius: 5px;
+      &:hover {
+        background: darken($white, 10);
+      }
     }
   }
   h1 {
@@ -104,7 +110,7 @@
 }
 
 .auth-carousel-container {
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: $break-point-md) {
     display: none;
   }
   position: relative;

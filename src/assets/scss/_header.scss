@@ -42,8 +42,16 @@ header {
     border: 1px solid $primary-dark;
     color: $primary-dark;
   }
+  .input-group {
+    display: none;
+    @media screen and(min-width: 768px) {
+      display: flex;
+    }
+  }
 }
 .input-group {
+  display: flex;
+
   &.outline-primary {
     border: 1px solid $primary-dark;
     color: $primary-dark;
@@ -53,7 +61,6 @@ header {
   }
   border-radius: 300px;
   overflow: hidden;
-  display: flex;
   padding: 0px 12px;
   gap: 12px;
 

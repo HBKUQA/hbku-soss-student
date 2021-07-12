@@ -25,13 +25,8 @@ $container-lg: 960px;
 $container-xl: 1140px;
 $container-xxl: 1320px;
 
-// @media screen and(min-width: 576px) {
-// }
-// @media screen and(min-width: 768px) {
-// }
-// @media screen and(min-width: 992px) {
-// }
-// @media screen and(min-width: 1200px) {
-// }
-// @media screen and(min-width: 1400px) {
-// }
+$break-point-sm: 576px;
+$break-point-md: 768px;
+$break-point-lg: 992px;
+$break-point-xl: 1200px;
+$break-point-xxl: 1400px;
