@@ -1,9 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import "_variables.scss";
+
+:root {
+  font-size: $default-font-size;
+}
+
 img {
   vertical-align: bottom;
   object-fit: cover;
 }
 
+button {
+  cursor: pointer;
+}
+
+#top {
+  scroll-margin-top: 105px;
+}
 html,
 body,
 #root,
@@ -11,9 +24,84 @@ main {
   min-height: 100vh;
 }
 
+img,
+video {
+  width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
 * {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
   font-family: $fontRoboto;
+}
+a {
+  color: $primary;
+  text-decoration: none;
+}
+
+$multiplier: 0, 0.25, 0.5, 1, 1.5, 3;
+$spacer: 1rem;
+@for $i from 0 through 5 {
+  .me-#{$i} {
+    margin-inline-end: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .ms-#{$i} {
+    margin-inline-start: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .mt-#{$i} {
+    margin-top: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .mb-#{$i} {
+    margin-bottom: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .mx-#{$i} {
+    margin-inline-end: nth($multiplier, $i + 1) * $spacer !important;
+    margin-inline-start: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .my-#{$i} {
+    margin-top: nth($multiplier, $i + 1) * $spacer !important;
+    margin-bottom: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .m-#{$i} {
+    margin-inline-end: nth($multiplier, $i + 1) * $spacer !important;
+    margin-inline-start: nth($multiplier, $i + 1) * $spacer !important;
+    margin-top: nth($multiplier, $i + 1) * $spacer !important;
+    margin-bottom: nth($multiplier, $i + 1) * $spacer !important;
+  }
+
+  .pe-#{$i} {
+    padding-inline-end: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .ps-#{$i} {
+    padding-inline-start: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .pt-#{$i} {
+    padding-top: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .pb-#{$i} {
+    padding-bottom: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .px-#{$i} {
+    padding-inline-end: nth($multiplier, $i + 1) * $spacer !important;
+    padding-inline-start: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .py-#{$i} {
+    padding-top: nth($multiplier, $i + 1) * $spacer !important;
+    padding-bottom: nth($multiplier, $i + 1) * $spacer !important;
+  }
+  .p-#{$i} {
+    padding-inline-end: nth($multiplier, $i + 1) * $spacer !important;
+    padding-inline-start: nth($multiplier, $i + 1) * $spacer !important;
+    padding-top: nth($multiplier, $i + 1) * $spacer !important;
+    padding-bottom: nth($multiplier, $i + 1) * $spacer !important;
+  }
+}
+.gap-y-0 {
+  grid-row-gap: 0px !important;
 }

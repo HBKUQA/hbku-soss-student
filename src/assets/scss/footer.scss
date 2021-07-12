@@ -1,0 +1,46 @@
+@import "_variables.scss";
+footer {
+  background: $primary-dark;
+  display: flex;
+  padding: 20px 0px;
+  position: relative;
+  .btn-top {
+    top: -20px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $primary-dark;
+    height: 40px;
+    position: absolute;
+    background: $white;
+    border: 1px solid $primary-dark;
+  }
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    li {
+      padding: 0px 18px;
+      position: relative;
+      &::after {
+        content: " ";
+        width: 3px;
+        display: block;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        right: -1px;
+        height: 3px;
+        background: $white;
+      }
+      &:last-of-type::after {
+        display: none;
+      }
+    }
+    a {
+      color: $white;
+      font-family: $fontRoboto;
+      font-size: 14px;
+    }
+  }
+}

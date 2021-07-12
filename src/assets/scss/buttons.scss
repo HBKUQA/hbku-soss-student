@@ -1,0 +1,72 @@
+@import "_variables.scss";
+.btn {
+  padding: 12px 20px;
+  font-family: $fontRoboto;
+  border: 0px;
+  background: $white;
+  svg {
+    height: 1em;
+  }
+  display: inline-flex;
+  justify-content: center;
+
+  align-items: center;
+  border-radius: 5px;
+}
+
+.btn-outline-dark {
+  border: 1px solid $primary-dark;
+  color: $primary-dark;
+  background: $white;
+  &:hover {
+    background: $primary-dark;
+    color: $white;
+    svg {
+      fill: $white;
+    }
+  }
+}
+
+.btn-primary {
+  background: $primary;
+  color: $white;
+  &:hover {
+    color: $primary;
+    background: $white;
+  }
+}
+.btn-outline-white {
+  background: $primary-dark;
+  color: $white;
+  border: 1px solid $white;
+  &:hover {
+    color: $primary-dark;
+    background: $white;
+  }
+}
+
+.read-more {
+  color: $primary;
+  background: transparent;
+  font-size: 0.9em;
+  padding: 0px;
+  text-decoration: underline;
+  border: none;
+  &::before {
+    font-family: $fontAwesome;
+    content: "\f067";
+    font-weight: 700;
+    font-size: 0.8em;
+    transition: transform 300ms ease-in-out;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 2em;
+    height: 1em;
+    transform-origin: center;
+  }
+  &:hover::before {
+    transform: rotate(-90deg);
+  }
+}

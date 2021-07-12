@@ -1,0 +1,82 @@
+@import "_variables.scss";
+header {
+  padding: 20px 1em;
+  z-index: 30;
+  top: 0px;
+  background: $white;
+  width: 100%;
+  position: fixed;
+  box-shadow: 0px 3px 10px #0000001a;
+  @media screen and(min-width: 576px) {
+    padding: 20px 0px;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    width: 127px;
+    height: 65px;
+  }
+  .actions {
+    gap: 20px;
+    display: flex;
+    height: 40px;
+  }
+  input[type="search"] {
+    border: none;
+    padding: 12px;
+    width: 680px;
+
+    @media screen and(max-width: 1200px) {
+      width: 480px;
+    }
+    @media screen and(max-width: 992px) {
+      width: 280px;
+    }
+    @media screen and(max-width: 768px) {
+      display: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+  .outline-primary {
+    border: 1px solid $primary-dark;
+    color: $primary-dark;
+  }
+}
+.input-group {
+  border-radius: 300px;
+  overflow: hidden;
+  display: flex;
+
+  .input-group-icon {
+    @media screen and(max-width: 768px) {
+      padding: 1em;
+    }
+    color: $gray;
+    display: flex;
+    padding-left: 1em;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.notif {
+  position: relative;
+  font-size: 20px;
+  &.active {
+    &:after {
+      content: " ";
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background: red;
+      border-radius: 4px;
+      right: -2px;
+      top: 3px;
+    }
+  }
+}

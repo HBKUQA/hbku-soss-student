@@ -1,0 +1,41 @@
+.professor-card {
+  padding: 40px;
+  margin: 40px 0px;
+  border-radius: 10px;
+  background: #f6f6f6;
+  h2 {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    padding: 0px;
+  }
+  .professor-card-container {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 116px auto;
+    & > img {
+      width: 112px;
+      height: 112px;
+      object-fit: cover;
+      border: 2px $primary solid;
+      border-radius: 50%;
+    }
+    & > div {
+      padding-top: 12px;
+      .name {
+        font: normal normal bold 16px/26px $fontRoboto;
+        letter-spacing: 0px;
+        color: $primary-dark;
+        text-transform: uppercase;
+      }
+      .professor-grid {
+        grid-template-columns: repeat(2, 1fr);
+        color: $primary-light;
+        grid-row-gap: 8px !important;
+        margin-bottom: 10px;
+        font: normal normal normal 16px/26px $fontRoboto;
+        letter-spacing: 0px;
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+@import "_variables.scss";
+
+body {
+  background-position: center bottom;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-image: url("../svg/bg.svg");
+  scroll-behavior: smooth;
+}
+
+.container {
+  width: 100%;
+  // padding: 1em;
+  margin: auto;
+  @media screen and(min-width: 576px) {
+    width: 540px;
+  }
+  @media screen and(min-width: 768px) {
+    width: 720px;
+  }
+  @media screen and(min-width: 992px) {
+    width: 960px;
+  }
+  @media screen and(min-width: 1200px) {
+    width: 1140px;
+  }
+  @media screen and(min-width: 1400px) {
+    width: 1320px;
+  }
+}
+
+.is-grid {
+  gap: 40px;
+  display: grid;
+}
+
+.has-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: bold;
+  font-family: $fontRoboto;
+}
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  font-family: $fontRoboto;
+}
+h3 {
+  font-family: $fontMontserrat;
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.front-grid {
+  grid-template-columns: 260px auto;
+  color: $primary-dark;
+  margin-top: 75px;
+  margin-bottom: 75px;
+  .card-container {
+    flex-direction: column;
+    gap: 40px;
+    display: flex;
+    .title {
+      display: block;
+      margin: 8px 0px 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-family: $fontRoboto;
+    }
+    .text {
+      font: normal normal bold 16px/22px $fontRoboto;
+    }
+  }
+  p {
+    line-height: 2em;
+  }
+  h2 {
+    margin-top: 2rem;
+    color: $primary;
+    padding-bottom: 10px;
+  }
+}
+
+.card {
+  border: 2px solid rgba($gray-border, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  .card-header {
+    font: {
+      family: $fontRoboto;
+      size: 28px;
+    }
+    color: $primary-dark;
+    border-bottom: 2px solid $primary-dark;
+  }
+  .card-body {
+    font: {
+      family: $fontRoboto;
+      size: 16px;
+    }
+    color: $gray;
+    & > div {
+      margin: 20px 0px;
+    }
+  }
+}
+
+ul.checks {
+  padding-inline-start: 20px;
+  li {
+    padding: 10px;
+    &::marker {
+      font-family: $fontAwesome;
+      font-weight: 900;
+      font-size: 1.2em;
+      content: "\f058";
+      color: $primary-light;
+      margin: 10px;
+    }
+  }
+}
