@@ -105,6 +105,7 @@ button {
   text-decoration: underline;
   padding-left: 0px;
   padding-right: 0px;
+  background: transparent;
   &:hover {
     text-decoration: none;
     font-weight: bolder;
@@ -143,5 +144,59 @@ input[type="search"] {
 
   &:focus {
     outline: none;
+  }
+}
+
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 1em;
+  cursor: pointer;
+  font-size: 1em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    &:checked ~ .checkmark {
+      // background-color: #2196f3;
+      &:after {
+        display: flex;
+      }
+    }
+  }
+  &:hover input ~ .checkmark {
+    background-color: lighten($primary-dark, 75);
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  .checkmark {
+    position: absolute;
+    top: 0;
+    border: 1px solid $primary-dark;
+    left: 0;
+    height: 1em;
+    width: 1em;
+    background-color: $white;
+    &:after {
+      display: none;
+      width: 100%;
+      height: 100%;
+      font-weight: 700;
+      font-size: 0.6em;
+      color: $primary-dark;
+      content: "\f00c";
+      align-items: center;
+      justify-content: center;
+      font-family: $fontAwesome;
+    }
   }
 }

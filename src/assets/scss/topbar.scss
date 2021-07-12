@@ -1,11 +1,11 @@
 @import "_variables.scss";
 
 .topbar {
-  margin-top: 105px;
+  margin-top: $header-height;
   background: $primary-dark;
   color: $white;
   position: relative;
-  padding: 30px 0px;
+  padding: 30px 0px !important;
   h1 {
     padding-top: 20px;
   }
@@ -24,9 +24,6 @@
   }
 
   .video-container {
-    // position: relative;
-    // background: $white;
-    // position: absolute;
     video {
       height: 100%;
     }

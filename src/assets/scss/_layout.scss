@@ -8,24 +8,49 @@ body {
   scroll-behavior: smooth;
 }
 
+.toogle-container {
+  transition: width 500ms ease-in-out;
+}
+
 .container {
-  width: 100%;
-  // padding: 1em;
+  $width: $container-xs;
+  width: $width;
+  padding: 1em;
+  // transition: width 500ms ease-in-out;
+  // $aside-width-lg: 600px;
+  // : 400px;
+  // : 200px;
   margin: auto;
+  .toogled {
+    width: $container-xs !important;
+  }
   @media screen and(min-width: 576px) {
-    width: 540px;
+    width: $container-sm;
+    padding: 0px;
   }
   @media screen and(min-width: 768px) {
-    width: 720px;
+    width: $container-md;
+    .toogled {
+      width: $container-md - $aside-width-md !important;
+    }
   }
   @media screen and(min-width: 992px) {
-    width: 960px;
+    width: $container-lg;
+    .toogled {
+      width: $container-lg - $aside-width-md !important;
+    }
   }
   @media screen and(min-width: 1200px) {
-    width: 1140px;
+    width: $container-xl;
+    .toogled {
+      width: $container-xl - $aside-width-lg !important;
+    }
   }
   @media screen and(min-width: 1400px) {
-    width: 1320px;
+    width: $container-xxl;
+    .toogled {
+      width: $container-xxl - $aside-width-lg !important;
+    }
   }
 }
 
@@ -35,7 +60,10 @@ body {
 }
 
 .has-2 {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
+  @media screen and(min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 h1 {
@@ -128,6 +156,11 @@ ul.checks {
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  gap: $default-gap;
+  @media screen and(min-width: 768px) {
+    flex-direction: row;
+  }
   input[type="search"] {
     width: 100%;
   }
