@@ -12,10 +12,23 @@
 
   align-items: center;
   border-radius: 5px;
+  border: 1px solid transparent;
+  &.big-text {
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+a,
+button {
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .btn-outline-dark {
-  border: 1px solid $primary-dark;
+  border-color: $primary-dark;
   color: $primary-dark;
   background: $white;
   &:hover {
@@ -25,6 +38,27 @@
       fill: $white;
     }
   }
+
+  &:disabled {
+    border-color: rgba($primary-dark, 0.3);
+    background: $white;
+    color: rgba($primary-dark, 0.3);
+    &:hover {
+      border-color: rgba($primary-dark, 0.3);
+      background: $white;
+      color: rgba($primary-dark, 0.3);
+    }
+
+    &.hover-outline:hover {
+      border-color: rgba($primary-dark, 0.3);
+      background: $white;
+      color: rgba($primary-dark, 0.3);
+    }
+  }
+}
+.filter-buttons {
+  display: flex;
+  gap: $default-gap;
 }
 
 .btn-primary {
@@ -34,14 +68,46 @@
     color: $primary;
     background: $white;
   }
+  &:disabled {
+    color: $white;
+    background: rgba($primary, 0.3);
+    &.hover-outline:hover {
+      border-color: transparent;
+    }
+  }
+  &.hover-outline:hover {
+    border-color: $primary;
+  }
 }
+
+.btn-outline-primary {
+  color: $primary;
+  background: $white;
+  border-color: $primary;
+  &:hover {
+    background: $primary;
+    color: $white;
+  }
+}
+
 .btn-outline-white {
   background: $primary-dark;
   color: $white;
-  border: 1px solid $white;
+  border-color: $white;
   &:hover {
     color: $primary-dark;
     background: $white;
+  }
+}
+
+.btn-link {
+  color: $primary;
+  text-decoration: underline;
+  padding-left: 0px;
+  padding-right: 0px;
+  &:hover {
+    text-decoration: none;
+    font-weight: bolder;
   }
 }
 
@@ -68,5 +134,14 @@
   }
   &:hover::before {
     transform: rotate(-90deg);
+  }
+}
+
+input[type="search"] {
+  border: none;
+  padding: 12px 0px;
+
+  &:focus {
+    outline: none;
   }
 }

@@ -80,18 +80,18 @@ export const programTopData = {
   video: { label: 'Introduction', url: videoUrl, poster },
   title: 'Virtual Student Orientation',
   text: 'The virtual Student Orientation will help you to become familiar with the university and its resources, and each student can complete the orientation at their own pace.',
-  primaryAction: { text: 'Start the orientation now', link: '/' },
-  secondaryAction: { text: 'Orientation website', link: '/' },
+  primaryAction: { text: 'Start the orientation now', link: '/program/1/1' },
+  secondaryAction: { text: 'Orientation website', link: '/program/1' },
 }
 
 export const orientation = {
   title: 'Orientation program',
   items: [
-    { title: 'Welcome Note by HBKU Leadership', time: 675 },
-    { title: 'What you should known about HBKU', time: 1211 },
-    { title: 'The Student Services at HBKU', time: 1211 },
-    { title: 'How to engage in student life ?', time: 1211 },
-    { title: 'Research activities at HBKU', time: 1211 },
-    { title: 'Next steps', time: 1211 },
+    { link: '/program/1/1', title: 'Welcome Note by HBKU Leadership', time: 675 },
+    { link: '/program/1/2', title: 'What you should known about HBKU', time: 1211 },
+    { link: '/program/1/3', title: 'The Student Services at HBKU', time: 1211 },
+    { link: '/program/1/4', title: 'How to engage in student life ?', time: 1211 },
+    { link: '/program/1/5', title: 'Research activities at HBKU', time: 1211 },
+    { link: '/program/1/6', title: 'Next steps', time: 1211 },
   ],
 }

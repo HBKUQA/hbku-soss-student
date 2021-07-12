@@ -64,8 +64,17 @@
     justify-content: space-between;
     align-items: center;
     .title {
+      color: $primary-dark;
+      &:hover {
+        text-decoration: underline;
+        &::before {
+          text-decoration: none;
+        }
+      }
       &::before {
+        display: inline-block;
         padding-inline-end: 20px;
+        text-decoration: none;
         font-family: $fontAwesome;
         font-weight: 700;
         font-size: 14px;
@@ -77,6 +86,185 @@
       font: normal normal bold 16px/26px $fontRoboto;
       letter-spacing: 0px;
       color: $primary;
+    }
+  }
+}
+
+.card {
+  border: 2px solid rgba($gray-border, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  .card-header {
+    font: {
+      family: $fontRoboto;
+      size: 28px;
+    }
+    color: $primary-dark;
+    border-bottom: 2px solid $primary-dark;
+  }
+  .card-body {
+    font: {
+      family: $fontRoboto;
+      size: 16px;
+    }
+    color: $gray;
+    & > div {
+      margin: 20px 0px;
+    }
+  }
+}
+
+.courses {
+  display: grid;
+  margin-bottom: 60px;
+  gap: 2 * $default-gap;
+  grid-template-columns: repeat(3, 1fr);
+
+  .course-card {
+    background: $white;
+    border: 2px solid rgba($gray-border, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    opacity: 1;
+
+    .thumbnail-container {
+      height: 200px;
+      position: relative;
+      &:hover {
+        .overlay {
+          &::after {
+            background: transparent;
+          }
+        }
+        .thumbnail-icon {
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      .thumbnail-icon {
+        width: 65px;
+        transition: all 500ms ease-in-out;
+        height: 65px;
+        background: rgba($white, 0.5);
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 50%;
+        position: relative;
+        z-index: 1;
+        svg {
+          transform: translateX(0px);
+          height: 40px;
+          width: 40px;
+        }
+      }
+
+      .overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &::after {
+          transition: all 500ms ease-in-out;
+          content: " ";
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.1);
+        }
+
+        &.locked {
+          background: $primary-dark;
+          &::after {
+            display: none;
+          }
+          img {
+            height: 65px;
+            width: 65px;
+            object-fit: contain;
+          }
+        }
+        //   if (props.locked)
+        //   return (
+        //     <span className='overlay locked'>
+        //       <img src={lock} alt='locked' />
+        //     </span>
+        //   )
+        // return (
+        //   <span className='overlay'>
+        //     <Link to='/' className='thumbnail-icon'>
+        //       <svg
+        //         xmlns='http://www.w3.org/2000/svg'
+        //         width='16'
+        //         height='16'
+        //         fill='currentColor'
+        //         viewBox='0 0 16 16'>
+        //         <path d='m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z' />
+        //       </svg>
+        //     </Link>
+        //   </span>
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        & > img {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      & > img {
+        position: absolute;
+        height: 100%;
+        top: 0px;
+        object-fit: cover;
+      }
+
+      .progress {
+        position: absolute;
+        right: 23px;
+        bottom: 0px;
+        transform: translateY(50%);
+        width: 50px;
+        height: 50px;
+        background: $primary;
+        color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-weight: 700;
+        border: 2px solid $primary-light;
+        opacity: 1;
+
+        &::after {
+          position: relative;
+          top: -2px;
+          font-size: 0.7em;
+          right: 0px;
+          content: "%";
+        }
+      }
+    }
+
+    .card-body {
+      padding: 1.5 * $default-gap $default-gap $default-gap $default-gap;
+      color: $primary-dark;
+      display: flex;
+      height: calc(100% - 200px);
+      flex-direction: column;
+      justify-content: space-between;
+      gap: $default-gap;
+      p {
+        margin-bottom: $default-gap;
+        font: normal normal normal 16px/28px $fontRoboto;
+        letter-spacing: 0px;
+      }
+      .actions {
+        display: flex;
+        gap: $default-gap;
+      }
     }
   }
 }

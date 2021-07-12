@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/svg/logo_text_color.svg'
-// import UserIcon from '../../assets/svg/user.svg'
 
 const UserIcon = () => (
   <svg xmlns='http://www.w3.org/2000/svg' width='18.285' height='16' viewBox='0 0 18.285 16'>
@@ -23,7 +22,9 @@ function Header(props) {
   return (
     <header>
       <div className='container'>
-        <img src={logo} alt='logo' className='logo' />
+        <Link to='/programs'>
+          <img src={logo} alt='logo' className='logo' />
+        </Link>
         <div className='actions'>
           <div className='input-group outline-primary'>
             <span className='input-group-icon'>

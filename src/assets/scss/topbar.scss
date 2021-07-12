@@ -31,4 +31,13 @@
       height: 100%;
     }
   }
+
+  .category {
+    border-left: 3px solid $white;
+    padding-left: 10px;
+    text-transform: uppercase;
+
+    font: normal normal bold 14px/16px $fontRoboto;
+    letter-spacing: 0px;
+  }
 }
