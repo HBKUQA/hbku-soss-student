@@ -1,14 +1,18 @@
-import { put, takeEvery } from 'redux-saga/effects'
-import axios from 'axios'
-import { API_SECRET } from '../../params'
-// // Login Redux States
-import * as Types from './actionTypes'
 import {
-  apiError,
-  // loginSuccess,
-  //   logoutUserSuccess,
-  //   refreshTokenSuccess,
-} from './actions'
+  // put,
+  takeEvery,
+} from 'redux-saga/effects'
+
+// import axios from 'axios'
+// import { API_SECRET } from '../../params'
+// // // Login Redux States
+// import * as Types from './actionTypes'
+// import {
+//   apiError,
+//   // loginSuccess,
+//   //   logoutUserSuccess,
+//   //   refreshTokenSuccess,
+// } from './actions'
 
 // import { axiosApi } from "../../../helpers/api_helper"
 
@@ -59,26 +63,27 @@ import {
 //   }
 // }
 
-const sendLogin = async credits => await axios.post('/oauth/token', credits).then(res => res.data)
+// const sendLogin = async credits => await axios.post('/oauth/token', credits).then(res => res.data)
 
-function* loginUser({ payload: { credential } }) {
-  let data = new FormData()
-  data.append('grant_type', 'password')
-  data.append('client_id', API_SECRET)
-  data.append('client_secret', API_SECRET)
-  data.append('username', credential.email)
-  data.append('password', credential.password)
-  try {
-    const res = yield sendLogin(data)
-    localStorage.setItem('access_token', res.access_token)
-    localStorage.setItem('expires_in', res.expires_in)
-    localStorage.setItem('refresh_token', res.refresh_token)
-    localStorage.setItem('token_type', res.token_type)
-  } catch (error) {
-    const errorMessage = error?.response?.data?.message
-    yield put(apiError(errorMessage ?? 'Cannot connect to server'))
-  }
-}
+// function* loginUser({ payload: { credential } }) {
+//   let data = new FormData()
+//   data.append('grant_type', 'password')
+//   data.append('client_id', API_SECRET)
+//   data.append('client_secret', API_SECRET)
+//   data.append('username', credential.email)
+//   data.append('password', credential.password)
+//   try {
+//     const res = yield sendLogin(data)
+//     console.log(res)
+//     localStorage.setItem('access_token', res.access_token)
+//     localStorage.setItem('expires_in', res.expires_in)
+//     localStorage.setItem('refresh_token', res.refresh_token)
+//     localStorage.setItem('token_type', res.token_type)
+//   } catch (error) {
+//     const errorMessage = error?.response?.data?.message
+//     yield put(apiError(errorMessage ?? 'Cannot connect to server'))
+//   }
+// }
 
 // function* logoutUser({ payload: { history } }) {
 //   try {
@@ -92,8 +97,10 @@ function* loginUser({ payload: { credential } }) {
 //   }
 // }
 
+function getUserData({ payload: { user } }) {}
+
 function* authSaga() {
-  yield takeEvery(Types.LOGIN_USER, loginUser)
+  yield takeEvery(Types.GET_USER_DATA, getUserData)
   //   yield takeEvery(LOGOUT_USER, logoutUser)
   //   yield takeEvery(REFRESH_TOKEN, refreshToken)
 }

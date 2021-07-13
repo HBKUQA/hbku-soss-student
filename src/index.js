@@ -6,6 +6,9 @@ import './assets/scss/main.scss'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import store from './store'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'https://hbku-soos.boufaied.com'
 
 ReactDOM.render(
   <React.StrictMode>

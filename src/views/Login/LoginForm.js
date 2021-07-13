@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
-function LoginForm(props) {
+import { loginUser } from '../../store/auth/actions'
+
+function LoginForm() {
   const passwordRef = useRef()
   const [passwordIsShown, setPasswordIsShown] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const counter = useSelector(state => state)
+
+  const { loggingIn, error } = useSelector(state => ({
+    loggingIn: state.Login.loggingIn,
+    error: state.Login.error,
+  }))
+
   const dispatch = useDispatch()
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm()
-  console.log(errors)
+  const { register, handleSubmit, watch } = useForm()
+
   const onSubmit = data => {
-    console.log(data)
-    setLoading(true)
+    dispatch(loginUser(data))
   }
   console.log(watch('example')) // watch input value by passing the name of it
   const showPassword = () => {
@@ -35,8 +35,7 @@ function LoginForm(props) {
     }
   }
 
-  console.log(counter)
-  if (loading)
+  if (loggingIn)
     return (
       <div className='auth-form'>
         <div className='auth-form-loading'>
@@ -47,16 +46,17 @@ function LoginForm(props) {
         </div>
       </div>
     )
+  // <button onClick={() => dispatch({ type: 'INCREMENT', step: 1 })}>test</button>
 
   return (
     <div className='auth-form'>
-      <button onClick={() => dispatch({ type: 'INCREMENT', step: 1 })}>test</button>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Log in</h1>
         <h3>
           with your <strong>HBKU adress</strong>
         </h3>
-        <input type='email' {...register('email', { required: true })} placeholder='Your email*' />
+        {error ? <div className='alert'>{error}</div> : <></>}
+        <input type='text' {...register('email', { required: true })} placeholder='Your email*' />
         <div className='input-actions'>
           <input
             type='password'
