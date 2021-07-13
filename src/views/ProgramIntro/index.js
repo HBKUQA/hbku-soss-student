@@ -14,8 +14,8 @@ import {
   requirements,
   cardsRelated,
 } from './data'
+
 import Cards from './Cards'
-import Card from './Cards'
 import Professor from './Professor'
 
 function ProgramIntro() {

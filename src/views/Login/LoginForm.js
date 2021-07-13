@@ -1,10 +1,27 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useForm } from 'react-hook-form'
+
 function LoginForm(props) {
   const passwordRef = useRef()
   const [passwordIsShown, setPasswordIsShown] = useState(false)
   const [loading, setLoading] = useState(false)
+  const counter = useSelector(state => state)
+  const dispatch = useDispatch()
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
+  console.log(errors)
+  const onSubmit = data => {
+    console.log(data)
+    setLoading(true)
+  }
+  console.log(watch('example')) // watch input value by passing the name of it
   const showPassword = () => {
     if (!passwordRef) return
     if (!passwordRef.current) return
@@ -18,17 +35,12 @@ function LoginForm(props) {
     }
   }
 
-  const sendData = event => {
-    event.preventDefault()
-    setLoading(true)
-    setTimeout(props.login, 2000)
-  }
-
+  console.log(counter)
   if (loading)
     return (
       <div className='auth-form'>
         <div className='auth-form-loading'>
-          <form onSubmit={sendData}>
+          <form onSubmit={event => event.preventDefault()}>
             <h1>Logging in</h1>
             <i className=' fas fa-spinner fa-spin fa-2x'></i>
           </form>
@@ -38,14 +50,20 @@ function LoginForm(props) {
 
   return (
     <div className='auth-form'>
-      <form onSubmit={sendData}>
+      <button onClick={() => dispatch({ type: 'INCREMENT', step: 1 })}>test</button>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Log in</h1>
         <h3>
           with your <strong>HBKU adress</strong>
         </h3>
-        <input type='email' placeholder='Your email*' />
+        <input type='email' {...register('email', { required: true })} placeholder='Your email*' />
         <div className='input-actions'>
-          <input type='password' ref={passwordRef} placeholder='Password*' />
+          <input
+            type='password'
+            {...register('password', { required: true })}
+            ref={passwordRef}
+            placeholder='Password*'
+          />
           <button type='button' onClick={showPassword}>
             {passwordIsShown ? (
               <i className='fas fa-eye-slash'></i>

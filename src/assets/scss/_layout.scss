@@ -84,7 +84,11 @@ h3 {
 
 .front-grid {
   grid-template-columns: 1fr;
+  padding-left: 0px;
 
+  @media screen and (min-width: $break-point-xl) {
+    padding-left: 100px;
+  }
   @media screen and (min-width: $break-point-lg) {
     grid-template-columns: 260px auto;
   }
