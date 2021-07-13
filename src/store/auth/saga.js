@@ -74,6 +74,7 @@ function* loginUser({ payload: { credential } }) {
     localStorage.setItem('expires_in', res.expires_in)
     localStorage.setItem('refresh_token', res.refresh_token)
     localStorage.setItem('token_type', res.token_type)
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.access_token
   } catch (error) {
     const errorMessage = error?.response?.data?.message
     yield put(apiError(errorMessage ?? 'Cannot connect to server'))

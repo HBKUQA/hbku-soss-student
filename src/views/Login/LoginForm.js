@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-
+import axios from 'axios'
 import { loginUser } from '../../store/auth/actions'
 
 function LoginForm() {
@@ -21,6 +21,14 @@ function LoginForm() {
   const onSubmit = data => {
     dispatch(loginUser(data))
   }
+
+  const testSend = () => {
+    axios
+      .get('/api/current-user')
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
+
   console.log(watch('example')) // watch input value by passing the name of it
   const showPassword = () => {
     if (!passwordRef) return
@@ -38,6 +46,7 @@ function LoginForm() {
   if (loggingIn)
     return (
       <div className='auth-form'>
+        <button onClick={testSend}></button>
         <div className='auth-form-loading'>
           <form onSubmit={event => event.preventDefault()}>
             <h1>Logging in</h1>

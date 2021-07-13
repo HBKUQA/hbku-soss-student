@@ -1,6 +1,26 @@
+import axios from 'axios'
+import { useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 function Orientation(props) {
+  const [items, setItems] = useState([])
+  useEffect(() => {
+    if (props.parent)
+      axios
+        .get(`/api/program/${props.parent}/chapters`)
+        .then(res =>
+          setItems(
+            res.data.map(e => ({
+              link: `/program/${props.parent}/${e.nid}`,
+              title: e.title,
+              time: parseInt(e?.field_video_duration),
+            }))
+          )
+        )
+        .catch(err => console.log(err))
+  }, [props.parent])
+
   const FormatTime = ({ total }) => {
     const format = i => i.toString().padStart(2, '0')
     const s = total % 60
@@ -17,14 +37,14 @@ function Orientation(props) {
         <div>
           <span>
             <i className='fas me-2 fa-stopwatch'></i>
-            <FormatTime total={props.items.map(e => e.time).reduce((a, b) => a + b, 0)} /> of videos
+            <FormatTime total={items.map(e => e.time).reduce((a, b) => a + b, 0)} /> of videos
           </span>
           <span>
-            <i className='fas mx-2 fa-chart-pie'></i> {props.items.length} lessons
+            <i className='fas mx-2 fa-chart-pie'></i> {items.length} lessons
           </span>
         </div>
       </div>
-      {props.items.map((e, k) => (
+      {items.map((e, k) => (
         <div key={k} className='lesson'>
           <Link to={e.link} className='title'>
             {e.title}

@@ -7,8 +7,8 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import store from './store'
 import axios from 'axios'
-
-axios.defaults.baseURL = 'https://hbku-soos.boufaied.com'
+import { BASE_URL } from './params'
+axios.defaults.baseURL = BASE_URL
 
 ReactDOM.render(
   <React.StrictMode>

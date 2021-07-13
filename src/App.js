@@ -4,6 +4,7 @@ import Login from './views/Login'
 import ProgramIntro from './views/ProgramIntro'
 import Courses from './views/Courses'
 import Chapter from './views/Chapter'
+import LandingPage from './views/LandingPage'
 
 function App() {
   // const login = () => console.log('qsd')
@@ -19,7 +20,7 @@ function App() {
         isAuthProtected={false}
         exact
       />
-      <AuthMiddleWare path='/' component={ProgramIntro} isAuthProtected={false} exact />
+      <AuthMiddleWare path='/' component={LandingPage} isAuthProtected={false} exact />
       <Route>
         <Redirect to='/'></Redirect>
       </Route>
