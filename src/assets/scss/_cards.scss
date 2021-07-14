@@ -221,7 +221,8 @@
           &::after {
             display: none;
           }
-          img {
+          img,
+          video {
             height: 65px;
             width: 65px;
             object-fit: contain;
@@ -231,12 +232,14 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        & > img {
+        & > img,
+        & > video {
           height: 100%;
           object-fit: cover;
         }
       }
-      & > img {
+      & > img,
+      & > video {
         position: absolute;
         height: 100%;
         top: 0px;

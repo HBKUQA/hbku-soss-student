@@ -27,7 +27,9 @@ function Card(props) {
   return (
     <div className='course-card'>
       <div className='thumbnail-container'>
-        <img className='thumbnail' src={props.thumbnail} alt={props.title} />
+        <video className='thumbnail'>
+          <source src={props.thumbnail} />
+        </video>
         <OverThumb />
         <div className='progress'>{props.acchivement}</div>
       </div>
