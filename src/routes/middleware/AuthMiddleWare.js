@@ -11,12 +11,8 @@ function AuthMiddleWare({
   isAnonymousProtected,
   ...rest
 }) {
-  const { refreshingToken, user } = useSelector(state => ({
-    refreshingToken: state.Login.refreshingToken,
-    user: state.User.user,
-  }))
+  const user = useSelector(state => state.User.user)
 
-  if (refreshingToken) return <></>
   return (
     <Route
       {...rest}

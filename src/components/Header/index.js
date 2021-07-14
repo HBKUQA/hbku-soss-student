@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/svg/logo_text_color.svg'
+import { useSelector } from 'react-redux'
+import { BASE_URL } from '../../params'
 
 const UserIcon = () => (
   <svg xmlns='http://www.w3.org/2000/svg' width='18.285' height='16' viewBox='0 0 18.285 16'>
@@ -18,7 +20,30 @@ const UserIcon = () => (
   </svg>
 )
 
-function Header(props) {
+function UserAvatar(props) {
+  console.log(props)
+  return (
+    <div className='userAvatar'>
+      <div className='userAvatar-toogler'>
+        <img src={BASE_URL + props.user_picture} alt={props.field_full_name} />
+        <span className='userAvatar-name'>Welcome, {props.field_full_name}</span>
+      </div>
+    </div>
+  )
+}
+
+function AuthPanel() {
+  const user = useSelector(state => state.User.user)
+  if (user) return <UserAvatar {...user} />
+  return (
+    <Link to='/login' className='btn btn-outline-dark'>
+      <UserIcon />
+      <span className='ms-2'>Log in</span>
+    </Link>
+  )
+}
+
+function Header() {
   return (
     <header>
       <div className='container'>
@@ -35,10 +60,7 @@ function Header(props) {
           <div className='btn px-0'>
             <i className='fas fa-bell notif active'></i>
           </div>
-          <Link to='/login' className='btn btn-outline-dark'>
-            <UserIcon />
-            <span className='ms-2'>Log in</span>
-          </Link>
+          <AuthPanel />
         </div>
       </div>
     </header>

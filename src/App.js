@@ -5,8 +5,19 @@ import ProgramIntro from './views/ProgramIntro'
 import Courses from './views/Courses'
 import Chapter from './views/Chapter'
 import LandingPage from './views/LandingPage'
+import { refreshToken } from './store/auth/actions'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(refreshToken(true))
+  }, [dispatch])
+
+  const refreshingToken = useSelector(state => state.Login.refreshingToken)
+
+  if (refreshingToken) return <></>
   return (
     <Switch>
       <AuthMiddleWare

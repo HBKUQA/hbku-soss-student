@@ -1,6 +1,6 @@
 import * as Types from './actionTypes'
 
-const initialState = { error: '', loggingIn: false, refreshingToken: false }
+const initialState = { error: '', loggingIn: false, refreshingToken: true }
 
 const login = (state = initialState, action) => {
   switch (action.type) {
@@ -16,15 +16,19 @@ const login = (state = initialState, action) => {
     // case LOGOUT_USER_SUCCESS:
     //   state = { ...state }
     //   break
+
     case Types.API_ERROR:
       state = { ...state, error: action.payload, loggingIn: false }
       break
-    // case REFRESH_TOKEN:
-    //   state = { ...state, tokenRefreshed: true }
-    //   break
-    // case REFRESH_TOKEN_SUCCESS:
-    //   state = { ...state, tokenRefreshed: false }
-    //   break
+
+    case Types.REFRESH_TOKEN:
+      state = { ...state, refreshingToken: true }
+      break
+
+    case Types.REFRESH_TOKEN_SUCCESS:
+      state = { ...state, refreshingToken: false }
+      break
+
     default:
       state = { ...state }
       break
