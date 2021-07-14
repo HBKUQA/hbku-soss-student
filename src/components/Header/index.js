@@ -21,7 +21,6 @@ const UserIcon = () => (
 )
 
 function UserAvatar(props) {
-  console.log(props)
   return (
     <div className='userAvatar'>
       <div className='userAvatar-toogler'>

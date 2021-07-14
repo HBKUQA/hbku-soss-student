@@ -1,30 +1,44 @@
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import TopBar from './TopBar'
-import videoUrl from '../../assets/videos/welcome.mp4'
 import SideBar from './SideBar'
+import axios from 'axios'
+import { BASE_URL } from '../../params'
 
-const text =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, ante vel finibus molestie, ante augue scelerisque lectus, nec tempor risus ligula non augue. In diam nulla, iaculis ut commodo nec, congue at purus. Sed sagittis pharetra nisi semper volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique, ante vel finibus molestie, ante augue scelerisque lectus, nec tempor risus ligula non augue. In diam nulla, iaculis ut commodo nec, congue at purus. Sed sagittis pharetra nisi semper volutpat.'
 function Chapter(props) {
+  const [data, setData] = useState({})
+  const [error, setError] = useState(false)
+  const [courses, setCourses] = useState([])
   const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
 
-  const courseSections = [
-    { id: '1', title: 'Welcome Note by HBKU Leadership', time: 675, done: true },
-    { id: '2', title: 'What you should known about HBKU', time: 1211, done: true },
-    { id: '3', title: 'The Student Services at HBKU', time: 1211, done: false },
-    { id: '4', title: 'How to engage in student life ?', time: 1211, done: false },
-    { id: '5', title: 'Research activities at HBKU', time: 1211, done: false },
-    { id: '6', title: 'Next steps', time: 1211, done: false },
-  ]
-  const sections = [
-    { title: 'Note', text },
-    { title: 'Lorem ipsum', text },
-    { title: 'Lorem ipsum', text },
-  ]
+  const { id, chapterId } = props?.match?.params
+
+  useEffect(() => {
+    axios
+      .get(`/api/chapter/${chapterId}`)
+      .then(res => setData(res.data[0]))
+      .catch(() => setError(true))
+
+    axios
+      .get(`/api/program/${id}/chapters`)
+      .then(res =>
+        setCourses(
+          res.data.map(e => ({
+            id: e.nid,
+            title: e.title,
+            time: e.field_video_duration,
+            done: false,
+          }))
+        )
+      )
+      .catch(err => null)
+  }, [id, chapterId])
+
+  const sections = data?.field_paragraphs_export ?? []
+
   const toogler = () => {
     const sidebarDOM = sideBarRef?.current
     const videoDOM = videoRef?.current
@@ -61,22 +75,21 @@ function Chapter(props) {
       window.removeEventListener('resize', updatePosition)
     }
   }, [])
+  if (error) return <></>
   return (
     <>
       <Header />
-      <TopBar prefix='Section 2' title='The University Technology Services for Students' />
+      <TopBar prefix={`Section ${data?.nid}`} title={data?.title} />
       <SideBar
         useRef={sideBarRef}
         toogler={toogler}
-        items={courseSections}
+        items={courses}
         currentChapter={currentChapter}
       />
       <div className='vider-container'>
         <div className='container'>
           <div ref={videoRef}>
-            <video controls>
-              <source src={videoUrl} />
-            </video>
+            <video src={BASE_URL + data?.field_video} controls></video>
           </div>
         </div>
       </div>
@@ -85,7 +98,7 @@ function Chapter(props) {
           {sections.map((e, k) => (
             <React.Fragment key={k}>
               <h2>{e.title}</h2>
-              <p>{e.text}</p>
+              <p>{e.description}</p>
             </React.Fragment>
           ))}
         </div>
