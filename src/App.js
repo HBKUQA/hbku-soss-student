@@ -7,17 +7,21 @@ import Chapter from './views/Chapter'
 import LandingPage from './views/LandingPage'
 
 function App() {
-  // const login = () => console.log('qsd')
-
   return (
     <Switch>
-      <AuthMiddleWare path='/login' component={Login} isAuthProtected={false} exact />
-      <AuthMiddleWare path='/programs' component={Courses} isAuthProtected={false} exact />
-      <AuthMiddleWare path='/program/:id' component={ProgramIntro} isAuthProtected={false} exact />
+      <AuthMiddleWare
+        path='/login'
+        isAnonymousProtected
+        component={Login}
+        isAuthProtected={false}
+        exact
+      />
+      <AuthMiddleWare path='/programs' component={Courses} isAuthProtected={true} exact />
+      <AuthMiddleWare path='/program/:id' component={ProgramIntro} isAuthProtected={true} exact />
       <AuthMiddleWare
         path='/program/:id/:chapterId'
         component={Chapter}
-        isAuthProtected={false}
+        isAuthProtected={true}
         exact
       />
       <AuthMiddleWare path='/' component={LandingPage} isAuthProtected={false} exact />

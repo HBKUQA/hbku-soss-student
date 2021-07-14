@@ -1,6 +1,6 @@
 import * as Types from './actionTypes'
 
-const initialState = { error: '', loggingIn: false, tokenRefreshed: false }
+const initialState = { error: '', loggingIn: false, refreshingToken: false }
 
 const login = (state = initialState, action) => {
   switch (action.type) {

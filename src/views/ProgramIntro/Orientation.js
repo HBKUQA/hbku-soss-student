@@ -18,7 +18,7 @@ function Orientation(props) {
             }))
           )
         )
-        .catch(err => console.log(err))
+        .catch(() => null)
   }, [props.parent])
 
   const FormatTime = ({ total }) => {

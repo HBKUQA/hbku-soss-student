@@ -1,17 +1,30 @@
 import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 function Layout(props) {
   return <>{props.children}</>
 }
-function AuthMiddleWare({ path, component: Component, isAuthProtected, ...rest }) {
+function AuthMiddleWare({
+  path,
+  component: Component,
+  isAuthProtected,
+  isAnonymousProtected,
+  ...rest
+}) {
+  const { refreshingToken, user } = useSelector(state => ({
+    refreshingToken: state.Login.refreshingToken,
+    user: state.User.user,
+  }))
+
+  if (refreshingToken) return <></>
   return (
     <Route
       {...rest}
       render={props => {
-        if (isAuthProtected && !localStorage.getItem('authUser')) {
+        if (isAuthProtected && user === null) {
           return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
         }
-        if (!isAuthProtected && localStorage.getItem('authUser')) {
+        if (!isAuthProtected && isAnonymousProtected && user) {
           return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
         }
 

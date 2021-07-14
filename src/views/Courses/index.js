@@ -4,13 +4,22 @@ import TopBar from './TopBar'
 import Filter from './Filter'
 import CourseList from './CourseList'
 import axios from 'axios'
-import {
-  programTopData,
-  // courses
-} from './data'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { BASE_URL } from '../../params'
+
+const programTopData = {
+  title: 'My Orientation Program',
+  category: 'Courses',
+  icon: 'fas fa-user-graduate',
+  breadCrumb: [
+    { text: 'Home page', link: '/' },
+    { text: 'Categorie 1', link: '/' },
+    { text: 'Categorie 1.1', link: '/' },
+    { text: 'Courses', link: '/' },
+  ],
+}
+
 function Courses(props) {
   const filterFunction = item => true
   const [courses, setCourses] = useState([])
@@ -33,9 +42,7 @@ function Courses(props) {
           })
         )
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => {})
   }, [])
 
   return (
