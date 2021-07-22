@@ -52,6 +52,7 @@ header {
 
   .userAvatar {
     color: $primary-dark;
+    position: relative;
     .userAvatar-toogler {
       display: flex;
       align-items: center;
@@ -72,6 +73,30 @@ header {
           font-family: $fontAwesome;
           font-weight: 700;
           margin-inline-start: 5px;
+        }
+      }
+    }
+    &:hover,
+    &:focus {
+      .userAvatar-menue {
+        display: block;
+      }
+    }
+    .userAvatar-menue {
+      position: absolute;
+      display: none;
+      width: 100%;
+      top: 100%;
+
+      background: $white;
+      overflow: hidden;
+      border: 2px solid $primary-dark;
+      box-shadow: 0px 3px 3px rgba($primary-dark, 0.5);
+      a {
+        display: block;
+        padding: 0.5em 1em;
+        &:hover {
+          background: #f5f3ff;
         }
       }
     }

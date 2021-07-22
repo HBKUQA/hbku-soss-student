@@ -10,6 +10,10 @@ const login = (state = initialState, action) => {
     case Types.SET_USER_DATA:
       state = { ...state, user: action?.payload?.user, loggingIn: false }
       break
+    case Types.CLEAR_USER_DATA:
+      localStorage.clear()
+      state = { ...state, user: null }
+      break
     default:
       state = { ...state }
       break

@@ -27,6 +27,9 @@ function UserAvatar(props) {
         <img src={BASE_URL + props.user_picture} alt={props.field_full_name} />
         <span className='userAvatar-name'>Welcome, {props.field_full_name}</span>
       </div>
+      <div className='userAvatar-menue'>
+        <Link to='/logout'>Logout</Link>
+      </div>
     </div>
   )
 }
@@ -50,7 +53,7 @@ function Header() {
           <img src={logo} alt='logo' className='logo' />
         </Link>
         <div className='actions'>
-          <div className='input-group outline-primary'>
+          {/* <div className='input-group outline-primary'>
             <span className='input-group-icon'>
               <i className='fas fa-search'></i>
             </span>
@@ -58,7 +61,7 @@ function Header() {
           </div>
           <div className='btn px-0'>
             <i className='fas fa-bell notif active'></i>
-          </div>
+          </div> */}
           <AuthPanel />
         </div>
       </div>

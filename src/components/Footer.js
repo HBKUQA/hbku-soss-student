@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-function Footer(props) {
+function Footer() {
   const links = [
     { text: 'About', link: '/about' },
     { text: 'Privacy policy', link: '/privacy-policy' },

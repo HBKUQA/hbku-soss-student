@@ -6,8 +6,18 @@ import Courses from './views/Courses'
 import Chapter from './views/Chapter'
 import LandingPage from './views/LandingPage'
 import { refreshToken } from './store/auth/actions'
+import { disconnect } from './store/user/actions'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+function Logout() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(disconnect())
+  }, [dispatch])
+
+  return <Redirect to='/' />
+}
 
 function App() {
   const dispatch = useDispatch()
@@ -36,13 +46,14 @@ function App() {
         exact
       />
       <AuthMiddleWare path='/' component={LandingPage} isAuthProtected={false} exact />
+      <Route path='/logout'>
+        <Logout />
+      </Route>
       <Route>
         <Redirect to='/'></Redirect>
       </Route>
     </Switch>
   )
 }
-
-// /program/id/chapter_id
 
 export default App

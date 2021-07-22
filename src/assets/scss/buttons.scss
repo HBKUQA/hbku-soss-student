@@ -168,7 +168,6 @@ input[type="search"] {
     height: 0;
     width: 0;
     &:checked ~ .checkmark {
-      // background-color: #2196f3;
       &:after {
         display: flex;
       }

@@ -10,25 +10,15 @@ const login = (state = initialState, action) => {
     case Types.LOGIN_SUCCESS:
       state = { ...state, loggingIn: false }
       break
-    // case LOGOUT_USER:
-    //   state = { ...state }
-    //   break
-    // case LOGOUT_USER_SUCCESS:
-    //   state = { ...state }
-    //   break
-
     case Types.API_ERROR:
       state = { ...state, error: action.payload, loggingIn: false }
       break
-
     case Types.REFRESH_TOKEN:
       state = { ...state, refreshingToken: true }
       break
-
     case Types.REFRESH_TOKEN_SUCCESS:
       state = { ...state, refreshingToken: false }
       break
-
     default:
       state = { ...state }
       break

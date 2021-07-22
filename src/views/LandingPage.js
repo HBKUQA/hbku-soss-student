@@ -1,6 +1,6 @@
 import ProgramIntro from './ProgramIntro'
 
-function LandingPage(props) {
+function LandingPage() {
   return <ProgramIntro isLandingPage />
 }
 

@@ -45,8 +45,6 @@ function LoginForm() {
         </div>
       </div>
     )
-  // <button onClick={() => dispatch({ type: 'INCREMENT', step: 1 })}>test</button>
-
   return (
     <div className='auth-form'>
       <form onSubmit={handleSubmit(onSubmit)}>
