@@ -96,6 +96,7 @@ h3 {
       grid-column-start: 2;
     }
   }
+
   color: $primary-dark;
   margin-top: 75px;
   margin-bottom: 75px;
@@ -211,6 +212,7 @@ ul.checks {
     width: 100%;
   }
 }
+
 .course-detail {
   color: $primary-dark;
   margin: 2 * $default-gap auto 3 * $default-gap;
@@ -223,6 +225,7 @@ ul.checks {
     padding-bottom: 10px;
   }
 }
+
 .vider-container {
   video {
     position: relative;
