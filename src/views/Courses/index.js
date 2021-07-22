@@ -12,16 +12,9 @@ const programTopData = {
   title: 'My Orientation Program',
   category: 'Courses',
   icon: 'fas fa-user-graduate',
-  breadCrumb: [
-    { text: 'Home page', link: '/' },
-    { text: 'Categorie 1', link: '/' },
-    { text: 'Categorie 1.1', link: '/' },
-    { text: 'Courses', link: '/' },
-  ],
 }
 
-function Courses(props) {
-  const filterFunction = item => true
+function Courses() {
   const [courses, setCourses] = useState([])
   useEffect(() => {
     axios
@@ -51,7 +44,7 @@ function Courses(props) {
       <TopBar {...programTopData} />
       <div className='container'>
         <Filter />
-        <CourseList items={courses.filter(filterFunction)} />
+        <CourseList items={courses} />
       </div>
       <Footer />
     </>

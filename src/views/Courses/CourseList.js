@@ -10,7 +10,7 @@ function Card(props) {
       )
     return (
       <div className='overlay'>
-        <Link to='/' className='thumbnail-icon'>
+        <Link to={props.secondary} className='thumbnail-icon'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='16'

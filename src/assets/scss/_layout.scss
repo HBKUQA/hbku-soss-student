@@ -78,6 +78,106 @@ h3 {
   font-weight: 300;
 }
 
+.landing-page {
+  color: $primary-dark;
+  .my-5 {
+    margin-top: 75px;
+    margin-bottom: 75px;
+  }
+
+  .landing-container {
+    padding-right: 370px;
+    position: relative;
+  }
+
+  .container {
+    position: relative;
+  }
+  .cours-info-container {
+    position: absolute;
+    right: 0px;
+    width: 350px;
+    .cours-info {
+      top: 150px;
+      position: fixed;
+      width: 350px;
+      z-index: 30;
+      padding: 2px;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      box-shadow: 0px 0px 10px #00000029;
+      border-radius: 5px;
+      .cours-info-description {
+        padding: $default-gap;
+      }
+      h3 {
+        font: 1.75rem/1.625rem $fontRoboto;
+        font-weight: 500;
+        letter-spacing: 0px;
+        color: $primary-dark;
+        opacity: 1;
+        margin-bottom: 10px;
+      }
+      .actions {
+        a,
+        button {
+          display: block;
+          margin-bottom: 10px;
+        }
+      }
+      h4 {
+        margin-top: 24px;
+        font-weight: 500;
+        font: 1.1rem/1.625rem $fontRoboto;
+        letter-spacing: 0px;
+        color: $primary-dark;
+      }
+
+      .description-list {
+        font: 0.9rem/1.625rem $fontRoboto;
+        color: $gray;
+        opacity: 1;
+      }
+    }
+  }
+
+  @media screen and (max-width: $break-point-lg) {
+    .landing-container {
+      padding-right: 0px;
+    }
+    .cours-info-container {
+      position: static;
+      width: 100%;
+      .cours-info {
+        border: 0px;
+        box-shadow: none;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: repeat(2, 1fr);
+        top: 150px;
+        position: static;
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: $break-point-md) {
+    .cours-info-container {
+      .cours-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+  p {
+    line-height: 2em;
+  }
+  h2 {
+    margin-top: 2rem;
+    color: $primary;
+    padding-bottom: 10px;
+  }
+}
+
 .front-grid {
   grid-template-columns: 1fr;
   padding-left: 0px;
