@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import TopBar from './TopBar'
 import SideBar from './SideBar'
 import axios from 'axios'
-import { BASE_URL } from '../../params'
+import CoursVideo from './CoursVideo'
 
 function Chapter(props) {
   const [data, setData] = useState({})
@@ -75,6 +75,18 @@ function Chapter(props) {
       window.removeEventListener('resize', updatePosition)
     }
   }, [])
+
+  const isLast = courses[courses.length - 1]?.id === chapterId
+
+  const videoData = {
+    videoRef: videoRef,
+    end: () => {
+      console.log(isLast)
+      console.log('video ended')
+    },
+    field_video: data.field_video,
+  }
+
   if (error) return <></>
   return (
     <>
@@ -86,13 +98,8 @@ function Chapter(props) {
         items={courses}
         currentChapter={currentChapter}
       />
-      <div className='vider-container'>
-        <div className='container'>
-          <div ref={videoRef}>
-            <video src={BASE_URL + data?.field_video} controls></video>
-          </div>
-        </div>
-      </div>
+      <CoursVideo {...videoData} />
+
       <div className='container course-detail'>
         <div ref={documentRef}>
           {sections.map((e, k) => (
