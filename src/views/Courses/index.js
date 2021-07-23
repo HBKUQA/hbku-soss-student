@@ -16,6 +16,7 @@ const programTopData = {
 
 function Courses() {
   const [courses, setCourses] = useState([])
+  const [progress, setProgress] = useState({})
   useEffect(() => {
     axios
       .get('/api/programs')
@@ -24,6 +25,7 @@ function Courses() {
           res.data.map(e => {
             const chapters = e.field_chapters ?? ''
             return {
+              id: e.nid,
               thumbnail: BASE_URL + e.field_introduction,
               acchivement: '50',
               primary: `/program/${e.nid}/${chapters.split(',')?.[0]}`,
@@ -35,7 +37,20 @@ function Courses() {
           })
         )
       })
-      .catch(err => {})
+      .catch(() => {})
+
+    axios
+      .get('/api/student/progress')
+      .then(res => {
+        const tmp = {}
+        res.data.forEach(e => {
+          tmp[parseInt(e.field_program)] = e.field_process
+        })
+        setProgress(tmp)
+      })
+      .catch(() => {
+        setProgress({})
+      })
   }, [])
 
   return (
@@ -44,7 +59,12 @@ function Courses() {
       <TopBar {...programTopData} />
       <div className='container'>
         <Filter />
-        <CourseList items={courses} />
+        <CourseList
+          items={courses.map(e => ({
+            ...e,
+            acchivement: progress?.[e.id] ?? '0',
+          }))}
+        />
       </div>
       <Footer />
     </>
