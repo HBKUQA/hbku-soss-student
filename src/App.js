@@ -26,8 +26,9 @@ function App() {
   }, [dispatch])
 
   const refreshingToken = useSelector(state => state.Login.refreshingToken)
+  const loggingIn = useSelector(state => state.User.loggingIn)
 
-  if (refreshingToken) return <></>
+  if (refreshingToken || loggingIn) return <></>
   return (
     <Switch>
       <AuthMiddleWare

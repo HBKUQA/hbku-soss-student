@@ -4,7 +4,7 @@ import { API_SECRET } from '../../params'
 import * as Types from './actionTypes'
 import { apiError, refreshTokenSuccess } from './actions'
 
-import { getUserData } from '../user/actions'
+import { getUserData, disconnect } from '../user/actions'
 
 const sendLogin = async credits => await axios.post('/oauth/token', credits).then(res => res.data)
 
@@ -48,6 +48,7 @@ function* refreshToken({ payload: { blocker } }) {
   } catch (error) {
     localStorage.clear()
     yield put(refreshTokenSuccess())
+    yield put(disconnect())
   }
 }
 

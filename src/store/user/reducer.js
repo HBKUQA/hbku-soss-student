@@ -1,6 +1,6 @@
 import * as Types from './actionTypes'
 
-const initialState = { user: null, loading: false }
+const initialState = { user: null, loading: true, loggingIn: true }
 
 const login = (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +12,7 @@ const login = (state = initialState, action) => {
       break
     case Types.CLEAR_USER_DATA:
       localStorage.clear()
-      state = { ...state, user: null }
+      state = { ...state, user: null, loggingIn: false }
       break
     default:
       state = { ...state }
