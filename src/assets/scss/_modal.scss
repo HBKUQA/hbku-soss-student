@@ -1,0 +1,35 @@
+@import "_variables.scss";
+.modal {
+  display: none;
+  &.show {
+    display: flex;
+  }
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  z-index: 100;
+
+  .modal-content {
+    padding: 1rem 3rem;
+    background: $white;
+    border: 2px solid $primary-dark;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: $default-gap;
+    .review {
+      font-size: 2rem;
+    }
+    h3 {
+      font-weight: 500;
+      color: $primary-dark;
+    }
+  }
+}

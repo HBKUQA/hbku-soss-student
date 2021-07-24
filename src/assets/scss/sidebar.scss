@@ -129,6 +129,15 @@ aside {
         background: darken(#ededed, 10);
       }
     }
+    .disabled {
+      color: $gray !important;
+      .title {
+        color: inherit;
+      }
+      .time {
+        color: inherit;
+      }
+    }
     &.active {
       &:hover {
         background: $primary-dark;

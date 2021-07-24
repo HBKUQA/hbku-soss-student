@@ -56,6 +56,31 @@ button {
     }
   }
 }
+
+.btn-dark {
+  border-color: $primary-dark;
+  background: $primary-dark;
+  color: $white;
+  &:hover {
+    color: $primary-dark;
+    background: $white;
+    svg {
+      fill: $white;
+    }
+  }
+
+  &:disabled {
+    border-color: rgba($primary-dark, 0.3);
+    background: rgba($primary-dark, 0.3);
+    color: $white;
+    &:hover {
+      border-color: rgba($primary-dark, 0.3);
+      background: $white;
+      color: rgba($primary-dark, 0.3);
+    }
+  }
+}
+
 .filter-buttons {
   display: flex;
   flex-direction: column;

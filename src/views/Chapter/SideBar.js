@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 
 function SideBar(props) {
+  const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
+  const numberOfChapters = props.items.length === 0 ? 1 : props.items.length
+  const chapterProgress = 1 / numberOfChapters
+
   const formatTime = seconds => {
     const m = parseInt(seconds / 60)
     return `${m} min`
@@ -25,7 +29,7 @@ function SideBar(props) {
           <Link to='/programs' className='btn btn-outline-dark'>
             Main Menu
           </Link>
-          <Link to='/program/1' className='btn btn-outline-dark'>
+          <Link to={`/program/${props.programId}`} className='btn btn-outline-dark'>
             Section Details
           </Link>
         </div>
@@ -53,17 +57,31 @@ function SideBar(props) {
               <li className={e.id === props.currentChapter ? 'active' : ''} key={k}>
                 <div className='li-container'>
                   <label className='checkbox-container'>
-                    <input type='checkbox' defaultChecked={e.done} />
+                    <input
+                      type='checkbox'
+                      checked={(chapterProgress * k).toFixed(2) < progress}
+                      onChange={() => null}
+                    />
                     <span className='checkmark'></span>
                   </label>
                   <div>
-                    <Link to={`/program/1/${e.id}`}>
-                      <div className='title'>{e.title}</div>
-                      <div className='time'>
-                        <i className='fas me-2 fa-stopwatch' />
-                        {formatTime(e.time)}
+                    {(chapterProgress * k).toFixed(2) <= progress ? (
+                      <Link to={`/program/${props.programId}/${e.id}`} disabled={true}>
+                        <div className='title'>{e.title}</div>
+                        <div className='time'>
+                          <i className='fas me-2 fa-stopwatch' />
+                          {formatTime(e.time)}
+                        </div>
+                      </Link>
+                    ) : (
+                      <div className='disabled'>
+                        <div className='title'>{e.title}</div>
+                        <div className='time'>
+                          <i className='fas me-2 fa-stopwatch' />
+                          {formatTime(e.time)}
+                        </div>
                       </div>
-                    </Link>
+                    )}
                   </div>
                 </div>
               </li>

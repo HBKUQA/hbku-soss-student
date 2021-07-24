@@ -5,11 +5,18 @@ import TopBar from './TopBar'
 import SideBar from './SideBar'
 import axios from 'axios'
 import CoursVideo from './CoursVideo'
+import Review from './Review'
 
 function Chapter(props) {
   const [data, setData] = useState({})
   const [error, setError] = useState(false)
   const [courses, setCourses] = useState([])
+  const [progress, setProgress] = useState(0)
+  const [progressID, setProgressID] = useState(null)
+  const [showReview, setShowReview] = useState(false)
+  const [hasReview, setHasReview] = useState(false)
+  const [review, setReview] = useState(0)
+
   const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
@@ -21,7 +28,9 @@ function Chapter(props) {
       .get(`/api/chapter/${chapterId}`)
       .then(res => setData(res.data[0]))
       .catch(() => setError(true))
+  }, [chapterId])
 
+  useEffect(() => {
     axios
       .get(`/api/program/${id}/chapters`)
       .then(res =>
@@ -34,8 +43,26 @@ function Chapter(props) {
           }))
         )
       )
-      .catch(err => null)
-  }, [id, chapterId])
+      .catch(() => null)
+
+    axios
+      .get(`/api/student/${id}/progress`)
+      .then(res => {
+        setProgress(res.data?.[0]?.field_process ?? 0)
+        setProgressID(res.data?.[0]?.nid)
+      })
+      .catch(() => setProgress(0))
+
+    axios
+      .get(`/api/student/${id}/review`)
+      .then(res => {
+        if (res.data?.[0]) {
+          setHasReview(true)
+          setReview(res.data?.[0].field_review)
+        }
+      })
+      .catch(() => {})
+  }, [id])
 
   const sections = data?.field_paragraphs_export ?? []
 
@@ -78,23 +105,53 @@ function Chapter(props) {
 
   const isLast = courses[courses.length - 1]?.id === chapterId
 
+  const numberOfChapters = courses.length === 0 ? 1 : courses.length
+  const chapterProgress = 1 / numberOfChapters
+  const thisIndex = courses.findIndex(e => e.id === chapterId)
+  const nextProgress = chapterProgress * (thisIndex + 1)
+  console.log(nextProgress)
   const videoData = {
     videoRef: videoRef,
     end: () => {
-      console.log(isLast)
-      console.log('video ended')
+      if (isLast) {
+        setShowReview(true)
+        axios
+          .patch(`/node/${progressID}`, {
+            type: 'student_progress',
+            field_process: [{ value: 100 }],
+          })
+          .then(() => {
+            setProgress(100)
+          })
+          .catch(console.log)
+      } else {
+        axios
+          .patch(`/node/${progressID}`, {
+            type: 'student_progress',
+            field_process: [{ value: nextProgress * 100 }],
+          })
+          .then(() => {
+            setProgress(nextProgress * 100)
+          })
+          .catch(console.log)
+      }
     },
     field_video: data.field_video,
   }
 
   if (error) return <></>
+
+  document.title = `${data?.title} - HBKU-SOOS`
   return (
     <>
       <Header />
+      <Review review={review} add={isLast} hasReview={hasReview} show={showReview} />
       <TopBar prefix={`Section ${data?.nid}`} title={data?.title} />
       <SideBar
+        progress={progress}
         useRef={sideBarRef}
         toogler={toogler}
+        programId={id}
         items={courses}
         currentChapter={currentChapter}
       />
