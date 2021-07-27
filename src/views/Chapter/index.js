@@ -24,7 +24,6 @@ function Chapter(props) {
   const user = useSelector(state => state.User.user)
   const { id, chapterId } = props?.match?.params
   const refreshReview = data => {
-    console.log(data)
     setHasReview(true)
     setReview(data.field_review[0].value)
   }
@@ -140,7 +139,7 @@ function Chapter(props) {
           .then(() => {
             setProgress(100)
           })
-          .catch(console.log)
+          .catch(() => null))
       } else {
         axios
           .patch(`/node/${progressID}`, {
@@ -150,7 +149,7 @@ function Chapter(props) {
           .then(() => {
             setProgress(nextProgress * 100)
           })
-          .catch(console.log)
+          .catch(() => null))
       }
     },
     field_video: data.field_video,

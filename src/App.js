@@ -19,12 +19,10 @@ const refreshTokenWithoutRedux = () => {
   data.append('client_id', API_SECRET)
   data.append('client_secret', API_SECRET)
   data.append('refresh_token', token)
-  console.log('refreshTokenWithoutRedux')
   if (token) {
     axios
       .post('/oauth/token', data)
       .then(res => {
-        console.log(res.data)
         const token = res.data
         localStorage.setItem('access_token', token.access_token)
         localStorage.setItem('expires_in', token.expires_in)
@@ -33,7 +31,7 @@ const refreshTokenWithoutRedux = () => {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.access_token
       })
       .catch(err => {
-        console.log(err)
+        localStorage.clear()
       })
   }
 }
