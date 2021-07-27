@@ -6,6 +6,7 @@ import SideBar from './SideBar'
 import axios from 'axios'
 import CoursVideo from './CoursVideo'
 import Review from './Review'
+import { useSelector } from 'react-redux'
 
 function Chapter(props) {
   const [data, setData] = useState({})
@@ -20,9 +21,13 @@ function Chapter(props) {
   const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
-
+  const user = useSelector(state => state.User.user)
   const { id, chapterId } = props?.match?.params
-
+  const refreshReview = data => {
+    console.log(data)
+    setHasReview(true)
+    setReview(data.field_review[0].value)
+  }
   useEffect(() => {
     axios
       .get(`/api/chapter/${chapterId}`)
@@ -52,12 +57,18 @@ function Chapter(props) {
         setProgressID(res.data[0].nid)
       })
       .catch(() => {
-        axios.post('/node', {
-          type: 'student_progress',
-          field_program: [{ value: id }],
-          field_process: [{ value: 0 }],
-        })
-        console.log('Hello in catch')
+        axios
+          .post('/node?_format=json', {
+            type: 'student_progress',
+            title: [{ value: `student progess ${id}-${user.uid}` }],
+            field_program: [{ target_id: id }],
+            field_process: [{ value: 0 }],
+          })
+          .then(newProgress => newProgress.data)
+          .then(newProgress => {
+            setProgress(0)
+            setProgressID(newProgress.nid[0].value)
+          })
       })
 
     axios
@@ -151,8 +162,14 @@ function Chapter(props) {
   return (
     <>
       <Header />
-      {/* <Review programId={id} review={review} add={true} hasReview={false} show={true} /> */}
-      <Review programId={id} review={review} add={isLast} hasReview={hasReview} show={showReview} />
+      <Review
+        refreshReview={refreshReview}
+        programId={id}
+        review={review}
+        add={isLast}
+        hasReview={hasReview}
+        show={showReview}
+      />
       <TopBar prefix={`Section ${data?.nid}`} title={data?.title} />
       <SideBar
         progress={progress}

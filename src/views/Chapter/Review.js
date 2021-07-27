@@ -1,19 +1,24 @@
 import axios from 'axios'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 function Review(props) {
   const [rate, setRate] = useState(0)
-
+  const user = useSelector(state => state.User.user)
   const sendReview = () => {
     const data = {
-      // title: 'Student Review 1-4',
       type: 'student_review',
-      field_program: [{ value: props.programId }],
+      title: [{ value: `student review ${props.programId}-${user.uid}` }],
+      field_program: [{ target_id: props.programId }],
       field_review: [{ value: rate }],
     }
-
-    axios.post('/node', data)
-    console.log(data)
+    axios
+      .post('/node?_format=json', data)
+      .then(res => {
+        props.refreshReview(res.data)
+      })
+      .catch(err => {})
   }
   if (!props.add) return <></>
   if (props.hasReview)
