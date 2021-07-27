@@ -48,10 +48,17 @@ function Chapter(props) {
     axios
       .get(`/api/student/${id}/progress`)
       .then(res => {
-        setProgress(res.data?.[0]?.field_process ?? 0)
-        setProgressID(res.data?.[0]?.nid)
+        setProgress(res.data[0].field_process ?? 0)
+        setProgressID(res.data[0].nid)
       })
-      .catch(() => setProgress(0))
+      .catch(() => {
+        axios.post('/node', {
+          type: 'student_progress',
+          field_program: [{ value: id }],
+          field_process: [{ value: 0 }],
+        })
+        console.log('Hello in catch')
+      })
 
     axios
       .get(`/api/student/${id}/review`)
@@ -109,7 +116,6 @@ function Chapter(props) {
   const chapterProgress = 1 / numberOfChapters
   const thisIndex = courses.findIndex(e => e.id === chapterId)
   const nextProgress = chapterProgress * (thisIndex + 1)
-  console.log(nextProgress)
   const videoData = {
     videoRef: videoRef,
     end: () => {
@@ -145,7 +151,8 @@ function Chapter(props) {
   return (
     <>
       <Header />
-      <Review review={review} add={isLast} hasReview={hasReview} show={showReview} />
+      {/* <Review programId={id} review={review} add={true} hasReview={false} show={true} /> */}
+      <Review programId={id} review={review} add={isLast} hasReview={hasReview} show={showReview} />
       <TopBar prefix={`Section ${data?.nid}`} title={data?.title} />
       <SideBar
         progress={progress}

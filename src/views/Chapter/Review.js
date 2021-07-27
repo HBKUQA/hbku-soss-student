@@ -1,7 +1,20 @@
+import axios from 'axios'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 function Review(props) {
   const [rate, setRate] = useState(0)
+
+  const sendReview = () => {
+    const data = {
+      // title: 'Student Review 1-4',
+      type: 'student_review',
+      field_program: [{ value: props.programId }],
+      field_review: [{ value: rate }],
+    }
+
+    axios.post('/node', data)
+    console.log(data)
+  }
   if (!props.add) return <></>
   if (props.hasReview)
     return (
@@ -31,7 +44,7 @@ function Review(props) {
               className={`${k + 1 <= rate ? 'fas fa-star' : 'far fa-star'}`}></i>
           ))}
         </div>
-        <button disabled={rate === 0} className='btn btn-dark'>
+        <button onClick={sendReview} disabled={rate === 0} className='btn btn-dark'>
           Send review
         </button>
       </div>
