@@ -18,7 +18,7 @@ function Review(props) {
       .then(res => {
         props.refreshReview(res.data)
       })
-      .catch(err => {})
+      .catch(() => {})
   }
   if (!props.add) return <></>
   if (props.hasReview)

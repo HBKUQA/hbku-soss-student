@@ -21,12 +21,14 @@ function Chapter(props) {
   const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
-  const user = useSelector(state => state.User.user)
+  const userID = useSelector(state => state.User?.user?.id)
   const { id, chapterId } = props?.match?.params
+
   const refreshReview = data => {
     setHasReview(true)
     setReview(data.field_review[0].value)
   }
+
   useEffect(() => {
     axios
       .get(`/api/chapter/${chapterId}`)
@@ -59,7 +61,7 @@ function Chapter(props) {
         axios
           .post('/node?_format=json', {
             type: 'student_progress',
-            title: [{ value: `student progess ${id}-${user.uid}` }],
+            title: [{ value: `student progess ${id}-${userID}` }],
             field_program: [{ target_id: id }],
             field_process: [{ value: 0 }],
           })
@@ -79,7 +81,7 @@ function Chapter(props) {
         }
       })
       .catch(() => {})
-  }, [id])
+  }, [id, userID])
 
   const sections = data?.field_paragraphs_export ?? []
 
