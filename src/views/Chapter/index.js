@@ -149,7 +149,7 @@ function Chapter(props) {
           .then(() => {
             setProgress(nextProgress * 100)
           })
-          .catch(() => null))
+          .catch(() => null)
       }
     },
     field_video: data.field_video,
