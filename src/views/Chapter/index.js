@@ -139,7 +139,7 @@ function Chapter(props) {
           .then(() => {
             setProgress(100)
           })
-          .catch(() => null))
+          .catch(() => null)
       } else {
         axios
           .patch(`/node/${progressID}`, {
