@@ -19,9 +19,6 @@ function ProgramTopBar(props) {
               <Link to={props.primaryAction.link} className='btn btn-primary'>
                 {props.primaryAction.text}
               </Link>
-              <Link to={props.secondaryAction.link} className='btn btn-outline-white'>
-                {props.secondaryAction.text}
-              </Link>
             </div>
           </div>
         </div>

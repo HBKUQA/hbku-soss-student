@@ -29,11 +29,8 @@ function CoursInfo(props) {
               <Link to={props.primaryAction.link} className='btn btn-primary hover-outline'>
                 {props.primaryAction.text}
               </Link>
-              <Link to={props.secondaryAction.link} className='btn btn-outline-dark'>
-                {props.secondaryAction.text}
-              </Link>
             </div>
-            <h4>Includes</h4>
+            <h4>Attachments</h4>
 
             {props.includes.map((e, k) => (
               <div className='description-list' key={k}>
@@ -137,8 +134,6 @@ function Landing() {
               <li key={k}>{e}</li>
             ))}
           </ul>
-
-          <Orientation title='Orientation program' items={items} />
 
           <h2>Requirements</h2>
           <p>{data?.field_requirements}</p>

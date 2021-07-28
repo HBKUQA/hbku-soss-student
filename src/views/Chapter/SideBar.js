@@ -27,10 +27,10 @@ function SideBar(props) {
       <aside ref={props.useRef}>
         <div className='actions'>
           <Link to='/programs' className='btn btn-outline-dark'>
-            Main Menu
+            List all chapters
           </Link>
           <Link to={`/program/${props.programId}`} className='btn btn-outline-dark'>
-            Section Details
+            Next Chapter
           </Link>
         </div>
         <div>
