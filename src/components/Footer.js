@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Footer() {
+  const user = useSelector(state => state.User.user)
+
   const links = [
     { text: 'About', link: '/about' },
     { text: 'Privacy policy', link: '/privacy-policy' },
     { text: 'Terms and condition', link: '/terms-and-condition' },
-    { text: 'Log in', link: '/login' },
   ]
   return (
     <footer>
@@ -26,6 +28,12 @@ function Footer() {
               <Link to={e.link}>{e.text}</Link>
             </li>
           ))}
+
+          {user === null && (
+            <li>
+              <Link to='/login'>Log in</Link>
+            </li>
+          )}
         </ul>
       </div>
     </footer>
