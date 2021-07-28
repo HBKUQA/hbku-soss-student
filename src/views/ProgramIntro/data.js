@@ -13,16 +13,7 @@ export const professorData = {
 
 export const cards = [
   {
-    title: 'Includes',
-    items: [
-      { type: 'text', icon: 'fas fa-plus', text: 'Lorem ipsum dolor sit amet.' },
-      { type: 'text', icon: 'fas fa-plus', text: 'Lorem ipsum dolor sit amet.' },
-      { type: 'text', icon: 'fas fa-plus', text: 'Lorem ipsum dolor sit amet.' },
-      { type: 'text', icon: 'fas fa-plus', text: 'Lorem ipsum dolor sit amet.' },
-    ],
-  },
-  {
-    title: 'More info',
+    title: 'Attachments',
     items: [
       { type: 'text', icon: 'fas fa-plus', text: 'Lorem ipsum dolor sit amet.' },
       { type: 'text', icon: 'fas fa-plus', text: 'Lorem ipsum dolor sit amet.' },

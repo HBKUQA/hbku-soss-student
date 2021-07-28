@@ -12,7 +12,7 @@ import Professor from './Professor'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
-const outcomes = 'Virtual orientation outcomes'
+const outcomes = 'Outcomes'
 
 function ProgramIntro(props) {
   const id = props?.match?.params?.id
@@ -52,10 +52,9 @@ function ProgramIntro(props) {
     title: data?.title,
     text: data?.field_highlight,
     primaryAction: {
-      text: 'Start the orientation now',
+      text: 'Start this chapter now',
       link: `/program/${data?.nid}/${firstChapter}`,
     },
-    secondaryAction: { text: 'Orientation website', link: `/program/${data?.nid}` },
   }
   return (
     <>
@@ -73,7 +72,7 @@ function ProgramIntro(props) {
               ))}
             </ul>
 
-            <Orientation title='Orientation program' parent={data?.nid} />
+            <Orientation title='Chapter sections' parent={data?.nid} />
 
             <h2>Requirements</h2>
             <p>{data?.field_requirements}</p>
