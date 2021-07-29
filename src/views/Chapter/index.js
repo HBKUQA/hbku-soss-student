@@ -21,7 +21,28 @@ function Chapter(props) {
   const [review, setReview] = useState(0)
   const [attachements, setAttachements] = useState([])
   const [loadingAttachements, setLoadingAttachements] = useState(true)
-  const [loading, setLoading] = useState(true)
+
+  const Attachements = () => {
+    if (loadingAttachements) {
+      return (
+        <div className='text-center'>
+          <i className='fas fa-spinner fa-spin'></i>
+        </div>
+      )
+    }
+    return (
+      <ul>
+        {attachements.map((e, k) => (
+          <li key={k} className='py-1'>
+            <a href={e.field_attachment} target='_blank' rel='noreferrer'>
+              <i className='fas fa-download me-2'></i>
+              {e.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 
   const videoRef = useRef()
   const documentRef = useRef()
@@ -46,7 +67,6 @@ function Chapter(props) {
   useEffect(toogler, [])
 
   useEffect(() => {
-    setLoading(true)
     setData({})
     setAttachements([])
     setError(false)
@@ -75,8 +95,9 @@ function Chapter(props) {
     axios
       .get(`/api/student/program/${id}/progress`)
       .then(res => {
-        setProgress(res.data[0].field_process ?? 0)
-        setProgressID(res.data[0].nid)
+        const progress = res.data.sort((a, b) => a.nid - b.nid)
+        setProgress(progress[0].field_process ?? 0)
+        setProgressID(progress[0].nid)
       })
       .catch(() => {
         axios
@@ -211,6 +232,9 @@ function Chapter(props) {
               <p>{e.description}</p>
             </React.Fragment>
           ))}
+
+          <h2>Attachements</h2>
+          <Attachements />
         </div>
         <Professor {...professorData} />
       </div>

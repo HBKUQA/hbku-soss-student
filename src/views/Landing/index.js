@@ -92,9 +92,6 @@ function Landing() {
         .catch(() => null)
   }, [nid])
 
-  let firstChapter = data?.field_chapters ?? ''
-  firstChapter = firstChapter.split(',')?.[0]
-
   if (loading) return <></>
   if (error) return <></>
 
@@ -126,15 +123,11 @@ function Landing() {
       <div className='container my-5 landing-container'>
         <div className='main-frame'>
           <h2>{outcomes}</h2>
-            <Description
-                title=''
-                description={data?.field_description}
-                list={outcomesList}
-            />
+          <Description title='' description={data?.field_description} list={outcomesList} />
           <Description
-              title='Orientation program'
-              description={data?.field_requirements}
-              list={outcomesList}
+            title='Orientation program'
+            description={data?.field_requirements}
+            list={outcomesList}
           />
           <Professor {...professorData} />
         </div>

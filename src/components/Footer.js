@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 function Footer() {
-  const user = useSelector(state => state.User.user)
+  // const user = useSelector(state => state.User.user)
 
-  const links = [
-    { text: 'About', link: '/about' },
-    { text: 'Privacy policy', link: '/privacy-policy' },
-    { text: 'Terms and condition', link: '/terms-and-condition' },
-  ]
+  // const links = [
+  //   { text: 'About', link: '/about' },
+  //   { text: 'Privacy policy', link: '/privacy-policy' },
+  //   { text: 'Terms and condition', link: '/terms-and-condition' },
+  // ]
   return (
     <footer>
       <div className='container'>
@@ -23,9 +23,9 @@ function Footer() {
           </svg>
         </a>
         <ul>
-            <li>
-              <Link to="">Copyright ©2021 All rights reserved to Hamad Bin Khalifa University.</Link>
-            </li>
+          <li>
+            <Link to=''>Copyright ©2021 All rights reserved to Hamad Bin Khalifa University.</Link>
+          </li>
         </ul>
       </div>
     </footer>

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import lock from '../../assets/svg/lock.svg'
 function Card(props) {
-  console.log(props)
   const firstLink = props.secondary + '/' + props?.chapters?.[0]
   const OverThumb = () => {
     if (props.locked)

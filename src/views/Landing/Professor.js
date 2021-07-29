@@ -1,8 +1,8 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 
 function Professor(props) {
-  const [show, setShow] = useState(false)
-  const showLess = str => (show ? str : str.split('.').slice(0, 3).join('.') + '...')
+  // const [show, setShow] = useState(false)
+  // const showLess = str => (show ? str : str.split('.').slice(0, 3).join('.') + '...')
 
   return (
     <div className='professor-card'>
