@@ -6,7 +6,7 @@ import CourseList from './CourseList'
 import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { BASE_URL } from '../../params'
+import { BASE_URL, LAST_PROGRAM_ID } from '../../params'
 
 const programTopData = {
   title: 'Virtual Student Orientation',
@@ -37,6 +37,9 @@ function Courses() {
             }
           })
         )
+
+        console.log(res.data)
+        localStorage.setItem(LAST_PROGRAM_ID, res.data[res.data.length - 1].nid)
       })
       .catch(() => {})
 

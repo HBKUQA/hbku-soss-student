@@ -21,6 +21,25 @@ function Review(props) {
       .catch(() => {})
   }
   if (!props.add) return <></>
+
+  if (props.isLastProgram && props.hasReview)
+    return (
+      <div className={`modal${props.show ? ' show' : ''}`}>
+        <div className='modal-content'>
+          <h2>Complete Orientation</h2>
+          <h3>Thank you for your review</h3>
+          <div className='review text-primary'>
+            {Array.from({ length: 5 }).map((e, k) => (
+              <i key={k} className={`${k + 1 <= props.review ? 'fas fa-star' : 'far fa-star'}`}></i>
+            ))}
+          </div>
+          <Link to='/programs' className='btn btn-dark'>
+            Back to list all chapters
+          </Link>
+        </div>
+      </div>
+    )
+
   if (props.hasReview)
     return (
       <div className={`modal${props.show ? ' show' : ''}`}>

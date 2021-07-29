@@ -9,6 +9,7 @@ import Review from './Review'
 import { useSelector } from 'react-redux'
 import { professorData } from '../Landing/data'
 import Professor from '../Landing/Professor'
+import { LAST_PROGRAM_ID } from '../../params'
 
 function Chapter(props) {
   const [data, setData] = useState({})
@@ -21,7 +22,6 @@ function Chapter(props) {
   const [review, setReview] = useState(0)
   const [attachements, setAttachements] = useState([])
   const [loadingAttachements, setLoadingAttachements] = useState(true)
-
   const Attachements = () => {
     if (loadingAttachements) {
       return (
@@ -29,6 +29,9 @@ function Chapter(props) {
           <i className='fas fa-spinner fa-spin'></i>
         </div>
       )
+    }
+    if (attachements.length === 0) {
+      return <div>No attachement</div>
     }
     return (
       <ul>
@@ -124,7 +127,7 @@ function Chapter(props) {
         setLoadingAttachements(false)
       })
     axios
-      .get(`/api/student/${id}/review`)
+      .get(`/api/student/program/${id}/review`)
       .then(res => {
         if (res.data?.[0]) {
           setHasReview(true)
@@ -201,6 +204,7 @@ function Chapter(props) {
 
   const sectionNumber = courses.findIndex(e => e.id === data?.nid) + 1
 
+  const isLastProgram = localStorage.getItem(LAST_PROGRAM_ID) === data.field_program
   document.title = `${data?.title} - HBKU-SOOS`
   return (
     <>
@@ -212,6 +216,7 @@ function Chapter(props) {
         add={isLast}
         hasReview={hasReview}
         show={showReview}
+        isLastProgram={isLastProgram}
       />
       <TopBar prefix={`Section ${sectionNumber}`} title={data?.title} />
       <SideBar

@@ -1,6 +1,6 @@
 - [x] Once “Start” is clicked, the main video should be displayed with all the sections on the side.
 - [x] To adjust the “collapse” button, it indicates clearly how you can hide the sidebar of contents.
-- [ ] Attachements
-- [ ] To adjust the logo of HBKU: use the white version Link (check google drive)
+- [x] Attachements
+- [x] To adjust the logo of HBKU: use the white version Link (check google drive)
 - [x] To add an image capture as thumbnail for each chapter (To adjust the Thumbnail of the video (it should not show white)
 - [ ] Once all the chapters are complete we should have a button that indicates “Complete Orientation” once clicked a pop-up message will appear including the final message (check google drive for message).
