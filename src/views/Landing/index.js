@@ -10,7 +10,7 @@ import Professor from './Professor'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
-const outcomes = 'Virtual orientation outcomes'
+const outcomes = 'Hayakom at HBKU!'
 
 function CoursInfo(props) {
   return (
@@ -107,7 +107,7 @@ function Landing() {
     text: data?.field_highlight,
     primaryAction: {
       text: 'Start the orientation now',
-      link: `/program/${data?.nid}/${firstChapter}`,
+      link: `/programs`,
     },
     secondaryAction: { text: 'Orientation website', link: `/program/${data?.nid}` },
     includes: [
@@ -128,20 +128,11 @@ function Landing() {
       <div className='container my-5 landing-container'>
         <div className='main-frame'>
           <h2>{outcomes}</h2>
-          <ul className='checks'>
-            {outcomesList.map((e, k) => (
-              <li key={k}>{e}</li>
-            ))}
-          </ul>
-
-          <h2>Requirements</h2>
-          <p>{data?.field_requirements}</p>
-          <Description
-            title='Description'
-            description={data?.field_description}
-            list={outcomesList}
-          />
-
+            <Description
+                title=''
+                description={data?.field_description}
+                list={outcomesList}
+            />
           <Professor {...professorData} />
         </div>
       </div>

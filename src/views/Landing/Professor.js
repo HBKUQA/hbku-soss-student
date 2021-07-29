@@ -6,35 +6,21 @@ function Professor(props) {
 
   return (
     <div className='professor-card'>
-      <h2>Who can assist me ?</h2>
+      <h2>Contact Us</h2>
       <div className='professor-card-container'>
         <img src={props.avatar} alt={props.name} />
         <div>
-          <span className='name'>{props.name}</span>
+          <span className='name'>Support Team</span>
           <div className='is-grid professor-grid'>
             <span>
-              <i className='fas me-2 fa-phone fa-flip-horizontal'></i>
-              <span>{props.phone}</span>
-            </span>
-            <span>
               <i className='fas me-2 fa-envelope'></i>
-              <span>{props.email}</span>
+              <span>orientation@hbku.edu.qa </span>
             </span>
             <span>
               <i className='fas me-2 fa-clock'></i>
-              <span>{props.disponibilityTime}</span>
-            </span>
-            <span>
-              <i className='far me-2 fa-calendar-alt'></i>
-              <span>{props.disponibilityDays}</span>
+              <span>Sun-Thur 8:00 to 16:00</span>
             </span>
           </div>
-          <p>
-            {showLess(props.description)}
-            <button onClick={() => setShow(!show)} className='read-more'>
-              {show ? 'Hide' : 'Read more'}
-            </button>
-          </p>
         </div>
       </div>
     </div>

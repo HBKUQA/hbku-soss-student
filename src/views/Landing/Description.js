@@ -9,16 +9,6 @@ function Description(props) {
     <>
       <h2>{props.title}</h2>
       <p>{props.description}</p>
-      <ul className='checks is-grid has-2 gap-y-0'>
-        {limitList(props.list).map((e, k) => (
-          <li key={k}>{e}</li>
-        ))}
-      </ul>
-      <div className='mt-3 text-center'>
-        <button onClick={() => setShow(!show)} className='read-more'>
-          {show ? 'Hide' : 'Read more'}
-        </button>
-      </div>
     </>
   )
 }

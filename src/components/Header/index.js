@@ -28,6 +28,7 @@ function UserAvatar(props) {
         <span className='userAvatar-name'>Welcome, {props.field_full_name}</span>
       </div>
       <div className='userAvatar-menue'>
+          <Link to='/'>Home page</Link>
         <Link to='/logout'>Logout</Link>
       </div>
     </div>
@@ -49,7 +50,7 @@ function Header() {
   return (
     <header>
       <div className='container'>
-        <Link to='/programs'>
+        <Link to='/'>
           <img src={logo} alt='logo' className='logo' />
         </Link>
         <div className='actions'>

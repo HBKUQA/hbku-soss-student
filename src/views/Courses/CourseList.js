@@ -37,24 +37,17 @@ function Card(props) {
       <div className='card-body'>
         <h2>{props.title}</h2>
         <div>
-          <p>{props.description}</p>
           <div className='actions'>
             {props.locked ? (
               <>
                 <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
                   Start now
                 </button>
-                <button to={props.secondary} disabled className='btn big-text btn-outline-dark'>
-                  Details
-                </button>
               </>
             ) : (
               <>
                 <Link to={firstLink} className='btn big-text hover-outline btn-primary'>
                   Start now
-                </Link>
-                <Link to={props.secondary} className='btn big-text btn-outline-dark'>
-                  Details
                 </Link>
               </>
             )}
