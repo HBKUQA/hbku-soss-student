@@ -5,7 +5,10 @@
   color: $primary;
   background: $white;
   border: none;
-  right: 0px;
+  border: 1px solid $primary-dark;
+  border-right: 0px;
+  left: 0px;
+  transform: translateX(-100%);
   z-index: 3;
 }
 
@@ -21,7 +24,13 @@ aside {
   background: $aside-bg;
   padding: $default-gap 0px;
   transition: all 500ms ease-in-out;
-  left: 150vw;
+  left: 99vw;
+
+  &.toogled {
+    #sidebar-toogler svg {
+      transform: rotate(180deg);
+    }
+  }
 
   .actions {
     display: flex;
@@ -74,6 +83,7 @@ aside {
       }
     }
   }
+
   li {
     .li-container {
       width: 100%;

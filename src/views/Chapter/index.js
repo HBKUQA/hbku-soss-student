@@ -7,8 +7,8 @@ import axios from 'axios'
 import CoursVideo from './CoursVideo'
 import Review from './Review'
 import { useSelector } from 'react-redux'
-import {professorData} from "../Landing/data";
-import Professor from "../Landing/Professor";
+import { professorData } from '../Landing/data'
+import Professor from '../Landing/Professor'
 
 function Chapter(props) {
   const [data, setData] = useState({})
@@ -23,8 +23,7 @@ function Chapter(props) {
   const [loadingAttachements, setLoadingAttachements] = useState(true)
   const [loading, setLoading] = useState(true)
 
-
-    const videoRef = useRef()
+  const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
   const userID = useSelector(state => state.User?.user?.uid)
@@ -33,13 +32,25 @@ function Chapter(props) {
     setHasReview(true)
     setReview(data.field_review[0].value)
   }
+  const toogler = () => {
+    const sidebarDOM = sideBarRef?.current
+    const videoDOM = videoRef?.current
+    const documentDOM = documentRef?.current
+    const status = sidebarDOM?.className === 'toogled'
+    if (sidebarDOM) sidebarDOM.className = status ? '' : 'toogled'
+    if (videoDOM) videoDOM.className = status ? '' : ' toogled'
+    if (documentDOM) documentDOM.className = status ? '' : ' toogled'
+    updatePosition()
+  }
+
+  useEffect(toogler, [])
 
   useEffect(() => {
-      setLoading(true)
-      setData({})
-      setAttachements([])
-      setError(false)
-      setLoadingAttachements(true)
+    setLoading(true)
+    setData({})
+    setAttachements([])
+    setError(false)
+    setLoadingAttachements(true)
     axios
       .get(`/api/chapter/${chapterId}`)
       .then(res => setData(res.data[0]))
@@ -81,16 +92,16 @@ function Chapter(props) {
             setProgressID(newProgress.nid[0].value)
           })
       })
-      axios
-          .get(`/api/program/${id}/attachments`)
-          .then(res => {
-              setAttachements(res.data)
-              setLoadingAttachements(false)
-          })
-          .catch(() => {
-              setAttachements([])
-              setLoadingAttachements(false)
-          })
+    axios
+      .get(`/api/program/${id}/attachments`)
+      .then(res => {
+        setAttachements(res.data)
+        setLoadingAttachements(false)
+      })
+      .catch(() => {
+        setAttachements([])
+        setLoadingAttachements(false)
+      })
     axios
       .get(`/api/student/${id}/review`)
       .then(res => {
@@ -104,17 +115,6 @@ function Chapter(props) {
 
   const sections = data?.field_paragraphs_export ?? []
 
-  const toogler = () => {
-    const sidebarDOM = sideBarRef?.current
-    const videoDOM = videoRef?.current
-    const documentDOM = documentRef?.current
-    const status = sidebarDOM?.className === 'toogled'
-    if (sidebarDOM) sidebarDOM.className = status ? '' : 'toogled'
-    if (videoDOM) videoDOM.className = status ? '' : ' toogled'
-    if (documentDOM) documentDOM.className = status ? '' : ' toogled'
-    updatePosition()
-  }
-
   const updatePosition = () => {
     const sidebarDOM = sideBarRef?.current
     const videoDOM = videoRef?.current
@@ -123,9 +123,9 @@ function Chapter(props) {
     const box = videoDOM?.getClientRects()?.[0]
     const sideBarStart = box?.x + box?.width
     if (window.innerWidth > 768) {
-      if (sidebarDOM) sidebarDOM.style.left = status ? `${sideBarStart}px` : '150vw'
+      if (sidebarDOM) sidebarDOM.style.left = status ? `${sideBarStart}px` : '100%'
     } else {
-      if (sidebarDOM) sidebarDOM.style.left = status ? `0px` : '100vw'
+      if (sidebarDOM) sidebarDOM.style.left = status ? `0px` : '100%'
     }
   }
 
@@ -212,7 +212,7 @@ function Chapter(props) {
             </React.Fragment>
           ))}
         </div>
-          <Professor {...professorData} />
+        <Professor {...professorData} />
       </div>
       <Footer />
     </>
