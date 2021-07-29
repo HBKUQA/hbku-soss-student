@@ -50,7 +50,7 @@ function LoginForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Log in</h1>
         <h3>
-          with your <strong>HBKU adress</strong>
+          with your <strong>HBKU adresse</strong>
         </h3>
         {error ? <div className='alert'>{error}</div> : <></>}
         <input type='text' {...register('email', { required: true })} placeholder='Your email*' />
