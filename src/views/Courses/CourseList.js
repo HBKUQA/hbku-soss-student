@@ -26,7 +26,14 @@ function Card(props) {
   }
 
   return (
-    <div className='course-card'>
+    <div className={props.locked ? 'course-card tooltip' : 'course-card'}>
+      {props.locked ? (
+          <>
+            <span className="tooltiptext">This chapter is locked, you must unlock the previous chapters</span>
+          </>
+          ):
+          ( <></>)
+      }
       <div className='thumbnail-container'>
         <video className='thumbnail'>
           <source src={props.thumbnail} />
