@@ -21,7 +21,7 @@ function AuthMiddleWare({
           return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
         }
         if (!isAuthProtected && isAnonymousProtected && user) {
-          return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+          return <Redirect to={{ pathname: '/programs', state: { from: props.location } }} />
         }
 
         return (
