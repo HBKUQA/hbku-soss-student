@@ -19,8 +19,12 @@ function Chapter(props) {
   const [showReview, setShowReview] = useState(false)
   const [hasReview, setHasReview] = useState(false)
   const [review, setReview] = useState(0)
+  const [attachements, setAttachements] = useState([])
+  const [loadingAttachements, setLoadingAttachements] = useState(true)
+  const [loading, setLoading] = useState(true)
 
-  const videoRef = useRef()
+
+    const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
   const userID = useSelector(state => state.User?.user?.uid)
@@ -31,6 +35,11 @@ function Chapter(props) {
   }
 
   useEffect(() => {
+      setLoading(true)
+      setData({})
+      setAttachements([])
+      setError(false)
+      setLoadingAttachements(true)
     axios
       .get(`/api/chapter/${chapterId}`)
       .then(res => setData(res.data[0]))
@@ -72,7 +81,16 @@ function Chapter(props) {
             setProgressID(newProgress.nid[0].value)
           })
       })
-
+      axios
+          .get(`/api/program/${id}/attachments`)
+          .then(res => {
+              setAttachements(res.data)
+              setLoadingAttachements(false)
+          })
+          .catch(() => {
+              setAttachements([])
+              setLoadingAttachements(false)
+          })
     axios
       .get(`/api/student/${id}/review`)
       .then(res => {

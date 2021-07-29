@@ -29,8 +29,6 @@ function CoursInfo(props) {
                 {props.primaryAction.text}
               </Link>
             </div>
-            <h4>Attachments</h4>
-
             {props.includes.map((e, k) => (
               <div className='description-list' key={k}>
                 <i className={e.icon + ' me-2'}></i>

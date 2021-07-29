@@ -41,13 +41,13 @@ function Card(props) {
             {props.locked ? (
               <>
                 <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
-                  Start now
+                  Start
                 </button>
               </>
             ) : (
               <>
                 <Link to={firstLink} className='btn big-text hover-outline btn-primary'>
-                  Start now
+                  Start
                 </Link>
               </>
             )}

@@ -23,11 +23,9 @@ function Footer() {
           </svg>
         </a>
         <ul>
-          {links.map((e, k) => (
-            <li key={k}>
-              <Link to={e.link}>{e.text}</Link>
+            <li>
+              <Link to="">Copyright ©2021 All rights reserved to Hamad Bin Khalifa University.</Link>
             </li>
-          ))}
 
           {user === null && (
             <li>
