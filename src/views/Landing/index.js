@@ -133,6 +133,11 @@ function Landing() {
                 description={data?.field_description}
                 list={outcomesList}
             />
+          <Description
+              title='Orientation program'
+              description={data?.field_requirements}
+              list={outcomesList}
+          />
           <Professor {...professorData} />
         </div>
       </div>
