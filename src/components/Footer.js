@@ -26,12 +26,6 @@ function Footer() {
             <li>
               <Link to="">Copyright ©2021 All rights reserved to Hamad Bin Khalifa University.</Link>
             </li>
-
-          {user === null && (
-            <li>
-              <Link to='/login'>Log in</Link>
-            </li>
-          )}
         </ul>
       </div>
     </footer>
