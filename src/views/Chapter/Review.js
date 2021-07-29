@@ -32,7 +32,7 @@ function Review(props) {
             ))}
           </div>
           <Link to='/programs' className='btn btn-dark'>
-            Back to programs
+            Back to list all chapters
           </Link>
         </div>
       </div>
