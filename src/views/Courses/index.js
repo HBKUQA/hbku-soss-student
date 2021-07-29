@@ -28,7 +28,7 @@ function Courses() {
             const chapters = e.field_chapters ?? ''
             return {
               id: e.nid,
-              thumbnail: BASE_URL + e.field_introduction,
+              thumbnail: BASE_URL + e.field_thumbnail,
               primary: `/program/${e.nid}/${chapters.split(',')?.[0]}`,
               title: e.title,
               description: e.field_description,

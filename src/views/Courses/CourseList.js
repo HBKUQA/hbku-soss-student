@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import lock from '../../assets/svg/lock.svg'
 function Card(props) {
+  console.log(props)
   const firstLink = props.secondary + '/' + props?.chapters?.[0]
   const OverThumb = () => {
     if (props.locked)
@@ -28,16 +29,19 @@ function Card(props) {
   return (
     <div className={props.locked ? 'course-card tooltip' : 'course-card'}>
       {props.locked ? (
-          <>
-            <span className="tooltiptext">Dear student, in order to activate this chapter, you should complete the previous one</span>
-          </>
-          ):
-          ( <></>)
-      }
+        <>
+          <span className='tooltiptext'>
+            Dear student, in order to activate this chapter, you should complete the previous one
+          </span>
+        </>
+      ) : (
+        <></>
+      )}
       <div className='thumbnail-container'>
-        <video className='thumbnail'>
+        <img src={props.thumbnail} alt={props.title} />
+        {/* <video className='thumbnail'>
           <source src={props.thumbnail} />
-        </video>
+        </video> */}
         <OverThumb />
         <div className='progress'>{props.acchivement}</div>
       </div>
