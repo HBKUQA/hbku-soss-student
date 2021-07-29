@@ -29,7 +29,7 @@ function Card(props) {
     <div className={props.locked ? 'course-card tooltip' : 'course-card'}>
       {props.locked ? (
           <>
-            <span className="tooltiptext">This chapter is locked, you must unlock the previous chapters</span>
+            <span className="tooltiptext">Dear student, in order to activate this chapter, you should complete the previous one</span>
           </>
           ):
           ( <></>)

@@ -1,5 +1,5 @@
 import poster from '../../assets/images/video-poster.png'
-import avatar from '../../assets/images/professor-avatar.png'
+import avatar from '../../assets/images/icon-qataris.png'
 export const professorData = {
   avatar,
   name: 'noha k. Salim',
