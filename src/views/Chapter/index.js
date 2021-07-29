@@ -158,6 +158,8 @@ function Chapter(props) {
 
   if (error) return <></>
 
+  const sectionNumber = courses.findIndex(e => e.id === data?.nid) + 1
+
   document.title = `${data?.title} - HBKU-SOOS`
   return (
     <>
@@ -170,7 +172,7 @@ function Chapter(props) {
         hasReview={hasReview}
         show={showReview}
       />
-      <TopBar prefix={`Section ${data?.nid}`} title={data?.title} />
+      <TopBar prefix={`Section ${sectionNumber}`} title={data?.title} />
       <SideBar
         progress={progress}
         useRef={sideBarRef}
