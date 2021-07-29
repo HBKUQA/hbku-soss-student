@@ -15,7 +15,6 @@ function SideBar(props) {
   ).length
   const progressMax = props.items.length === 0 ? 1 : props.items.length
   const percent = (progressValue * 100) / progressMax
-  console.log(progressValue, progressMax, percent)
 
   return (
     <>
