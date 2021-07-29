@@ -1,7 +1,6 @@
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import ProgramTopBar from './ProgramTopBar'
-import Orientation from './Orientation'
 import Description from './Description'
 import axios from 'axios'
 import { BASE_URL } from '../../params'

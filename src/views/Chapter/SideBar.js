@@ -9,6 +9,14 @@ function SideBar(props) {
     const m = parseInt(seconds / 60)
     return `${m} min`
   }
+
+  const progressValue = props.items.filter(
+    (e, k) => (chapterProgress * k).toFixed(2) < progress
+  ).length
+  const progressMax = props.items.length === 0 ? 1 : props.items.length
+  const percent = (progressValue * 100) / progressMax
+  console.log(progressValue, progressMax, percent)
+
   return (
     <>
       <button id='sidebar-toogler' onClick={props.toogler}>
@@ -32,6 +40,12 @@ function SideBar(props) {
           <Link to={`/program/${props.programId}`} className='btn btn-outline-dark'>
             Next Chapter
           </Link>
+        </div>
+        <div className='py-3'>
+          <div className='progress'>
+            <div className='progress-bar' style={{ width: `${percent}%` }}></div>
+            <span className='progress-label'>{percent}%</span>
+          </div>
         </div>
         <div>
           <div className='header'>

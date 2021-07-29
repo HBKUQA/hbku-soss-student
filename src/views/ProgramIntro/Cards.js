@@ -5,7 +5,7 @@ function Cards(props) {
       {props.items.map((e, k) => (
         <div className='card' key={k}>
           <div className='card-header'>{e.title}</div>
-          <div className='card-body'>
+          <div className='card-body py-3'>
             {e.items.map((i, ki) => (
               <Card key={ki} {...i} />
             ))}

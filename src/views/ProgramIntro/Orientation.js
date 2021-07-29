@@ -1,26 +1,6 @@
-import axios from 'axios'
-import { useState } from 'react'
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-function Orientation(props) {
-  const [items, setItems] = useState([])
-  useEffect(() => {
-    if (props.parent)
-      axios
-        .get(`/api/program/${props.parent}/chapters`)
-        .then(res =>
-          setItems(
-            res.data.map(e => ({
-              link: `/program/${props.parent}/${e.nid}`,
-              title: e.title,
-              time: parseInt(e?.field_video_duration),
-            }))
-          )
-        )
-        .catch(() => null)
-  }, [props.parent])
-
+function Orientation({ title, items }) {
   const FormatTime = ({ total }) => {
     const format = i => i.toString().padStart(2, '0')
     const s = total % 60
@@ -33,7 +13,7 @@ function Orientation(props) {
   return (
     <div className='orientation'>
       <div className='header'>
-        <h2>{props.title}</h2>
+        <h2>{title}</h2>
         <div>
           <span>
             <i className='fas me-2 fa-stopwatch'></i>

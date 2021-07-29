@@ -21,9 +21,8 @@ function Chapter(props) {
   const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
-  const userID = useSelector(state => state.User?.user?.id)
+  const userID = useSelector(state => state.User?.user?.uid)
   const { id, chapterId } = props?.match?.params
-
   const refreshReview = data => {
     setHasReview(true)
     setReview(data.field_review[0].value)
@@ -52,7 +51,7 @@ function Chapter(props) {
       .catch(() => null)
 
     axios
-      .get(`/api/student/${id}/progress`)
+      .get(`/api/student/program/${id}/progress`)
       .then(res => {
         setProgress(res.data[0].field_process ?? 0)
         setProgressID(res.data[0].nid)
@@ -89,7 +88,6 @@ function Chapter(props) {
     const sidebarDOM = sideBarRef?.current
     const videoDOM = videoRef?.current
     const documentDOM = documentRef?.current
-
     const status = sidebarDOM?.className === 'toogled'
     if (sidebarDOM) sidebarDOM.className = status ? '' : 'toogled'
     if (videoDOM) videoDOM.className = status ? '' : ' toogled'
@@ -128,6 +126,7 @@ function Chapter(props) {
   const chapterProgress = 1 / numberOfChapters
   const thisIndex = courses.findIndex(e => e.id === chapterId)
   const nextProgress = chapterProgress * (thisIndex + 1)
+
   const videoData = {
     videoRef: videoRef,
     end: () => {
@@ -154,7 +153,7 @@ function Chapter(props) {
           .catch(() => null)
       }
     },
-    field_video: data.field_video,
+    field_video: data?.field_video,
   }
 
   if (error) return <></>

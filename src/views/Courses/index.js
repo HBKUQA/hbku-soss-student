@@ -15,8 +15,10 @@ const programTopData = {
 }
 
 function Courses() {
+  document.title = programTopData.title + ' - HBKU-SOOS'
   const [courses, setCourses] = useState([])
   const [progress, setProgress] = useState({})
+  const [chapters, setChapters] = useState({})
   useEffect(() => {
     axios
       .get('/api/programs')
@@ -27,7 +29,6 @@ function Courses() {
             return {
               id: e.nid,
               thumbnail: BASE_URL + e.field_introduction,
-              acchivement: '50',
               primary: `/program/${e.nid}/${chapters.split(',')?.[0]}`,
               title: e.title,
               description: e.field_description,
@@ -51,6 +52,18 @@ function Courses() {
       .catch(() => {
         setProgress({})
       })
+
+    axios
+      .get('/api/program/chapters')
+      .then(res => {
+        const tmp = {}
+        res.data.forEach(e => {
+          if (tmp[e.field_program] === undefined) tmp[e.field_program] = []
+          tmp[e.field_program].push(e.nid)
+        })
+        setChapters(tmp)
+      })
+      .catch(() => null)
   }, [])
 
   return (
@@ -59,11 +72,18 @@ function Courses() {
       <TopBar {...programTopData} />
       <div className='container'>
         <Filter />
+
         <CourseList
-          items={courses.map(e => ({
-            ...e,
-            acchivement: progress?.[e.id] ?? '0',
-          }))}
+          chapters={chapters}
+          items={courses.map((e, i, a) => {
+            const last = a?.[i - 1] ?? { acchivement: '100' }
+            const lastProgress = progress?.[last.id] ?? '0'
+            return {
+              ...e,
+              locked: last.id !== undefined && lastProgress !== '100',
+              acchivement: progress?.[e.id] ?? '0',
+            }
+          })}
         />
       </div>
       <Footer />

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import lock from '../../assets/svg/lock.svg'
 function Card(props) {
+  const firstLink = props.secondary + '/' + props?.chapters?.[0]
   const OverThumb = () => {
     if (props.locked)
       return (
@@ -10,7 +11,7 @@ function Card(props) {
       )
     return (
       <div className='overlay'>
-        <Link to={props.secondary} className='thumbnail-icon'>
+        <Link to={firstLink} className='thumbnail-icon'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='16'
@@ -40,10 +41,7 @@ function Card(props) {
           <div className='actions'>
             {props.locked ? (
               <>
-                <button
-                  to={props.primary}
-                  disabled
-                  className='btn big-text hover-outline btn-primary'>
+                <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
                   Start now
                 </button>
                 <button to={props.secondary} disabled className='btn big-text btn-outline-dark'>
@@ -52,7 +50,7 @@ function Card(props) {
               </>
             ) : (
               <>
-                <Link to={props.primary} className='btn big-text hover-outline btn-primary'>
+                <Link to={firstLink} className='btn big-text hover-outline btn-primary'>
                   Start now
                 </Link>
                 <Link to={props.secondary} className='btn big-text btn-outline-dark'>
@@ -70,9 +68,9 @@ function Card(props) {
 function CourseList(props) {
   return (
     <div className='courses'>
-      {props.items.map((e, k) => (
-        <Card key={k} {...e} />
-      ))}
+      {props.items.map((e, k) => {
+        return <Card key={k} chapters={props.chapters[e.id]} {...e} />
+      })}
     </div>
   )
 }

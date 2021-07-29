@@ -180,6 +180,7 @@ h3 {
 
 .front-grid {
   grid-template-columns: 1fr;
+  grid-template-rows: fit-content(100%) 1fr;
   padding-left: 0px;
 
   @media screen and (min-width: $break-point-xl) {
@@ -347,4 +348,8 @@ ul.checks {
 }
 .text-primary {
   color: $primary;
+}
+
+.text-center {
+  text-align: center;
 }

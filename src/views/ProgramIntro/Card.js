@@ -8,7 +8,7 @@ function Card(props) {
       </div>
     )
   return (
-    <div>
+    <div className={props.parentClass}>
       <i className={props.icon + ' me-2'}></i>
       <span>{props.text}</span>
     </div>
