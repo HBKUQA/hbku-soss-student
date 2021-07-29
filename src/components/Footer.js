@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 // import { useSelector } from 'react-redux'
 
 function Footer() {
@@ -23,9 +23,7 @@ function Footer() {
           </svg>
         </a>
         <ul>
-          <li>
-            <Link to=''>Copyright ©2021 All rights reserved to Hamad Bin Khalifa University.</Link>
-          </li>
+          <li>Copyright ©2021 All rights reserved to Hamad Bin Khalifa University.</li>
         </ul>
       </div>
     </footer>

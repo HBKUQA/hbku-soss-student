@@ -28,6 +28,7 @@ footer {
       flex-direction: row;
     }
     li {
+      color: $white;
       padding: 0.5em 0px;
       text-align: center;
       @media screen and(min-width: 576px) {
