@@ -32,7 +32,7 @@ function Review(props) {
             ))}
           </div>
           <Link to='/programs' className='btn btn-dark'>
-            Back to programs
+            Back to list all chapters
           </Link>
         </div>
       </div>
@@ -40,7 +40,7 @@ function Review(props) {
   return (
     <div className={`modal${props.show ? ' show' : ''}`}>
       <div className='modal-content'>
-        <h3>Do you want to review this program ?</h3>
+        <h3>Do you want to review this chapter ?</h3>
         <div className='review text-primary'>
           {Array.from({ length: 5 }).map((e, k) => (
             <i

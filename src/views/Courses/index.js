@@ -9,8 +9,8 @@ import { useEffect } from 'react'
 import { BASE_URL } from '../../params'
 
 const programTopData = {
-  title: 'My Orientation Program',
-  category: 'Courses',
+  title: 'List all chapters',
+  category: 'Chapters',
   icon: 'fas fa-user-graduate',
 }
 
