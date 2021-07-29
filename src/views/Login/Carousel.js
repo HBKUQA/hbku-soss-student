@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import logo from '../../assets/svg/logo_text_color.svg'
+import logo from '../../assets/images/hbku_transparent_logo.png'
 import PropTypes from 'prop-types'
 class Carousel extends Component {
   state = { show: 0, timer: 5000 }
