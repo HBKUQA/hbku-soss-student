@@ -7,6 +7,8 @@ import axios from 'axios'
 import CoursVideo from './CoursVideo'
 import Review from './Review'
 import { useSelector } from 'react-redux'
+import {professorData} from "../Landing/data";
+import Professor from "../Landing/Professor";
 
 function Chapter(props) {
   const [data, setData] = useState({})
@@ -192,6 +194,7 @@ function Chapter(props) {
             </React.Fragment>
           ))}
         </div>
+          <Professor {...professorData} />
       </div>
       <Footer />
     </>
