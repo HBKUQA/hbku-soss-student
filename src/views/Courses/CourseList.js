@@ -42,7 +42,7 @@ function Card(props) {
           <source src={props.thumbnail} />
         </video> */}
         <OverThumb />
-        <div className='progress'>{props.acchivement}</div>
+        <div className='progress'>{parseInt(props.acchivement)}</div>
       </div>
       <div className='card-body'>
         <h2>{props.title}</h2>

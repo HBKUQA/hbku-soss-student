@@ -83,7 +83,7 @@ function Courses() {
             const lastProgress = progress?.[last.id] ?? '0'
             return {
               ...e,
-              locked: last.id !== undefined && lastProgress !== '100',
+              locked: last.id !== undefined && parseInt(lastProgress) !== 100,
               acchivement: progress?.[e.id] ?? '0',
             }
           })}
