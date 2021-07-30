@@ -36,6 +36,7 @@
       }
       .professor-grid {
         grid-template-columns: 1fr;
+        margin-top: 15px;
         @media screen and (min-width: $break-point-md) {
           grid-template-columns: repeat(2, 1fr);
         }
@@ -217,7 +218,6 @@
         }
 
         &.locked {
-          background: $primary-dark;
           &::after {
             display: none;
           }

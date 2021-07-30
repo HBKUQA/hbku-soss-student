@@ -136,9 +136,7 @@ function ProgramIntro(props) {
       <div className='container'>
         <div className='is-grid front-grid'>
           <Cards items={cards} />
-
           <div className='main-frame'>
-            <h2>{outcomes}</h2>
             <ul className='checks'>
               {outcomesList.map((e, k) => (
                 <li key={k}>{e}</li>

@@ -24,6 +24,7 @@ function Chapter(props) {
   const [attachements, setAttachements] = useState([])
   const [loadingAttachements, setLoadingAttachements] = useState(true)
   const Attachements = () => {
+
     if (loadingAttachements) {
       return (
         <div className='text-center'>
@@ -31,9 +32,11 @@ function Chapter(props) {
         </div>
       )
     }
-    if (attachements.length === 0) {
-      return <div>No attachement</div>
-    }
+    if (attachements.length !== 0) {
+    return (
+        <h2>Attachements</h2>
+    )
+
     return (
       <ul>
         {attachements.map((e, k) => (
@@ -46,6 +49,9 @@ function Chapter(props) {
         ))}
       </ul>
     )
+    }else{
+        return ('')
+    }
   }
 
   const videoRef = useRef()
@@ -240,8 +246,6 @@ function Chapter(props) {
               <p>{parse(e.description)}</p>
             </React.Fragment>
           ))}
-
-          <h2>Attachements</h2>
           <Attachements />
         </div>
         <Professor {...professorData} />

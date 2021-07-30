@@ -124,7 +124,7 @@ function Landing() {
         text: `${formatTime(items.map(e => e.time).reduce((a, b) => a + b, 0))} of videos`,
       },
       { icon: 'fas fa-chart-pie', text: `${programs} sections` },
-      { icon: 'fas fa-mobile-alt', text: 'Access on mobile & TV' },
+      { icon: 'fas fa-mobile-alt', text: 'Access on desktop & mobile' },
       { icon: 'fas fa-info-circle', text: 'Limited access during the orientation period' },
     ],
   }
@@ -136,7 +136,7 @@ function Landing() {
       <div className='container my-5 landing-container'>
         <div className='main-frame'>
           <h2>{outcomes}</h2>
-          <Description title='' description={data?.field_description} list={outcomesList} />
+          <Description description={data?.field_description} list={outcomesList} />
           <Description
             title='Orientation program'
             description={data?.field_requirements}
