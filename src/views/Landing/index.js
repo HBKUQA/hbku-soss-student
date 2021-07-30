@@ -97,7 +97,7 @@ function Landing() {
 
   const outcomesList = data?.field_outcomes?.split?.('$$$') ?? []
   const programTopData = {
-    video: { label: '', url: BASE_URL + data?.field_introduction, poster: '' },
+    video: { label: '', url: BASE_URL + data?.field_introduction, poster: BASE_URL + data?.field_thumbnail },
     title: data?.title,
     text: data?.field_highlight,
     primaryAction: {
