@@ -13,6 +13,7 @@ function SideBar(props) {
   const progressValue = props.items.filter(
     (e, k) => (chapterProgress * k).toFixed(2) < progress
   ).length
+
   const progressMax = props.items.length === 0 ? 1 : props.items.length
   const percent = (progressValue * 100) / progressMax
 
@@ -43,7 +44,7 @@ function SideBar(props) {
         <div className='py-3'>
           <div className='progress'>
             <div className='progress-bar' style={{ width: `${percent}%` }}></div>
-            <span className='progress-label'>{percent}%</span>
+            <span className='progress-label'>{percent.toFixed(0)}%</span>
           </div>
         </div>
         <div>
@@ -78,7 +79,7 @@ function SideBar(props) {
                     <span className='checkmark'></span>
                   </label>
                   <div>
-                    {(chapterProgress * k).toFixed(2) <= progress ? (
+                    {parseInt((chapterProgress * k).toFixed(2)) <= parseInt(progress) ? (
                       <Link to={`/program/${props.programId}/${e.id}`} disabled={true}>
                         <div className='title'>{e.title}</div>
                         <div className='time'>
