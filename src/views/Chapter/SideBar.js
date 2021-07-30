@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import parse from 'html-react-parser'
 
 function SideBar(props) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
@@ -7,7 +8,8 @@ function SideBar(props) {
 
   const formatTime = seconds => {
     const m = parseInt(seconds / 60)
-    return `${m} min`
+    const s = parseInt(seconds % 60)
+    return `${m} min ${s} s`
   }
 
   const progressValue = props.items.filter(
@@ -81,7 +83,7 @@ function SideBar(props) {
                   <div>
                     {parseInt((chapterProgress * k).toFixed(2)) <= parseInt(progress) ? (
                       <Link to={`/program/${props.programId}/${e.id}`} disabled={true}>
-                        <div className='title'>{e.title}</div>
+                        <div className='title'>{parse(e.title)}</div>
                         <div className='time'>
                           <i className='fas me-2 fa-stopwatch' />
                           {formatTime(e.time)}
@@ -89,7 +91,7 @@ function SideBar(props) {
                       </Link>
                     ) : (
                       <div className='disabled'>
-                        <div className='title'>{e.title}</div>
+                        <div className='title'>{parse(e.title)}</div>
                         <div className='time'>
                           <i className='fas me-2 fa-stopwatch' />
                           {formatTime(e.time)}

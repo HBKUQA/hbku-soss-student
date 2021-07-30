@@ -56,6 +56,7 @@ function Landing() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [items, setItems] = useState([])
+  const [programs, setPrograms] = useState(0)
 
   let url = '/api/home'
   const nid = data?.nid
@@ -74,6 +75,13 @@ function Landing() {
         setLoading(false)
         setError(true)
       })
+
+    axios
+      .get('/api/programs')
+      .then(res => {
+        setPrograms(res.data.length)
+      })
+      .catch(() => null)
   }, [url])
 
   useEffect(() => {
@@ -115,7 +123,7 @@ function Landing() {
         icon: 'fas fa-stopwatch',
         text: `${formatTime(items.map(e => e.time).reduce((a, b) => a + b, 0))} of videos`,
       },
-      { icon: 'fas fa-chart-pie', text: `${items.length} sections` },
+      { icon: 'fas fa-chart-pie', text: `${programs} sections` },
       { icon: 'fas fa-mobile-alt', text: 'Access on mobile & TV' },
       { icon: 'fas fa-info-circle', text: 'Limited access during the orientation period' },
     ],

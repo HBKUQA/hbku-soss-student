@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import { professorData } from '../Landing/data'
 import Professor from '../Landing/Professor'
 import { LAST_PROGRAM_ID } from '../../params'
+import parse from 'html-react-parser'
 
 function Chapter(props) {
   const [data, setData] = useState({})
@@ -116,6 +117,7 @@ function Chapter(props) {
             setProgressID(newProgress.nid[0].value)
           })
       })
+
     axios
       .get(`/api/program/${id}/attachments`)
       .then(res => {
@@ -126,6 +128,7 @@ function Chapter(props) {
         setAttachements([])
         setLoadingAttachements(false)
       })
+
     axios
       .get(`/api/student/program/${id}/review`)
       .then(res => {
@@ -218,7 +221,7 @@ function Chapter(props) {
         show={showReview}
         isLastProgram={isLastProgram}
       />
-      <TopBar prefix={`Section ${sectionNumber}`} title={data?.title} />
+      <TopBar prefix={`Section ${sectionNumber}`} title={parse(data?.title ?? '')} />
       <SideBar
         progress={progress}
         useRef={sideBarRef}
@@ -233,8 +236,8 @@ function Chapter(props) {
         <div ref={documentRef}>
           {sections.map((e, k) => (
             <React.Fragment key={k}>
-              <h2>{e.title}</h2>
-              <p>{e.description}</p>
+              <h2>{parse(e.title)}</h2>
+              <p>{parse(e.description)}</p>
             </React.Fragment>
           ))}
 

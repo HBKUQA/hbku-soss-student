@@ -1,5 +1,6 @@
 import { BASE_URL } from '../../params'
 function CoursVideo(props) {
+  if (props.field_video === undefined) return <div ref={props.videoRef}></div>
   return (
     <div className='vider-container'>
       <div className='container'>
