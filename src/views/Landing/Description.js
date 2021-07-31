@@ -7,8 +7,14 @@ function Description(props) {
   // }
   return (
     <>
-      <h2>{props.title}</h2>
-      <p>{props.description}</p>
+        {props.title != undefined ? (
+            <>
+            <h2>{props.title}</h2>
+            </>
+        ):(<></>)
+        }
+
+      <p className='text-justify'>{props.description}</p>
     </>
   )
 }
