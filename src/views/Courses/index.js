@@ -9,7 +9,7 @@ import { useEffect } from 'react'
 import { BASE_URL, LAST_PROGRAM_ID } from '../../params'
 
 const programTopData = {
-  title: 'Virtual Student Orientation',
+  title: 'Virtual Student Orientation 2021/22',
   category: 'Chapters',
   icon: 'fas fa-user-graduate',
 }

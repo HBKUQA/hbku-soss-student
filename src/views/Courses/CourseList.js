@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import lock from '../../assets/svg/lock.svg'
 import {professorData} from "../Landing/data";
+import parse from 'html-react-parser'
 import Professor from "../Landing/Professor";
 function Card(props) {
   const firstLink = props.secondary + '/' + props?.chapters?.[0]
@@ -39,7 +40,7 @@ function Card(props) {
         <></>
       )}
       <div className='thumbnail-container'>
-        <img src={props.thumbnail} alt={props.title} />
+        <img src={props.thumbnail} alt={parse(props.title)} />
         {/* <video className='thumbnail'>
           <source src={props.thumbnail} />
         </video> */}
@@ -47,7 +48,7 @@ function Card(props) {
         <div className='progress'>{parseInt(props.acchivement)}</div>
       </div>
       <div className='card-body'>
-        <h2>{props.title}</h2>
+        <h2>{parse(props.title)}</h2>
         <div>
           <div className='actions'>
             {props.locked ? (
@@ -55,6 +56,9 @@ function Card(props) {
                 <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
                   Start
                 </button>
+                <span className="video-count">
+                  1
+                </span>
               </>
             ) : (
               <>

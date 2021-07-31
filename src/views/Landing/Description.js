@@ -14,7 +14,7 @@ function Description(props) {
         ):(<></>)
         }
 
-      <p className='text-justify'>{props.description}</p>
+      <p className='text-justify landing-description'>{props.description}</p>
     </>
   )
 }

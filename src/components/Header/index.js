@@ -29,6 +29,7 @@ function UserAvatar(props) {
       </div>
       <div className='userAvatar-menue'>
           <Link to='/'>Home page</Link>
+          <Link to='/programs'>My Orientation program</Link>
         <Link to='/logout'>Logout</Link>
       </div>
     </div>
