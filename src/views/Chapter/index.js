@@ -24,7 +24,6 @@ function Chapter(props) {
   const [attachements, setAttachements] = useState([])
   const [loadingAttachements, setLoadingAttachements] = useState(true)
   const Attachements = () => {
-
     if (loadingAttachements) {
       return (
         <div className='text-center'>
@@ -33,24 +32,23 @@ function Chapter(props) {
       )
     }
     if (attachements.length !== 0) {
-    return (
-        <h2>Attachements</h2>
-    )
-
-    return (
-      <ul>
-        {attachements.map((e, k) => (
-          <li key={k} className='py-1'>
-            <a href={e.field_attachment} target='_blank' rel='noreferrer'>
-              <i className='fas fa-download me-2'></i>
-              {e.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    )
-    }else{
-        return ('')
+      return (
+        <>
+          <h2>Attachements</h2>
+          <ul>
+            {attachements.map((e, k) => (
+              <li key={k} className='py-1'>
+                <a href={e.field_attachment} target='_blank' rel='noreferrer'>
+                  <i className='fas fa-download me-2'></i>
+                  {e.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    } else {
+      return <></>
     }
   }
 
