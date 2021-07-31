@@ -5,6 +5,7 @@ import parse from 'html-react-parser'
 import Professor from "../Landing/Professor";
 function Card(props) {
   const firstLink = props.secondary + '/' + props?.chapters?.[0]
+  var counter =1
   const OverThumb = () => {
     if (props.locked)
       return (
@@ -56,14 +57,14 @@ function Card(props) {
                 <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
                   Start
                 </button>
-                <span className="video-count">1</span>
+                <span className="video-count">{counter+1}</span>
               </>
             ) : (
               <>
                 <Link to={firstLink} className='btn big-text hover-outline btn-primary'>
                   Start
                 </Link>
-                <span className="video-count">1</span>
+                <span className="video-count">{counter+1}</span>
               </>
             )}
           </div>
