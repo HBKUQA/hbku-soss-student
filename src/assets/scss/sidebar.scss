@@ -18,8 +18,8 @@ aside {
   width: 100%;
   padding-bottom: $footer-height;
   position: fixed;
-  z-index: 999;
-  height: calc(100vh - #{$header-height} - #{$footer-height});
+  z-index: 4;
+  height: calc(100vh - #{$header-height});
   background: $aside-bg;
   padding: $default-gap 0px;
   transition: all 500ms ease-in-out;
@@ -29,6 +29,7 @@ aside {
   bottom: 0px;
 
   @media screen and(max-width: 768px) {
+    z-index: 99;
     height: calc(100vh - #{$header-height});
   }
 
@@ -102,7 +103,7 @@ aside {
     //   height: calc(100vh - #{$header-height} - 150px);
     // }
     @media screen and(min-width: 768px) {
-      height: calc(100vh - #{$header-height} - 160px);
+      height: calc(100vh - #{$header-height} - #{$footer-height} - 160px);
     }
 
     overflow: auto;

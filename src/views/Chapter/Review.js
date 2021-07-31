@@ -25,14 +25,28 @@ function Review(props) {
   if (props.isLastProgram && props.hasReview)
     return (
       <div className={`modal${props.show ? ' show' : ''}`}>
-        <div className='modal-content'>
-          <h2>Complete Orientation</h2>
-          <h3>Thank you for your review</h3>
-          <div className='review text-primary'>
-            {Array.from({ length: 5 }).map((e, k) => (
-              <i key={k} className={`${k + 1 <= props.review ? 'fas fa-star' : 'far fa-star'}`}></i>
-            ))}
+        <div className='modal-content text-start'>
+          <div className='text-start pt-4'>
+            <p className='pb-4'>Dear Student,</p>
+            <p className='pb-4'>
+              Congratulations on reaching this chapter! We hope that you have gained the needed
+              knowledge to tackle this year successfully. To complete your orientation, you are
+              required to register for the advising session for your program through this link:
+              <a
+                target='_blank'
+                rel='noreferrer'
+                href='https://hbku.wufoo.com/forms/advising-session-registration-202122/'>
+                https://hbku.wufoo.com/forms/advising-session-registration-202122/
+              </a>
+            </p>
+            <p className='pb-4'>You will receive a link with the session link and timing.</p>
+            <p className='pb-4'>
+              For any questions, comments or feedback on your orientation experience, please feel
+              free to email us at{' '}
+              <a href='mailto:orientation@hbku.edu.qa'>orientation@hbku.edu.qa</a>
+            </p>
           </div>
+
           <Link to='/programs' className='btn btn-dark'>
             Back to list all chapters
           </Link>

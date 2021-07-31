@@ -3,8 +3,9 @@ footer {
   z-index: 10;
   background: $primary-dark;
   display: flex;
-  position: relative;
+  position: sticky;
   padding: 0px;
+  top: calc(100vh - #{$footer-height});
   @media screen and(min-width: 576px) {
     padding: $default-gap 0px;
   }

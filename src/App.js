@@ -14,6 +14,7 @@ import axios from 'axios'
 
 const refreshTokenWithoutRedux = () => {
   const token = localStorage.getItem('refresh_token')
+  console.log(token)
   let data = new FormData()
   data.append('grant_type', 'refresh_token')
   data.append('client_id', API_SECRET)
