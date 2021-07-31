@@ -57,7 +57,7 @@ function Card(props) {
                 <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
                   Start
                 </button>
-                <span className="video-count">{counter+1}</span>
+                <span className="video-count">{counter++}</span>
               </>
             ) : (
               <>

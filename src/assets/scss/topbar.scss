@@ -4,8 +4,11 @@
   margin-top: $header-height;
   background: $primary-dark;
   color: $white;
+  height: 353px;
   position: relative;
   padding: 30px 0px !important;
+  background-image: url('../images/orientation_banner.png');
+  background-position: 34% 40%;
   h1 {
     padding-top: 20px;
   }
