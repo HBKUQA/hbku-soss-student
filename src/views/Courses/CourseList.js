@@ -56,15 +56,14 @@ function Card(props) {
                 <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
                   Start
                 </button>
-                <span className="video-count">
-                  1
-                </span>
+                <span className="video-count">1</span>
               </>
             ) : (
               <>
                 <Link to={firstLink} className='btn big-text hover-outline btn-primary'>
                   Start
                 </Link>
+                <span className="video-count">1</span>
               </>
             )}
           </div>

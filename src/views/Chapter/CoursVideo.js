@@ -5,7 +5,7 @@ function CoursVideo(props) {
     <div className='vider-container'>
       <div className='container'>
         <div ref={props.videoRef}>
-          <video onEnded={props.end} src={BASE_URL + props.field_video} controls></video>
+          <video onEnded={props.end} src={BASE_URL + props.field_video} controls autoPlay muted></video>
         </div>
       </div>
     </div>
