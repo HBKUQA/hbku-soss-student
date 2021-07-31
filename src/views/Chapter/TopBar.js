@@ -1,6 +1,6 @@
 function TopBar(props) {
   return (
-    <div className='topbar' id='top'>
+    <div className='topbar topbar-cd' id='top'>
       <div className='container'>
         <div className={props.toogled ? ' toogled' : ''}>
           <h3 className='mb-4 section_title'>
