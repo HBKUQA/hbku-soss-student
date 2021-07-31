@@ -1,7 +1,7 @@
 import { Route, Redirect, Switch } from 'react-router-dom'
 import AuthMiddleWare from './routes/middleware/AuthMiddleWare'
 import Login from './views/Login'
-import ProgramIntro from './views/ProgramIntro'
+// import ProgramIntro from './views/ProgramIntro'
 import Courses from './views/Courses'
 import Chapter from './views/Chapter'
 import Landing from './views/Landing'
@@ -73,7 +73,7 @@ function App() {
         exact
       />
       <AuthMiddleWare path='/programs' component={Courses} isAuthProtected={true} exact />
-      <AuthMiddleWare path='/program/:id' component={ProgramIntro} isAuthProtected={true} exact />
+      {/* <AuthMiddleWare path='/program/:id' component={ProgramIntro} isAuthProtected={true} exact /> */}
       <AuthMiddleWare
         path='/program/:id/:chapterId'
         component={Chapter}

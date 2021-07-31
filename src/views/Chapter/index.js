@@ -16,6 +16,7 @@ function Chapter(props) {
   const [data, setData] = useState({})
   const [error, setError] = useState(false)
   const [courses, setCourses] = useState([])
+  const [loadingcourses, setLoadingCourses] = useState(true)
   const [progress, setProgress] = useState(0)
   const [progressID, setProgressID] = useState(null)
   const [showReview, setShowReview] = useState(false)
@@ -23,6 +24,7 @@ function Chapter(props) {
   const [review, setReview] = useState(0)
   const [attachements, setAttachements] = useState([])
   const [loadingAttachements, setLoadingAttachements] = useState(true)
+
   const Attachements = () => {
     if (loadingAttachements) {
       return (
@@ -76,9 +78,7 @@ function Chapter(props) {
 
   useEffect(() => {
     setData({})
-    setAttachements([])
     setError(false)
-    setLoadingAttachements(true)
     axios
       .get(`/api/chapter/${chapterId}`)
       .then(res => setData(res.data[0]))
@@ -86,9 +86,12 @@ function Chapter(props) {
   }, [chapterId])
 
   useEffect(() => {
+    setAttachements([])
+    setLoadingAttachements(true)
+    setLoadingCourses(true)
     axios
       .get(`/api/program/${id}/chapters`)
-      .then(res =>
+      .then(res => {
         setCourses(
           res.data.map(e => ({
             id: e.nid,
@@ -97,8 +100,11 @@ function Chapter(props) {
             done: false,
           }))
         )
-      )
-      .catch(() => null)
+        setLoadingCourses(false)
+      })
+      .catch(() => {
+        setLoadingCourses(false)
+      })
 
     axios
       .get(`/api/student/program/${id}/progress`)
@@ -193,15 +199,17 @@ function Chapter(props) {
           })
           .catch(() => null)
       } else {
-        axios
-          .patch(`/node/${progressID}`, {
-            type: 'student_progress',
-            field_process: [{ value: nextProgress * 100 }],
-          })
-          .then(() => {
-            setProgress(nextProgress * 100)
-          })
-          .catch(() => null)
+        if (nextProgress * 100 > progress) {
+          axios
+            .patch(`/node/${progressID}`, {
+              type: 'student_progress',
+              field_process: [{ value: nextProgress * 100 }],
+            })
+            .then(() => {
+              setProgress(nextProgress * 100)
+            })
+            .catch(() => null)
+        }
       }
     },
     field_video: data?.field_video,
@@ -231,7 +239,9 @@ function Chapter(props) {
         useRef={sideBarRef}
         toogler={toogler}
         programId={id}
+        progressID={progressID}
         items={courses}
+        loadingcourses={loadingcourses}
         currentChapter={currentChapter}
       />
       <CoursVideo {...videoData} />
@@ -245,7 +255,7 @@ function Chapter(props) {
             </React.Fragment>
           ))}
           <Attachements />
-           <Professor {...professorData} />
+          <Professor {...professorData} />
         </div>
       </div>
       <Footer />

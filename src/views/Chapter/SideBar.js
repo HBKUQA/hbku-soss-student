@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import parse from 'html-react-parser'
 
 const formatTime = seconds => {
@@ -63,9 +63,21 @@ function SideBar(props) {
     ...e,
     currentChapter: e.id === props.currentChapter,
     checked: (chapterProgress * k).toFixed(2) < progress,
-    link: Math.random() < 0.5,
+    link:
+      (chapterProgress * k).toFixed(2) < progress ||
+      (chapterProgress * (k - 1)).toFixed(2) < progress,
     programId: props.programId,
   })
+
+  const sidebarList = props.items.map(cleanData)
+  if (!props.loadingcourses) {
+    const accesible = sidebarList.filter(e => e.link)
+    const current = sidebarList.filter(e => e.id === props.currentChapter)[0]
+    if (current === undefined) return <Redirect to='/'></Redirect>
+    if (!current.link && props.progressID !== null) {
+      return <Redirect to={`/program/17/${accesible[accesible.length - 1].id}`} />
+    }
+  }
 
   return (
     <aside ref={props.useRef}>
@@ -116,7 +128,7 @@ function SideBar(props) {
           </div>
         </div>
         <ul className='lessons-list'>
-          {props.items.map(cleanData).map((e, k) => (
+          {sidebarList.map((e, k) => (
             <SideBarItem key={k} {...e} />
           ))}
         </ul>
