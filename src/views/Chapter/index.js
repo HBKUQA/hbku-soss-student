@@ -245,8 +245,8 @@ function Chapter(props) {
             </React.Fragment>
           ))}
           <Attachements />
+           <Professor {...professorData} />
         </div>
-        <Professor {...professorData} />
       </div>
       <Footer />
     </>
