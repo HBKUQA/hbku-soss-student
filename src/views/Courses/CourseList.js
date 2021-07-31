@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
 import lock from '../../assets/svg/lock.svg'
-import {professorData} from "../Landing/data";
+import { professorData } from '../Landing/data'
 import parse from 'html-react-parser'
-import Professor from "../Landing/Professor";
+import Professor from '../Landing/Professor'
 function Card(props) {
   const firstLink = props.secondary + '/' + props?.chapters?.[0]
-  var counter =1
   const OverThumb = () => {
     if (props.locked)
       return (
@@ -57,14 +56,14 @@ function Card(props) {
                 <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
                   Start
                 </button>
-                <span className="video-count">{counter++}</span>
+                <span className='video-count'>{props.order}</span>
               </>
             ) : (
               <>
                 <Link to={firstLink} className='btn big-text hover-outline btn-primary'>
                   Start
                 </Link>
-                <span className="video-count">{counter+1}</span>
+                <span className='video-count'>{props.order}</span>
               </>
             )}
           </div>
@@ -76,14 +75,14 @@ function Card(props) {
 
 function CourseList(props) {
   return (
-      <div>
-    <div className='courses'>
-      {props.items.map((e, k) => {
-        return <Card key={k} chapters={props.chapters[e.id]} {...e} />
-      })}
-    </div>
-    <Professor {...professorData} />
+    <div>
+      <div className='courses'>
+        {props.items.map((e, k) => {
+          return <Card key={k} chapters={props.chapters[e.id]} {...e} order={k + 1} />
+        })}
       </div>
+      <Professor {...professorData} />
+    </div>
   )
 }
 
