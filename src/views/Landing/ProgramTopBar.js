@@ -3,7 +3,7 @@ function ProgramTopBar(props) {
     <div className='topbar' id='top'>
       <div className='container landing-container'>
         <div>
-          <h1>Virtual Student Orientation</h1>
+          <h1>Virtual Student Orientation 2021/22</h1>
         </div>
       </div>
     </div>
