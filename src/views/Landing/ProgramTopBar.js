@@ -4,7 +4,6 @@ function ProgramTopBar(props) {
       <div className='container landing-container'>
         <div>
           <h1>Virtual Student Orientation</h1>
-          <p>{props.text}</p>
         </div>
       </div>
     </div>

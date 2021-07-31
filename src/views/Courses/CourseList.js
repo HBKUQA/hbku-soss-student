@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import lock from '../../assets/svg/lock.svg'
+import {professorData} from "../Landing/data";
+import Professor from "../Landing/Professor";
 function Card(props) {
   const firstLink = props.secondary + '/' + props?.chapters?.[0]
   const OverThumb = () => {
@@ -70,11 +72,14 @@ function Card(props) {
 
 function CourseList(props) {
   return (
+      <div>
     <div className='courses'>
       {props.items.map((e, k) => {
         return <Card key={k} chapters={props.chapters[e.id]} {...e} />
       })}
     </div>
+    <Professor {...professorData} />
+      </div>
   )
 }
 
