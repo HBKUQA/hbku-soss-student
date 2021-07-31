@@ -38,7 +38,6 @@ function Courses() {
           })
         )
 
-        console.log(res.data)
         localStorage.setItem(LAST_PROGRAM_ID, res.data[res.data.length - 1].nid)
       })
       .catch(() => {})

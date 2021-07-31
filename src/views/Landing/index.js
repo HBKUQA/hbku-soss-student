@@ -104,7 +104,6 @@ function Landing() {
   if (error) return <></>
 
   const outcomesList = data?.field_outcomes?.split?.('$$$') ?? []
-  console.log(data)
   const programTopData = {
     video: {
       label: '',

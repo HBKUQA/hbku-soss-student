@@ -73,7 +73,7 @@ function SideBar(props) {
   if (!props.loadingcourses) {
     const accesible = sidebarList.filter(e => e.link)
     const current = sidebarList.filter(e => e.id === props.currentChapter)[0]
-    if (current === undefined) return <Redirect to='/'></Redirect>
+    if (current === undefined) return <Redirect to='/programs'></Redirect>
     if (!current.link && props.progressID !== null) {
       return <Redirect to={`/program/17/${accesible[accesible.length - 1].id}`} />
     }
@@ -98,9 +98,15 @@ function SideBar(props) {
         <Link to='/programs' className='btn btn-outline-dark'>
           List all chapters
         </Link>
-        <Link to={`/program/${props.programId}`} className='btn btn-outline-dark'>
-          Next Chapter
-        </Link>
+        {percent === 100 ? (
+          <a href={props.nextUrl} className='btn btn-outline-dark'>
+            Next Chapter
+          </a>
+        ) : (
+          <button className='btn btn-outline-dark' disabled>
+            Next Chapter
+          </button>
+        )}
       </div>
       <div className='py-3'>
         <div className='progress'>

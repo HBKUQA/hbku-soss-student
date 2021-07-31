@@ -24,7 +24,7 @@ function Chapter(props) {
   const [review, setReview] = useState(0)
   const [attachements, setAttachements] = useState([])
   const [loadingAttachements, setLoadingAttachements] = useState(true)
-
+  const [nextUrl, setNextUrl] = useState('')
   const Attachements = () => {
     if (loadingAttachements) {
       return (
@@ -148,6 +148,21 @@ function Chapter(props) {
         }
       })
       .catch(() => {})
+
+    axios
+      .get('/api/programs')
+      .then(res => {
+        const list = res.data.map(e => e.nid)
+        const nextProgram = list[list.indexOf(id) + 1]
+        axios
+          .get(`/api/program/${nextProgram}/chapters`)
+          .then(res => {
+            const nextUrl = `/program/${nextProgram}/${res.data?.[0]?.nid}`
+            setNextUrl(nextUrl)
+          })
+          .catch(() => null)
+      })
+      .catch(() => null)
   }, [id, userID])
 
   const sections = data?.field_paragraphs_export ?? []
@@ -232,12 +247,14 @@ function Chapter(props) {
         hasReview={hasReview}
         show={showReview}
         isLastProgram={isLastProgram}
+        nextUrl={nextUrl}
       />
       <TopBar prefix={`Section ${sectionNumber}`} title={parse(data?.title ?? '')} />
       <SideBar
         progress={progress}
         useRef={sideBarRef}
         toogler={toogler}
+        nextUrl={nextUrl}
         programId={id}
         progressID={progressID}
         items={courses}

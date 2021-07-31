@@ -64,8 +64,11 @@ function Review(props) {
               <i key={k} className={`${k + 1 <= props.review ? 'fas fa-star' : 'far fa-star'}`}></i>
             ))}
           </div>
+          <a href={props.nextUrl} className='btn btn-primary hover-outline'>
+            Go to next chapter <i className='fas fa-arrow-right ms-3'></i>
+          </a>
           <Link to='/programs' className='btn btn-dark'>
-            Back to list all chapters
+            <i className='fas fa-home me-3'></i> Back to list all chapters
           </Link>
         </div>
       </div>
