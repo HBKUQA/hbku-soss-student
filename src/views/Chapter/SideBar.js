@@ -1,23 +1,71 @@
 import { Link } from 'react-router-dom'
 import parse from 'html-react-parser'
 
+const formatTime = seconds => {
+  const m = parseInt(seconds / 60)
+  const s = parseInt(seconds % 60)
+  return `${m} min ${s} s`
+}
+function SideBarItem(props) {
+  const InnerLi = () => {
+    if (props.link)
+      return (
+        <div>
+          <Link to={`/program/${props.programId}/${props.id}`} disabled={true}>
+            <div className='title'>{parse(props.title)}</div>
+            <div className='time'>
+              <i className='fas me-2 fa-stopwatch' />
+              {formatTime(props.time)}
+            </div>
+          </Link>
+        </div>
+      )
+    return (
+      <div>
+        <div className='disabled'>
+          <div className='title'>{parse(props.title)}</div>
+          <div className='time'>
+            <i className='fas me-2 fa-stopwatch' />
+            {formatTime(props.time)}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const liClass = props.currentChapter ? 'active' : ''
+  return (
+    <li className={liClass}>
+      <div className='li-container'>
+        <label className='checkbox-container'>
+          <input type='checkbox' checked={props.checked} onChange={() => null} />
+          <span className='checkmark'></span>
+        </label>
+        <InnerLi />
+      </div>
+    </li>
+  )
+}
+
 function SideBar(props) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
   const numberOfChapters = props.items.length === 0 ? 1 : props.items.length
   const chapterProgress = 1 / numberOfChapters
 
-  const formatTime = seconds => {
-    const m = parseInt(seconds / 60)
-    const s = parseInt(seconds % 60)
-    return `${m} min ${s} s`
-  }
-
   const progressValue = props.items.filter(
-    (e, k) => (chapterProgress * k).toFixed(2) < progress
+    (_, k) => (chapterProgress * k).toFixed(2) < progress
   ).length
 
   const progressMax = props.items.length === 0 ? 1 : props.items.length
   const percent = (progressValue * 100) / progressMax
+
+  const cleanData = (e, k) => ({
+    ...e,
+    currentChapter: e.id === props.currentChapter,
+    checked: (chapterProgress * k).toFixed(2) < progress,
+    link: Math.random() < 0.5,
+    programId: props.programId,
+  })
 
   return (
     <>
@@ -53,7 +101,7 @@ function SideBar(props) {
           <div className='header'>
             <div>
               <span>Section content</span>
-              {/* <button className='btn btn-link' onClick={props.toogler}>
+              <button className='btn btn-link close-side-bar' onClick={props.toogler}>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='16'
@@ -65,42 +113,12 @@ function SideBar(props) {
                     d='M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z'
                   />
                 </svg>
-              </button> */}
+              </button>
             </div>
           </div>
           <ul className='lessons-list'>
-            {props.items.map((e, k) => (
-              <li className={e.id === props.currentChapter ? 'active' : ''} key={k}>
-                <div className='li-container'>
-                  <label className='checkbox-container'>
-                    <input
-                      type='checkbox'
-                      checked={(chapterProgress * k).toFixed(2) < progress}
-                      onChange={() => null}
-                    />
-                    <span className='checkmark'></span>
-                  </label>
-                  <div>
-                    {parseInt((chapterProgress * k).toFixed(2)) <= parseInt(progress) ? (
-                      <Link to={`/program/${props.programId}/${e.id}`} disabled={true}>
-                        <div className='title'>{parse(e.title)}</div>
-                        <div className='time'>
-                          <i className='fas me-2 fa-stopwatch' />
-                          {formatTime(e.time)}
-                        </div>
-                      </Link>
-                    ) : (
-                      <div className='disabled'>
-                        <div className='title'>{parse(e.title)}</div>
-                        <div className='time'>
-                          <i className='fas me-2 fa-stopwatch' />
-                          {formatTime(e.time)}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </li>
+            {props.items.map(cleanData).map((e, k) => (
+              <SideBarItem key={k} {...e} />
             ))}
           </ul>
         </div>
