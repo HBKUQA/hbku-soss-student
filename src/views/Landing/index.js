@@ -18,7 +18,7 @@ function CoursInfo(props) {
       <div className='cours-info-container'>
         <div className='cours-info'>
           <div className='video-container'>
-            <video controls poster={props.video.poster}>
+            <video controls poster={props.video.poster} autoPlay>
               <source src={props.video.url}></source>
             </video>
           </div>
@@ -122,7 +122,7 @@ function Landing() {
         icon: 'fas fa-stopwatch',
         text: `${formatTime(items.map(e => e.time).reduce((a, b) => a + b, 0))} of videos`,
       },
-      { icon: 'fas fa-chart-pie', text: `${programs} sections` },
+      { icon: 'fas fa-chart-pie', text: `${programs} chapters` },
       { icon: 'fas fa-mobile-alt', text: 'Access on desktop & mobile' },
       { icon: 'fas fa-info-circle', text: 'Limited access during the orientation period' },
     ],
