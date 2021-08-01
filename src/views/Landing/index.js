@@ -113,7 +113,7 @@ function Landing() {
     title: data?.title,
     text: data?.field_highlight,
     primaryAction: {
-      text: 'Start the orientation now',
+      text: 'Start your orientation',
       link: `/programs`,
     },
     secondaryAction: { text: 'Orientation website', link: `/program/${data?.nid}` },
