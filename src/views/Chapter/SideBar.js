@@ -96,7 +96,7 @@ function SideBar(props) {
       </button>
       <div className='actions'>
         <Link to='/programs' className='btn btn-outline-dark'>
-          List all chapters
+          All chapters
         </Link>
         {percent === 100 ? (
           <a href={props.nextUrl} className='btn btn-outline-dark'>
@@ -117,7 +117,7 @@ function SideBar(props) {
       <div>
         <div className='header'>
           <div>
-            <span>Section content</span>
+            <span>Section Content</span>
             <button className='btn btn-link close-side-bar' onClick={props.toogler}>
               <svg
                 xmlns='http://www.w3.org/2000/svg'

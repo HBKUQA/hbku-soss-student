@@ -36,7 +36,7 @@ function Chapter(props) {
     if (attachements.length !== 0) {
       return (
         <>
-          <h2>Attachements</h2>
+          <h2>Attachments</h2>
           <ul>
             {attachements.map((e, k) => (
               <li key={k} className='py-1'>
@@ -268,7 +268,7 @@ function Chapter(props) {
           {sections.map((e, k) => (
             <React.Fragment key={k}>
               <h2>{parse(e.title)}</h2>
-              <p>{parse(e.description)}</p>
+              <p dangerouslySetInnerHTML={{__html: e.description}}></p>
             </React.Fragment>
           ))}
           <Attachements />

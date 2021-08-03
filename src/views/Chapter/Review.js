@@ -48,7 +48,7 @@ function Review(props) {
           </div>
 
           <Link to='/programs' className='btn btn-dark'>
-            Back to list all chapters
+            Back to all chapters
           </Link>
         </div>
       </div>
@@ -68,7 +68,7 @@ function Review(props) {
             Go to next chapter <i className='fas fa-arrow-right ms-3'></i>
           </a>
           <Link to='/programs' className='btn btn-dark'>
-            <i className='fas fa-home me-3'></i> Back to list all chapters
+            <i className='fas fa-home me-3'></i> Back to all chapters
           </Link>
         </div>
       </div>
