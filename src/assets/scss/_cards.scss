@@ -222,6 +222,11 @@
             background: rgba(0, 0, 0, 0);
           }
         }
+        &.locked:hover {
+          &::after {
+            background: rgba(0, 0, 0, 0.3);
+          }
+        }
         &::after {
           transition: all 500ms ease-in-out;
           content: " ";

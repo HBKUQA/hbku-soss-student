@@ -26,11 +26,13 @@ function Courses() {
         setCourses(
           res.data.map(e => {
             const chapters = e.field_chapters ?? ''
+            console.log(e.field_is_required)
             return {
               id: e.nid,
               thumbnail: BASE_URL + e.field_thumbnail,
               primary: `/program/${e.nid}/${chapters.split(',')?.[0]}`,
               title: e.title,
+              isRequired: e.field_is_required === 'On',
               description: e.field_description,
               secondary: `/program/${e.nid}`,
               locked: e.status === '0',
@@ -68,6 +70,8 @@ function Courses() {
       .catch(() => null)
   }, [])
 
+  const requiredCourses = courses.filter(e => e.isRequired)
+  // console.log(courses.map(e => e.isRequired))
   return (
     <>
       <Header />
@@ -77,9 +81,19 @@ function Courses() {
 
         <CourseList
           chapters={chapters}
-          items={courses.map((e, i, a) => {
-            const last = a?.[i - 1] ?? { acchivement: '100' }
-            const lastProgress = progress?.[last.id] ?? '0'
+          items={courses.map(e => {
+            if (!e.isRequired)
+              return {
+                ...e,
+                locked: false,
+                acchivement: progress?.[e.id] ?? '0',
+              }
+            const thisIndex = requiredCourses.findIndex(el => el.id === e.id)
+            // console.log(thisIndex)
+            const last = requiredCourses?.[thisIndex - 1] ?? { acchivement: '100' }
+            // console.log(last)
+            const lastProgress = progress?.[last.id] ?? 0
+
             return {
               ...e,
               locked: last.id !== undefined && parseInt(lastProgress) !== 100,
