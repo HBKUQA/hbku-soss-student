@@ -18,6 +18,8 @@ import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.
 
 function Chapter(props) {
   const [data, setData] = useState({})
+  const [program, setProgram] = useState({})
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [courses, setCourses] = useState([])
   const [loadingcourses, setLoadingCourses] = useState(true)
@@ -78,7 +80,7 @@ function Chapter(props) {
     if (documentDOM) documentDOM.className = status ? '' : ' toogled'
     updatePosition()
   }
-
+  let url = `/api/program/${id}`
   useEffect(toogler, [])
 
   useEffect(() => {
@@ -110,6 +112,18 @@ function Chapter(props) {
       .catch(() => {
         setLoadingCourses(false)
       })
+
+      axios
+            .get(url)
+            .then(res => {
+              setError(false)
+              setLoading(false)
+              setProgram(res.data[0])
+            })
+            .catch(() => {
+              setLoading(false)
+              setError(true)
+            })
 
     axios
       .get(`/api/student/program/${id}/progress`)
@@ -171,7 +185,6 @@ function Chapter(props) {
   }, [id, userID])
 
   const sections = data?.field_paragraphs_export ?? []
-
   const updatePosition = () => {
     const sidebarDOM = sideBarRef?.current
     const videoDOM = videoRef?.current
@@ -254,7 +267,7 @@ function Chapter(props) {
         isLastProgram={isLastProgram}
         nextUrl={nextUrl}
       />
-      <TopBar prefix={`Section ${sectionNumber}`} title={parse(data?.title ?? '')} />
+      <TopBar prefix={`${program?.title}  >  Section ${sectionNumber}`} title={parse(data?.title ?? '')} />
       <SideBar
         progress={progress}
         useRef={sideBarRef}
@@ -264,6 +277,7 @@ function Chapter(props) {
         setPercent={setPercent}
         progressID={progressID}
         items={courses}
+        program={program}
         loadingcourses={loadingcourses}
         currentChapter={currentChapter}
       />
