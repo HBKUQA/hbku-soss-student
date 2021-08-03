@@ -14,7 +14,11 @@ function Professor(props) {
           <div className='is-grid professor-grid'>
             <span>
               <i className='fas me-2 fa-envelope'></i>
-              <span><a href="mailto:orientation@hbku.edu.qa">orientation@hbku.edu.qa</a> </span>
+              <span>
+                <a href='mailto:orientation@hbku.edu.qa' className='text-primary-light'>
+                  orientation@hbku.edu.qa
+                </a>{' '}
+              </span>
             </span>
             <span>
               <i className='fas me-2 fa-clock'></i>

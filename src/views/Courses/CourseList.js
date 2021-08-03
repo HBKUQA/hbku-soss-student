@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 import lock from '../../assets/svg/lock.svg'
+import play from '../../assets/svg/video.svg'
+import exclamation from '../../assets/svg/exclamation.svg'
+
 import { professorData } from '../Landing/data'
 import parse from 'html-react-parser'
 import Professor from '../Landing/Professor'
@@ -8,21 +11,14 @@ function Card(props) {
   const OverThumb = () => {
     if (props.locked)
       return (
-        <div className='overlay locked'>
-          <img src={lock} alt='locked' />
+        <div className='overlay'>
+          <img src={lock} alt='locked' className='thumbnail-icon' />
         </div>
       )
     return (
       <div className='overlay'>
         <Link to={firstLink} className='thumbnail-icon'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='16'
-            height='16'
-            fill='currentColor'
-            viewBox='0 0 16 16'>
-            <path d='m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z' />
-          </svg>
+          <img src={play} alt='locked' className='thumbnail-icon' />
         </Link>
       </div>
     )
@@ -48,25 +44,30 @@ function Card(props) {
         <div className='progress'>{parseInt(props.acchivement)}</div>
       </div>
       <div className='card-body'>
+        <span className='chapter-badge'>Chapter {props.order}</span>
         <h2>{parse(props.title)}</h2>
         <div>
-          <div className='actions'>
-            {props.locked ? (
-              <>
-                <button to={firstLink} disabled className='btn big-text hover-outline btn-primary'>
-                  Start
-                </button>
-                <span className='video-count'>{props.order}</span>
-              </>
-            ) : (
-              <>
-                <Link to={firstLink} className='btn big-text hover-outline btn-primary'>
-                  Start
-                </Link>
-                <span className='video-count'>{props.order}</span>
-              </>
-            )}
-          </div>
+          {!props.isRequired ? (
+            <div className='actions'>
+              <button
+                to={firstLink}
+                disabled
+                className='btn big-text show-btn hover-outline btn-primary'>
+                Start
+              </button>
+              <span className='mandatory'>
+                <img src={exclamation} alt='exclamation' />
+                mandatory
+              </span>
+            </div>
+          ) : (
+            <div className='actions'>
+              <Link to={firstLink} className='btn big-text show-btn hover-outline btn-primary'>
+                Start
+              </Link>
+              <span className='video-count'></span>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -78,7 +79,15 @@ function CourseList(props) {
     <div>
       <div className='courses'>
         {props.items.map((e, k) => {
-          return <Card key={k} chapters={props.chapters[e.id]} {...e} order={k + 1} />
+          return (
+            <Card
+              key={k}
+              isRequired={Math.random() < 0.5}
+              chapters={props.chapters[e.id]}
+              {...e}
+              order={k + 1}
+            />
+          )
         })}
       </div>
       <Professor {...professorData} />
