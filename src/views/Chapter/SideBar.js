@@ -1,6 +1,10 @@
 import { Link, Redirect } from 'react-router-dom'
 import parse from 'html-react-parser'
 
+import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
+import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
+import { useEffect, useRef } from 'react'
+
 const formatTime = seconds => {
   const m = parseInt(seconds / 60)
   const s = parseInt(seconds % 60)
@@ -51,13 +55,19 @@ function SideBar(props) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
   const numberOfChapters = props.items.length === 0 ? 1 : props.items.length
   const chapterProgress = 1 / numberOfChapters
-
+  const oldPercent = useRef(0)
   const progressValue = props.items.filter(
     (_, k) => (chapterProgress * k).toFixed(2) < progress
   ).length
 
   const progressMax = props.items.length === 0 ? 1 : props.items.length
   const percent = (progressValue * 100) / progressMax
+
+  const { setPercent } = props
+  useEffect(() => {
+    if (oldPercent.current === percent) return
+    setPercent(percent)
+  }, [percent, setPercent])
 
   const cleanData = (e, k) => ({
     ...e,
@@ -96,15 +106,19 @@ function SideBar(props) {
       </button>
       <div className='actions'>
         <Link to='/programs' className='btn btn-outline-dark'>
-          All chapters
+          <ListIcon />
+          <span className='ms-2'>All chapters</span>
         </Link>
+
         {percent === 100 ? (
-          <a href={props.nextUrl} className='btn btn-outline-dark'>
-            Next Chapter
-          </a>
+          <Link to={props.nextUrl} className='btn btn-outline-dark' disabled>
+            <ChapterIcon />
+            <span className='ms-2'>Next Chapter</span>
+          </Link>
         ) : (
           <button className='btn btn-outline-dark' disabled>
-            Next Chapter
+            <ChapterIcon />
+            <span className='ms-2'>Next Chapter</span>
           </button>
         )}
       </div>

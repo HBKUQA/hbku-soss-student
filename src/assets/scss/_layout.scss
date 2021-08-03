@@ -398,3 +398,10 @@ ul.checks {
 .card-body h2 {
   font-size: 1.3rem !important;
 }
+
+.video-action {
+  display: flex;
+  margin-top: $default-gap;
+  justify-content: flex-end;
+  gap: $default-gap;
+}

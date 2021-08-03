@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
+import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
+
 function Review(props) {
   const [rate, setRate] = useState(0)
   const user = useSelector(state => state.User.user)
@@ -64,11 +67,13 @@ function Review(props) {
               <i key={k} className={`${k + 1 <= props.review ? 'fas fa-star' : 'far fa-star'}`}></i>
             ))}
           </div>
-          <a href={props.nextUrl} className='btn btn-primary hover-outline'>
-            Go to next chapter <i className='fas fa-arrow-right ms-3'></i>
-          </a>
+          <Link to={props.nextUrl} className='btn btn-primary hover-outline'>
+            <ChapterIcon />
+            <span className='ms-2'>Go to next chapter</span>
+          </Link>
           <Link to='/programs' className='btn btn-dark'>
-            <i className='fas fa-home me-3'></i> Back to all chapters
+            <ListIcon />
+            <span className='ms-2'>Back to all chapters</span>
           </Link>
         </div>
       </div>

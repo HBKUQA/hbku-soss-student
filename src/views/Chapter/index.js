@@ -11,7 +11,11 @@ import { professorData } from '../Landing/data'
 import Professor from '../Landing/Professor'
 import { LAST_PROGRAM_ID } from '../../params'
 import parse from 'html-react-parser'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
+import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
+
 function Chapter(props) {
   const [data, setData] = useState({})
   const [error, setError] = useState(false)
@@ -25,6 +29,7 @@ function Chapter(props) {
   const [attachements, setAttachements] = useState([])
   const [loadingAttachements, setLoadingAttachements] = useState(true)
   const [nextUrl, setNextUrl] = useState('')
+  const [percent, setPercent] = useState(0)
   const Attachements = () => {
     if (loadingAttachements) {
       return (
@@ -256,27 +261,37 @@ function Chapter(props) {
         toogler={toogler}
         nextUrl={nextUrl}
         programId={id}
+        setPercent={setPercent}
         progressID={progressID}
         items={courses}
         loadingcourses={loadingcourses}
         currentChapter={currentChapter}
       />
       <CoursVideo {...videoData} />
-    <div className='actions'>
-            <Link to='/programs' className='btn btn-outline-dark'>
-              All chapters
-            </Link>
-            <span></span>
-              <Link className='btn btn-outline-dark' disabled>
-                Next Chapter
-              </Link>
-          </div>
+      <div className='container video-action'>
+        <Link to='/programs' className='btn btn-dark'>
+          <ListIcon />
+          <span className='ms-2'>All chapters</span>
+        </Link>
+
+        {percent === 100 ? (
+          <Link to={nextUrl} className='btn btn-dark' disabled>
+            <ChapterIcon />
+            <span className='ms-2'>Next Chapter</span>
+          </Link>
+        ) : (
+          <button className='btn btn-dark' disabled>
+            <ChapterIcon />
+            <span className='ms-2'>Next Chapter</span>
+          </button>
+        )}
+      </div>
       <div className='container course-detail'>
         <div ref={documentRef}>
           {sections.map((e, k) => (
             <React.Fragment key={k}>
               <h2>{parse(e.title)}</h2>
-              <p dangerouslySetInnerHTML={{__html: e.description}}></p>
+              <p dangerouslySetInnerHTML={{ __html: e.description }}></p>
             </React.Fragment>
           ))}
           <Attachements />
