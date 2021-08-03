@@ -384,7 +384,7 @@ ul.checks {
   font-size: 3em;
   color: #53bde4a6;
   font-family: monospace;
-  margin-left: 65%;
+  margin-left: 55%;
 }
 
 .landing-description {
@@ -393,4 +393,8 @@ ul.checks {
 
 .text-start {
   text-align: start !important;
+}
+
+.card-body h2{
+  font-size: 1.3rem !important;
 }

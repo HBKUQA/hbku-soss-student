@@ -48,7 +48,7 @@ const formatTime = total => {
   total = parseInt((total - s) / 60)
   const m = total % 60
   total = parseInt((total - m) / 60)
-  return `${format(total)}:${format(m)}:${format(s)} Hours`
+  return `${format(total)}:${format(m)}:${format(s)} hours`
 }
 
 function Landing() {

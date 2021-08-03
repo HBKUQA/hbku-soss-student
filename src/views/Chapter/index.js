@@ -11,7 +11,7 @@ import { professorData } from '../Landing/data'
 import Professor from '../Landing/Professor'
 import { LAST_PROGRAM_ID } from '../../params'
 import parse from 'html-react-parser'
-
+import { Link, Redirect } from 'react-router-dom'
 function Chapter(props) {
   const [data, setData] = useState({})
   const [error, setError] = useState(false)
@@ -262,7 +262,15 @@ function Chapter(props) {
         currentChapter={currentChapter}
       />
       <CoursVideo {...videoData} />
-
+    <div className='actions'>
+            <Link to='/programs' className='btn btn-outline-dark'>
+              All chapters
+            </Link>
+            <span></span>
+              <Link className='btn btn-outline-dark' disabled>
+                Next Chapter
+              </Link>
+          </div>
       <div className='container course-detail'>
         <div ref={documentRef}>
           {sections.map((e, k) => (
