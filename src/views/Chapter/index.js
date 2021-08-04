@@ -305,7 +305,7 @@ function Chapter(props) {
           {sections.map((e, k) => (
             <React.Fragment key={k}>
               <h2>{parse(e.title)}</h2>
-              <p>{parse(e.description)}</p>
+              <p dangerouslySetInnerHTML={{ __html: parse(e.description) }}></p>
             </React.Fragment>
           ))}
           <Attachements />
