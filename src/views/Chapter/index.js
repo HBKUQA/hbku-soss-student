@@ -267,7 +267,7 @@ function Chapter(props) {
         isLastProgram={isLastProgram}
         nextUrl={nextUrl}
       />
-      <TopBar prefix={`${parse(program?.title)}  >  Section ${sectionNumber}`} title={parse(data?.title ?? '')} />
+      <TopBar prefix={`${parse(program?.title)} >  Section ${sectionNumber}`} title={parse(data?.title ?? '')} />
       <SideBar
         progress={progress}
         useRef={sideBarRef}
