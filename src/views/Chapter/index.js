@@ -19,7 +19,7 @@ import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.
 function Chapter(props) {
   const [data, setData] = useState({})
   const [program, setProgram] = useState({})
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [courses, setCourses] = useState([])
   const [loadingcourses, setLoadingCourses] = useState(true)
@@ -113,17 +113,17 @@ function Chapter(props) {
         setLoadingCourses(false)
       })
 
-      axios
-            .get(url)
-            .then(res => {
-              setError(false)
-              setLoading(false)
-              setProgram(res.data[0])
-            })
-            .catch(() => {
-              setLoading(false)
-              setError(true)
-            })
+    axios
+      .get(url)
+      .then(res => {
+        setError(false)
+        // setLoading(false)
+        setProgram(res.data[0])
+      })
+      .catch(() => {
+        // setLoading(false)
+        setError(true)
+      })
 
     axios
       .get(`/api/student/program/${id}/progress`)
@@ -182,7 +182,7 @@ function Chapter(props) {
           .catch(() => null)
       })
       .catch(() => null)
-  }, [id, userID])
+  }, [id, url, userID])
 
   const sections = data?.field_paragraphs_export ?? []
   const updatePosition = () => {
@@ -267,7 +267,10 @@ function Chapter(props) {
         isLastProgram={isLastProgram}
         nextUrl={nextUrl}
       />
-      <TopBar prefix={`${parse(program?.title ?? '')} >  Section ${sectionNumber}`} title={parse(data?.title ?? '')} />
+      <TopBar
+        prefix={`${parse(program?.title ?? '')} >  Section ${sectionNumber}`}
+        title={parse(data?.title ?? '')}
+      />
       <SideBar
         progress={progress}
         useRef={sideBarRef}

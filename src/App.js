@@ -79,7 +79,7 @@ function App() {
         isAuthProtected={true}
         exact
       />
-      <AuthMiddleWare path='/' component={Landing} isAuthProtected={true} exact />
+      <AuthMiddleWare path='/' component={Landing} isAuthProtected={false} exact />
       <Route path='/logout'>
         <Logout />
       </Route>

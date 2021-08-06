@@ -1,40 +1,27 @@
-import { Link } from 'react-router-dom'
-
-function Orientation(props) {
-  const FormatTime = ({ total }) => {
-    const format = i => i.toString().padStart(2, '0')
-    const s = total % 60
-    total = parseInt((total - s) / 60)
-    const m = total % 60
-    total = parseInt((total - m) / 60)
-    return `${format(total)}:${format(m)}:${format(s)} hours`
-  }
-
+import orientationImg from '../../assets/images/main-image.jpg'
+import bgImage from '../../assets/images/background-gray-dots.svg'
+function Orientation() {
   return (
-    <div className='orientation'>
-      <div className='header'>
-        <h2>{props.title}</h2>
-        <div>
-          <span>
-            <i className='fas me-2 fa-stopwatch'></i>
-            <FormatTime total={props.items.map(e => e.time).reduce((a, b) => a + b, 0)} /> of videos
-          </span>
-          <span>
-            <i className='fas mx-2 fa-chart-pie'></i> {props.items.length} lessons
-          </span>
+    <section className='orientation-program'>
+      <img src={bgImage} alt='bg' className='bg-image'></img>
+      <div className='container'>
+        <h1>Orientation Program</h1>
+        <div className='orientation-card'>
+          <div className='date'>15 TH OF AUGUST 2021</div>
+          <div className='text-container'>
+            <h2>We have developed 8 chapters which will help you learn more</h2>
+            <p>
+              Start with chapter one to unlock the following chapters. Once you have completed all
+              chapters, you will be able to register for the advising session that corresponds with
+              your program. Make sure to register with your HBKU email.
+            </p>
+          </div>
+          <div className='image-container'>
+            <img src={orientationImg} alt='orientation' />
+          </div>
         </div>
       </div>
-      {props.items.map((e, k) => (
-        <div key={k} className='lesson'>
-          <Link to={e.link} className='title'>
-            {e.title}
-          </Link>
-          <span className='time'>
-            <FormatTime total={e.time} />
-          </span>
-        </div>
-      ))}
-    </div>
+    </section>
   )
 }
 
