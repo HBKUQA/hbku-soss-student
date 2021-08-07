@@ -26,7 +26,6 @@ function Courses() {
         setCourses(
           res.data.map(e => {
             const chapters = e.field_chapters ?? ''
-            console.log(e.field_is_required)
             return {
               id: e.nid,
               thumbnail: BASE_URL + e.field_thumbnail,
@@ -71,7 +70,6 @@ function Courses() {
   }, [])
 
   const requiredCourses = courses.filter(e => e.isRequired)
-  // console.log(courses.map(e => e.isRequired))
   return (
     <>
       <Header />
@@ -82,22 +80,22 @@ function Courses() {
         <CourseList
           chapters={chapters}
           items={courses.map(e => {
+            const acchivement = isNaN(progress?.[e.id]) ? '0' : progress?.[e.id]
+
             if (!e.isRequired)
               return {
                 ...e,
                 locked: false,
-                acchivement: progress?.[e.id] ?? '0',
+                acchivement,
               }
             const thisIndex = requiredCourses.findIndex(el => el.id === e.id)
-            // console.log(thisIndex)
             const last = requiredCourses?.[thisIndex - 1] ?? { acchivement: '100' }
-            // console.log(last)
             const lastProgress = progress?.[last.id] ?? 0
 
             return {
               ...e,
               locked: last.id !== undefined && parseInt(lastProgress) !== 100,
-              acchivement: progress?.[e.id] ?? '0',
+              acchivement,
             }
           })}
         />

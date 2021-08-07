@@ -324,4 +324,56 @@
       }
     }
   }
+  .speakers-container {
+    margin-top: 3 * $default-gap;
+    display: grid;
+    gap: $default-gap;
+    grid-template-columns: repeat(4, 1fr);
+    .speakers-card {
+      background: white;
+      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.05);
+      &:hover {
+        .speakers-card-thumb-container {
+          img {
+            transform: scale(1);
+          }
+        }
+      }
+      .speakers-card-thumb-container {
+        height: 350px;
+        overflow: hidden;
+        img {
+          transition: 300ms ease-in-out;
+          transform: scale(1.1);
+          object-position: center;
+        }
+      }
+      .speakers-card-body {
+        padding: 1em;
+        color: $primary-dark;
+        .speakers-name {
+          position: relative;
+          font-size: 1.1em;
+          &:after {
+            top: 1.5em;
+            left: 0px;
+            position: absolute;
+            content: " ";
+            background-image: linear-gradient(90deg, $primary-dark, $primary);
+            width: 4ch;
+            height: 1px;
+            transition: 300ms ease;
+          }
+          &:hover {
+            &:after {
+              width: 15ch;
+            }
+          }
+        }
+        .speakers-post {
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
 }

@@ -4,7 +4,7 @@ import Login from './views/Login'
 // import ProgramIntro from './views/ProgramIntro'
 import Courses from './views/Courses'
 import Chapter from './views/Chapter'
-import Landing from './views/Landing'
+// import Landing from './views/Landing'
 import { refreshToken } from './store/auth/actions'
 import { disconnect } from './store/user/actions'
 import { useEffect } from 'react'
@@ -79,12 +79,12 @@ function App() {
         isAuthProtected={true}
         exact
       />
-      <AuthMiddleWare path='/' component={Landing} isAuthProtected={false} exact />
+      {/* <AuthMiddleWare path='/' component={Landing} isAuthProtected={false} exact /> */}
       <Route path='/logout'>
         <Logout />
       </Route>
       <Route>
-        <Redirect to='/'></Redirect>
+        <Redirect to='/login'></Redirect>
       </Route>
     </Switch>
   )
