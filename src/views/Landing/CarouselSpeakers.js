@@ -8,7 +8,6 @@ function CarouselSpeakers({ children }) {
 
   const next = useCallback(() => {
     setSelected((selected + 1) % children.length)
-    console.log('next')
   }, [children.length, selected])
 
   const prev = () => {
@@ -50,6 +49,28 @@ export function CarouselItem({ name, post, description, image, show }) {
       <div className='speaker-carousel-item-images'>
         <img src={image} alt={name} className='speaker-carousel-item-images-profil' />
         <img src={hbkuBg} alt='hbku-bg' className='speaker-carousel-item-images-bg' />
+      </div>
+    </div>
+  )
+}
+
+export function Professors(props) {
+  return (
+    <div className='container'>
+      <div className='speakers-container'>
+        {props.data.map((e, k) => {
+          return (
+            <div className='speakers-card' key={k}>
+              <div className='speakers-card-thumb-container'>
+                <img src={e.image} alt={e.name}></img>
+              </div>
+              <div className='speakers-card-body'>
+                <h4 className='speakers-name'>{e.name}</h4>
+                <div className='speakers-post'>{e.post}</div>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

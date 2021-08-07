@@ -129,7 +129,11 @@ function Chapter(props) {
       .get(`/api/student/program/${id}/progress`)
       .then(res => {
         const progress = res.data.sort((a, b) => a.nid - b.nid)
-        setProgress(progress[0].field_process ?? 0)
+        setProgress(
+          isNaN(progress[0].field_process) || progress[0].field_process === ''
+            ? 0
+            : progress[0].field_process
+        )
         setProgressID(progress[0].nid)
       })
       .catch(() => {
@@ -292,10 +296,10 @@ function Chapter(props) {
         </Link>
 
         {percent === 100 ? (
-          <Link to={nextUrl} className='btn btn-dark' disabled>
+          <a href={nextUrl} className='btn btn-dark' disabled>
             <ChapterIcon />
             <span className='ms-2'>Next Chapter</span>
-          </Link>
+          </a>
         ) : (
           <button className='btn btn-dark' disabled>
             <ChapterIcon />

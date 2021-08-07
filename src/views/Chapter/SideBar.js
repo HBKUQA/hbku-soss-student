@@ -10,6 +10,7 @@ const formatTime = seconds => {
   const s = parseInt(seconds % 60)
   return `${m} min ${s} s`
 }
+
 function SideBarItem(props) {
   const InnerLi = () => {
     if (props.link)
@@ -111,10 +112,10 @@ function SideBar(props) {
         </Link>
 
         {percent === 100 ? (
-          <Link to={props.nextUrl} className='btn btn-outline-dark' disabled>
+          <a href={props.nextUrl} className='btn btn-outline-dark' disabled>
             <ChapterIcon />
             <span className='ms-2'>Next Chapter</span>
-          </Link>
+          </a>
         ) : (
           <button className='btn btn-outline-dark' disabled>
             <ChapterIcon />

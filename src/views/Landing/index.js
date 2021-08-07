@@ -6,72 +6,15 @@ import avatar from '../../assets/images/woman-icon-picture-profile-female-icon-h
 import maryam from '../../assets/images/maryam_portrait.jpeg'
 import NavBar from './NavBar'
 import Orientation from './Orientation'
-import CarouselSpeakers, { CarouselItem } from './CarouselSpeakers'
+import CarouselSpeakers, { CarouselItem, Professors } from './CarouselSpeakers'
 // import { BASE_URL } from '../../params'
-import RevSlider, { Slide, Caption } from 'react-rev-slider'
-
-const config = {
-  delay: 9000,
-  startwidth: 1170,
-  startheight: 500,
-  hideThumbs: 10,
-  fullWidth: 'on',
-  forceFullWidth: 'on',
-}
 
 function Hero() {
   return <video className='hero' autoPlay muted loop src={headerVideo}></video>
 }
 
-function Professors() {
-  return (
-    <>
-      <RevSlider config={config}>
-        <Slide
-          src='https://i.ytimg.com/vi/dFnvYtPePRA/maxresdefault.jpg'
-          alt='slidebg1'
-          data-bgfit='cover'
-          data-bgposition='left top'
-          data-bgrepeat='no-repeat'
-          slideProperties={{
-            'data-transition': 'fade',
-            'data-slotamount': '7',
-            'data-masterspeed': '1500',
-          }}>
-          <Caption
-            class='tp-caption skewfromrightshort fadeout'
-            data-x='85'
-            data-y='224'
-            data-speed='500'
-            data-start='1200'
-            data-easing='Power4.easeOut'>
-            This is a caption
-          </Caption>
-        </Slide>
-        <Slide
-          src='https://i.ytimg.com/vi/0xe4H666drk/maxresdefault.jpg'
-          alt='slidebg1'
-          data-bgfit='cover'
-          data-bgposition='left top'
-          data-bgrepeat='no-repeat'
-          slideProperties={{
-            'data-transition': 'fade',
-            'data-slotamount': '7',
-            'data-masterspeed': '1500',
-          }}>
-          <Caption
-            class='tp-caption skewfromrightshort fadeout'
-            data-x='85'
-            data-y='224'
-            data-speed='500'
-            data-start='1200'
-            data-easing='Power4.easeOut'>
-            This is a caption
-          </Caption>
-        </Slide>
-      </RevSlider>
-    </>
-  )
+function PreviousOrientations(props) {
+  return <section></section>
 }
 
 function Landing() {
@@ -106,14 +49,14 @@ function Landing() {
           },
           { image: avatar, name: 'Dr. Nadir Yildirim', post: 'INNOVATION DIRECTOR' },
           { image: avatar, name: 'Arwa S. Sulieman', post: 'REGISTRAR SPECIALIST' },
-        ].map(e => ({
-          ...e,
-          google: 'https://google.com',
-          linkedin: 'https://linkedin.com',
-          facebook: 'https://facebook.com',
-          twitter: 'https://twitter.com',
-        }))}
+        ]}
       />
+      <section className='orientation-program'>
+        <div className='container'>
+          <h1>Previous Orientations</h1>
+        </div>
+      </section>
+      <PreviousOrientations></PreviousOrientations>
     </main>
   )
 }
