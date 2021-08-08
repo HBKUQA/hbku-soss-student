@@ -51,7 +51,7 @@ function Header() {
   return (
     <header>
       <div className='container'>
-        <Link to='/'>
+        <Link to='http://hbku-soos.com/home'>
           <img src={logo} alt='logo' className='logo' />
         </Link>
         <div className='actions'>
