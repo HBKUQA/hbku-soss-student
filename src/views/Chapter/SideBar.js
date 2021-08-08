@@ -132,7 +132,7 @@ function SideBar(props) {
       <div>
         <div className='header'>
           <div>
-            <span>{parse(props.program?.title ?? '')} Section Content</span>
+            <span>{parse(props.program?.title ?? '')} Chapter Content</span>
             <button className='btn btn-link close-side-bar' onClick={props.toogler}>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
