@@ -28,7 +28,7 @@ function UserAvatar(props) {
         <span className='userAvatar-name'>Welcome, {props.field_full_name}</span>
       </div>
       <div className='userAvatar-menue'>
-          <Link to='/'>Home page</Link>
+          <Link to='/'>Home Page</Link>
           <Link to='/programs'>My Orientation program</Link>
         <Link to='/logout'>Logout</Link>
       </div>
