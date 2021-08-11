@@ -12,6 +12,7 @@ import Professor from '../Landing/Professor'
 import { LAST_PROGRAM_ID } from '../../params'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
+import { BASE_URL } from '../../params'
 
 import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
 import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
@@ -47,7 +48,7 @@ function Chapter(props) {
           <ul>
             {attachements.map((e, k) => (
               <li key={k} className='py-1'>
-                <a href={e.field_attachment} target='_blank' rel='noreferrer'>
+                <a href={BASE_URL + e.field_attachment} target='_blank' rel='noreferrer'>
                   <i className='fas fa-download me-2'></i>
                   {e.title}
                 </a>
