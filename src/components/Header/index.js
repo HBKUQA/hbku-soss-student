@@ -28,7 +28,8 @@ function UserAvatar(props) {
         <span className='userAvatar-name'>Welcome, {props.field_full_name}</span>
       </div>
       <div className='userAvatar-menue'>
-        <a href='/'>Home Page</a>
+        <a href='/'>Homepage</a>
+        <a href='https://hbku.wufoo.com/forms/advising-session-registration-202122/' target='_blank'>Advising Session Registration</a>
         <Link to='/programs'>My Orientation program</Link>
         <Link to='/logout'>Logout</Link>
       </div>
