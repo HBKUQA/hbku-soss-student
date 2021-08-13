@@ -9,7 +9,7 @@ import { refreshToken } from './store/auth/actions'
 import { disconnect } from './store/user/actions'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { API_SECRET } from './params'
+import { API_SECRET, BASE_URL } from './params'
 import axios from 'axios'
 
 const refreshTokenWithoutRedux = () => {
@@ -19,6 +19,7 @@ const refreshTokenWithoutRedux = () => {
   data.append('client_id', API_SECRET)
   data.append('client_secret', API_SECRET)
   data.append('refresh_token', token)
+  console.log(token)
   if (token) {
     axios
       .post('/oauth/token', data)
@@ -37,9 +38,12 @@ const refreshTokenWithoutRedux = () => {
 }
 
 function Logout() {
+  axios.defaults.headers['api-key'] = undefined
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(disconnect())
+    window.location.href = BASE_URL + '/user/logout'
   }, [dispatch])
 
   return <Redirect to='/' />

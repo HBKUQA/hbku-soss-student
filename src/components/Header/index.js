@@ -3,6 +3,8 @@ import logo from '../../assets/svg/logo_text_color.svg'
 import { useSelector } from 'react-redux'
 import { BASE_URL } from '../../params'
 
+import defaultAvatar from '../../assets/images/icon-qataris.png'
+
 const UserIcon = () => (
   <svg xmlns='http://www.w3.org/2000/svg' width='18.285' height='16' viewBox='0 0 18.285 16'>
     <path
@@ -21,15 +23,23 @@ const UserIcon = () => (
 )
 
 function UserAvatar(props) {
+  const name = props.field_full_name === '' ? props.name : props.field_full_name
+
+  const avatar = props.user_picture === '' ? defaultAvatar : BASE_URL + props.user_picture
   return (
     <div className='userAvatar'>
       <div className='userAvatar-toogler'>
-        <img src={BASE_URL + props.user_picture} alt={props.field_full_name} />
-        <span className='userAvatar-name'>Welcome, {props.field_full_name}</span>
+        <img src={avatar} alt={name} />
+        <span className='userAvatar-name'>Welcome, {name}</span>
       </div>
       <div className='userAvatar-menue'>
         <a href='/'>Homepage</a>
-        <a href='https://hbku.wufoo.com/forms/advising-session-registration-202122/' target='_blank'>Advising Session Registration</a>
+        <a
+          href='https://hbku.wufoo.com/forms/advising-session-registration-202122/'
+          rel='noreferrer'
+          target='_blank'>
+          Advising Session Registration
+        </a>
         <Link to='/programs'>My Orientation program</Link>
         <Link to='/logout'>Logout</Link>
       </div>

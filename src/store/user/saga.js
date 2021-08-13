@@ -4,7 +4,8 @@ import * as Types from './actionTypes'
 import { setUserData } from './actions'
 import axios from 'axios'
 
-const getConnectedUser = async () => await axios.get('/api/current-user').then(res => res.data?.[0])
+const getConnectedUser = async () =>
+  await axios.get('/api/current-user', { withCredentials: true }).then(res => res.data?.[0])
 
 function* getUserData() {
   try {
