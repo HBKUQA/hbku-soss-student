@@ -7,13 +7,31 @@
   @media screen and (max-width: $break-point-md) {
     grid-template-columns: 1fr;
   }
+  &.loading {
+    grid-template-columns: 1fr;
+
+    .auth-form-loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      align-items: center;
+      width: 100%;
+      padding: 0px;
+      height: 100%;
+      color: $white;
+
+      i {
+        color: $primary;
+      }
+    }
+  }
 
   .auth-form-loading {
     width: 100%;
     padding: 0px;
     height: 100%;
     color: $white;
-
     i {
       color: $primary;
     }

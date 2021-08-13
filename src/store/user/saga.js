@@ -2,6 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects'
 
 import * as Types from './actionTypes'
 import { setUserData } from './actions'
+import { refreshTokenSuccess } from '../auth/actions'
 import axios from 'axios'
 
 const getConnectedUser = async () =>
@@ -11,8 +12,10 @@ function* getUserData() {
   try {
     const user = yield getConnectedUser()
     yield put(setUserData(user))
+    yield put(refreshTokenSuccess())
   } catch (error) {
     yield put(setUserData(null))
+    yield put(refreshTokenSuccess())
   }
 }
 

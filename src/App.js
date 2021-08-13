@@ -5,40 +5,46 @@ import Login from './views/Login'
 import Courses from './views/Courses'
 import Chapter from './views/Chapter'
 // import Landing from './views/Landing'
-import { refreshToken } from './store/auth/actions'
-import { disconnect } from './store/user/actions'
+// import { refreshToken } from './store/auth/actions'
+import { disconnect, getUserData } from './store/user/actions'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { API_SECRET, BASE_URL } from './params'
+
+import {
+  // API_SECRET,
+  BASE_URL,
+} from './params'
 import axios from 'axios'
 
-const refreshTokenWithoutRedux = () => {
-  const token = localStorage.getItem('refresh_token')
-  let data = new FormData()
-  data.append('grant_type', 'refresh_token')
-  data.append('client_id', API_SECRET)
-  data.append('client_secret', API_SECRET)
-  data.append('refresh_token', token)
-  console.log(token)
-  if (token) {
-    axios
-      .post('/oauth/token', data)
-      .then(res => {
-        const token = res.data
-        localStorage.setItem('access_token', token.access_token)
-        localStorage.setItem('expires_in', token.expires_in)
-        localStorage.setItem('refresh_token', token.refresh_token)
-        localStorage.setItem('token_type', token.token_type)
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.access_token
-      })
-      .catch(err => {
-        localStorage.clear()
-      })
-  }
-}
+// const refreshTokenWithoutRedux = () => {
+//   const token = localStorage.getItem('refresh_token')
+//   let data = new FormData()
+//   data.append('grant_type', 'refresh_token')
+//   data.append('client_id', API_SECRET)
+//   data.append('client_secret', API_SECRET)
+//   data.append('refresh_token', token)
+//   console.log(token)
+//   if (token) {
+//     axios
+//       .post('/oauth/token', data)
+//       .then(res => {
+//         const token = res.data
+//         localStorage.setItem('access_token', token.access_token)
+//         localStorage.setItem('expires_in', token.expires_in)
+//         localStorage.setItem('refresh_token', token.refresh_token)
+//         localStorage.setItem('token_type', token.token_type)
+//         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.access_token
+//       })
+//       .catch(err => {
+//         localStorage.clear()
+//       })
+//   }
+// }
 
 function Logout() {
-  axios.defaults.headers['api-key'] = undefined
+  axios.defaults.headers.common['api-key'] = undefined
+  console.log('clearing from logout')
+  localStorage.clear()
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -52,15 +58,17 @@ function Logout() {
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(refreshToken(true))
-  }, [dispatch])
+    // dispatch(refreshToken(true))
 
-  useEffect(() => {
-    const timer = setInterval(refreshTokenWithoutRedux, 150000)
-    return () => {
-      clearInterval(timer)
+    const token = localStorage.getItem('api-token')
+    if (token) {
+      axios.defaults.headers.common['api-key'] = token
+      dispatch(getUserData())
+    } else {
+      axios.defaults.headers.common['api-key'] = undefined
+      dispatch(getUserData())
     }
-  }, [])
+  }, [dispatch])
 
   const refreshingToken = useSelector(state => state.Login.refreshingToken)
   const loggingIn = useSelector(state => state.User.loggingIn)

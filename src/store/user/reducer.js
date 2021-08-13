@@ -11,7 +11,6 @@ const login = (state = initialState, action) => {
       state = { ...state, user: action?.payload?.user, loggingIn: false }
       break
     case Types.CLEAR_USER_DATA:
-      localStorage.clear()
       state = { ...state, user: null, loggingIn: false }
       break
     default:
