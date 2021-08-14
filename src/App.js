@@ -92,6 +92,9 @@ function App() {
         exact
       />
       {/* <AuthMiddleWare path='/' component={Landing} isAuthProtected={false} exact /> */}
+      <AuthMiddleWare path='/' isAuthProtected={false} exact>
+        <a href='https://orientationapi.hbku.edu.qa/user/login'>Login</a>
+      </AuthMiddleWare>
       <Route path='/logout'>
         <Logout />
       </Route>

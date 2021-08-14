@@ -34,12 +34,12 @@ function UserAvatar(props) {
       </div>
       <div className='userAvatar-menue'>
         <a href='/'>Homepage</a>
-        <a
+        {/* <a
           href='https://hbku.wufoo.com/forms/advising-session-registration-202122/'
           rel='noreferrer'
           target='_blank'>
           Advising Session Registration
-        </a>
+        </a> */}
         <Link to='/programs'>My Orientation program</Link>
         <Link to='/logout'>Logout</Link>
       </div>
@@ -62,7 +62,7 @@ function Header() {
   return (
     <header>
       <div className='container'>
-        <a href='/home'>
+        <a href='/'>
           <img src={logo} alt='logo' className='logo' />
         </a>
         <div className='actions'>
