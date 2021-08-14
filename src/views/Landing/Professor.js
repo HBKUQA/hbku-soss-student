@@ -22,7 +22,7 @@ function Professor(props) {
             </span>
             <span>
               <i className='fas me-2 fa-clock'></i>
-              <span>Sun-Thur 8:00 to 16:00</span>
+              <span>Sun-Thur 8AM to 4PM</span>
             </span>
           </div>
         </div>
