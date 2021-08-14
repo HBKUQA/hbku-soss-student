@@ -67,10 +67,10 @@ function Review(props) {
               <i key={k} className={`${k + 1 <= props.review ? 'fas fa-star' : 'far fa-star'}`}></i>
             ))}
           </div>
-          <Link to={props.nextUrl} className='btn btn-primary hover-outline'>
+          <a href={props.nextUrl} className='btn btn-primary hover-outline'>
             <ChapterIcon />
             <span className='ms-2'>Go to next chapter</span>
-          </Link>
+          </a>
           <Link to='/programs' className='btn btn-dark'>
             <ListIcon />
             <span className='ms-2'>Back to all chapters</span>
