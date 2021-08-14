@@ -62,9 +62,9 @@ function Header() {
   return (
     <header>
       <div className='container'>
-        <Link to='/home'>
+        <a href='/home'>
           <img src={logo} alt='logo' className='logo' />
-        </Link>
+        </a>
         <div className='actions'>
           {/* <div className='input-group outline-primary'>
             <span className='input-group-icon'>
