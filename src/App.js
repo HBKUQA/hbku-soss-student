@@ -55,6 +55,12 @@ function Logout() {
   return <Redirect to='/' />
 }
 
+function HomePage() {
+  window.location.reload(true)
+  return <></>
+  // return <a href='https://orientationapi.hbku.edu.qa/user/login'>Login</a>
+}
+
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -93,7 +99,7 @@ function App() {
       />
       {/* <AuthMiddleWare path='/' component={Landing} isAuthProtected={false} exact /> */}
       <AuthMiddleWare path='/' isAuthProtected={false} exact>
-        <a href='https://orientationapi.hbku.edu.qa/user/login'>Login</a>
+        <HomePage />
       </AuthMiddleWare>
       <Route path='/logout'>
         <Logout />
