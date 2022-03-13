@@ -14,7 +14,11 @@ import CourseDetails from './CourseDetails'
 function Chapter(props) {
   const { id, chapterId } = props?.match?.params
 
-  const { data = {}, refetch: refetchData } = useQuery(`get-chapter-${chapterId}`, () =>
+  const {
+    data = {},
+    refetch: refetchData,
+    isError,
+  } = useQuery(`get-chapter-${chapterId}`, () =>
     axios.get(`/api/chapter/${chapterId}`).then(res => res.data[0])
   )
 
@@ -37,8 +41,6 @@ function Chapter(props) {
     )
   )
 
-  const [error, setError] = useState(false)
-
   const [showReview, setShowReview] = useState(false)
   const [hasReview, setHasReview] = useState(false)
   const [review, setReview] = useState(0)
@@ -50,8 +52,6 @@ function Chapter(props) {
     setHasReview(true)
     setReview(data.field_review[0].value)
   }
-
-  let url = `/api/program/${id}`
 
   useEffect(() => {
     refetchData()
@@ -93,7 +93,7 @@ function Chapter(props) {
   const thisIndex = courses.findIndex(e => e.id === chapterId)
   const nextProgress = chapterProgress * (thisIndex + 1)
 
-  if (error) return <></>
+  if (isError) return <></>
 
   const sectionNumber = courses.findIndex(e => e.id === data?.nid) + 1
   const isLastProgram = localStorage.getItem(LAST_PROGRAM_ID) === data.field_program
