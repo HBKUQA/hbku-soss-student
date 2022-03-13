@@ -5,6 +5,7 @@ import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
 import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
 import { useEffect, useRef } from 'react'
 import SideBarItem from './SideBarItem'
+import Toogler from './Toogler'
 
 function SideBar(props) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
@@ -46,19 +47,7 @@ function SideBar(props) {
 
   return (
     <aside ref={props.useRef}>
-      <button id='sidebar-toogler' onClick={props.toogler}>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='16'
-          height='16'
-          fill='currentColor'
-          viewBox='0 0 16 16'>
-          <path
-            fillRule='evenodd'
-            d='M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z'
-          />
-        </svg>
-      </button>
+      <Toogler toogler={props.toogler} />
       <div className='actions'>
         <Link to='/programs' className='btn btn-outline-dark'>
           <ListIcon />
