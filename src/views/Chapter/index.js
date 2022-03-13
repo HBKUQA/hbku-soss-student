@@ -45,31 +45,12 @@ function Chapter(props) {
   )
 
   const [showReview, setShowReview] = useState(false)
-  const [hasReview, setHasReview] = useState(false)
-  const [nextUrl, setNextUrl] = useState('')
 
   const loadingcourses = isLoadingcourses || isFetchingcourses
 
   useEffect(() => {
     refetchData()
   }, [refetchData, chapterId])
-
-  useEffect(() => {
-    axios
-      .get('/api/programs')
-      .then(res => {
-        const list = res.data.map(e => e.nid)
-        const nextProgram = list[list.indexOf(id) + 1]
-        axios
-          .get(`/api/program/${nextProgram}/chapters`)
-          .then(res => {
-            const nextUrl = `/program/${nextProgram}/${res.data?.[0]?.nid}`
-            setNextUrl(nextUrl)
-          })
-          .catch(() => null)
-      })
-      .catch(() => null)
-  }, [id])
 
   const sections = data?.field_paragraphs_export ?? []
 
