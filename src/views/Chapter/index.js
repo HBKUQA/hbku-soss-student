@@ -10,6 +10,7 @@ import ChapterActions from './ChapterActions'
 import Layout from './Layout'
 import { useQuery } from 'react-query'
 import CourseDetails from './CourseDetails'
+import Quiz from './Quiz'
 
 function Chapter(props) {
   const { id, chapterId } = props?.match?.params
@@ -76,6 +77,7 @@ function Chapter(props) {
         show={isLast && showReview}
         isLastProgram={isLastProgram}
       />
+      <Quiz />
       <TopBar
         prefix={`${parse(program?.title ?? '')} >  Section ${sectionNumber}`}
         title={parse(data?.title ?? '')}

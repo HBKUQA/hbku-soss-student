@@ -9,7 +9,6 @@ import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.
 function Review({ refetchReview, review, show, isLastProgram, nextUrl, programId }) {
   const [rate, setRate] = useState(0)
   const user = useSelector(state => state.User.user)
-  console.log(review)
   const sendRevew = useMutation(
     () => {
       return axios.post('/node?_format=json', {
