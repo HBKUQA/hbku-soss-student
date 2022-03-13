@@ -164,37 +164,6 @@ function Chapter(props) {
   const thisIndex = courses.findIndex(e => e.id === chapterId)
   const nextProgress = chapterProgress * (thisIndex + 1)
 
-  const videoData = {
-    videoRef: videoRef,
-    end: () => {
-      if (isLast) {
-        setShowReview(true)
-        axios
-          .patch(`/node/${progressID}`, {
-            type: 'student_progress',
-            field_process: [{ value: 100 }],
-          })
-          .then(() => {
-            setProgress(100)
-          })
-          .catch(() => null)
-      } else {
-        if (nextProgress * 100 > progress) {
-          axios
-            .patch(`/node/${progressID}`, {
-              type: 'student_progress',
-              field_process: [{ value: nextProgress * 100 }],
-            })
-            .then(() => {
-              setProgress(nextProgress * 100)
-            })
-            .catch(() => null)
-        }
-      }
-    },
-    field_video: data?.field_video,
-  }
-
   if (error) return <></>
 
   const sectionNumber = courses.findIndex(e => e.id === data?.nid) + 1
@@ -229,7 +198,7 @@ function Chapter(props) {
         loadingcourses={loadingcourses}
         currentChapter={chapterId}
       />
-      <CoursVideo {...videoData} />
+      <CoursVideo videoRef={videoRef} field_video={data?.field_video} {...videoData} />
       <ChapterActions />
       <CourseDetails documentRef={documentRef} id={id} sections={sections} />
     </Layout>
