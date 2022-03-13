@@ -15,7 +15,7 @@ import CourseDetails from './CourseDetails'
 function Chapter(props) {
   const { id, chapterId } = props?.match?.params
 
-  const { data = {} } = useQuery(`get-chapter-${chapterId}`, () =>
+  const { data = {}, refetch: refetchData } = useQuery(`get-chapter-${chapterId}`, () =>
     axios.get(`/api/chapter/${chapterId}`).then(res => res.data[0])
   )
 
@@ -59,13 +59,8 @@ function Chapter(props) {
   let url = `/api/program/${id}`
 
   useEffect(() => {
-    setData({})
-    setError(false)
-    axios
-      .get(`/api/chapter/${chapterId}`)
-      .then(res => setData(res.data[0]))
-      .catch(() => setError(true))
-  }, [chapterId])
+    refetchData()
+  }, [refetchData, chapterId])
 
   useEffect(() => {
     axios
