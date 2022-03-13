@@ -11,6 +11,29 @@ function Layout({ programId, chapterId, children }) {
   const documentRef = useRef()
   const sideBarRef = useRef()
 
+  const updatePosition = () => {
+    const sidebarDOM = sideBarRef?.current
+    const videoDOM = videoRef?.current
+    const status = sidebarDOM?.className === 'toogled'
+    const box = videoDOM?.getClientRects()?.[0]
+    const sideBarStart = box?.x + box?.width
+
+    if (window.innerWidth > 768) {
+      if (sidebarDOM) sidebarDOM.style.left = status ? `${sideBarStart}px` : '100%'
+    } else {
+      if (sidebarDOM) sidebarDOM.style.left = status ? `0px` : '100%'
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      updatePosition()
+    })
+    return () => {
+      window.removeEventListener('resize', updatePosition)
+    }
+  }, [])
+
   const { data: list = [] } = useQuery('get-programs-list', () =>
     axios.get('/api/programs').then(res => res.data.map(e => e.nid))
   )
@@ -36,6 +59,7 @@ function Layout({ programId, chapterId, children }) {
           videoRef,
           documentRef,
           sideBarRef,
+          updatePosition,
         })
       })}
       <Footer />

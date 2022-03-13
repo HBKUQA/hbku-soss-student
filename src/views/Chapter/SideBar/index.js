@@ -6,7 +6,7 @@ import Actions from './Actions'
 import Progress from './Progress'
 import SidebarHeader from './SidebarHeader'
 
-function SideBar({ sideBarRef, ...props }) {
+function SideBar({ sideBarRef, videoRef, documentRef, updatePosition, ...props }) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
   const numberOfChapters = props.items.length === 0 ? 1 : props.items.length
   const chapterProgress = 1 / numberOfChapters
@@ -35,6 +35,19 @@ function SideBar({ sideBarRef, ...props }) {
     programId: props.programId,
   })
 
+  const toogler = () => {
+    const sidebarDOM = sideBarRef?.current
+    const videoDOM = videoRef?.current
+    const documentDOM = documentRef?.current
+    const status = sidebarDOM?.className === 'toogled'
+    if (sidebarDOM) sidebarDOM.className = status ? '' : 'toogled'
+    if (videoDOM) videoDOM.className = status ? '' : ' toogled'
+    if (documentDOM) documentDOM.className = status ? '' : ' toogled'
+    updatePosition()
+  }
+
+  useEffect(toogler, [documentRef, sideBarRef, updatePosition, videoRef])
+
   const sidebarList = props.items.map(cleanData)
   if (!props.loadingcourses) {
     const accesible = sidebarList.filter(e => e.link)
@@ -48,11 +61,11 @@ function SideBar({ sideBarRef, ...props }) {
 
   return (
     <aside ref={sideBarRef}>
-      <Toogler toogler={props.toogler} />
+      <Toogler toogler={toogler} />
       <Actions nextUrl={props.nextUrl} percent={percent} />
       <Progress percent={percent} />
       <div>
-        <SidebarHeader toogler={props.toogler} title={props.program?.title ?? ''} />
+        <SidebarHeader toogler={toogler} title={props.program?.title ?? ''} />
         <ul className='lessons-list'>
           {sidebarList.map((e, k) => (
             <SideBarItem key={k} {...e} />

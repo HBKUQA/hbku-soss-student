@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TopBar from './TopBar'
 import SideBar from './SideBar'
 import axios from 'axios'
@@ -49,27 +49,14 @@ function Chapter(props) {
 
   const loadingcourses = isLoadingcourses || isFetchingcourses
 
-  const videoRef = useRef()
-  const documentRef = useRef()
-  const sideBarRef = useRef()
   const userID = useSelector(state => state.User?.user?.uid)
 
   const refreshReview = data => {
     setHasReview(true)
     setReview(data.field_review[0].value)
   }
-  const toogler = () => {
-    const sidebarDOM = sideBarRef?.current
-    const videoDOM = videoRef?.current
-    const documentDOM = documentRef?.current
-    const status = sidebarDOM?.className === 'toogled'
-    if (sidebarDOM) sidebarDOM.className = status ? '' : 'toogled'
-    if (videoDOM) videoDOM.className = status ? '' : ' toogled'
-    if (documentDOM) documentDOM.className = status ? '' : ' toogled'
-    updatePosition()
-  }
+
   let url = `/api/program/${id}`
-  useEffect(toogler, [])
 
   useEffect(() => {
     setData({})
@@ -134,28 +121,6 @@ function Chapter(props) {
   }, [id, url, userID])
 
   const sections = data?.field_paragraphs_export ?? []
-  const updatePosition = () => {
-    const sidebarDOM = sideBarRef?.current
-    const videoDOM = videoRef?.current
-    const status = sidebarDOM?.className === 'toogled'
-
-    const box = videoDOM?.getClientRects()?.[0]
-    const sideBarStart = box?.x + box?.width
-    if (window.innerWidth > 768) {
-      if (sidebarDOM) sidebarDOM.style.left = status ? `${sideBarStart}px` : '100%'
-    } else {
-      if (sidebarDOM) sidebarDOM.style.left = status ? `0px` : '100%'
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('resize', () => {
-      updatePosition()
-    })
-    return () => {
-      window.removeEventListener('resize', updatePosition)
-    }
-  }, [])
 
   const isLast = courses[courses.length - 1]?.id === chapterId
 
@@ -188,7 +153,6 @@ function Chapter(props) {
       />
       <SideBar
         progress={progress}
-        toogler={toogler}
         setPercent={setPercent}
         progressID={progressID}
         items={courses}
