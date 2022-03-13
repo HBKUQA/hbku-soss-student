@@ -11,9 +11,7 @@ import { LAST_PROGRAM_ID } from '../../params'
 import parse from 'html-react-parser'
 import ChapterActions from './ChapterActions'
 import Attachements from './Attachements'
-
-import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
-import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
+import Layout from './Layout'
 
 function Chapter(props) {
   const [data, setData] = useState({})
@@ -155,8 +153,6 @@ function Chapter(props) {
     }
   }
 
-  const currentChapter = props?.match?.params?.chapterId
-
   useEffect(() => {
     window.addEventListener('resize', () => {
       updatePosition()
@@ -236,7 +232,7 @@ function Chapter(props) {
         items={courses}
         program={program}
         loadingcourses={loadingcourses}
-        currentChapter={currentChapter}
+        currentChapter={chapterId}
       />
       <CoursVideo {...videoData} />
       <ChapterActions />
