@@ -1,5 +1,3 @@
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
 import React, { useEffect, useRef, useState } from 'react'
 import TopBar from './TopBar'
 import SideBar from './SideBar'
@@ -260,8 +258,7 @@ function Chapter(props) {
   const isLastProgram = localStorage.getItem(LAST_PROGRAM_ID) === data.field_program
   document.title = `${data?.title} - HBKU-SOOS`
   return (
-    <>
-      <Header />
+    <Layout id={id}>
       <Review
         refreshReview={refreshReview}
         programId={id}
@@ -320,8 +317,7 @@ function Chapter(props) {
           <Professor {...professorData} />
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   )
 }
 export default Chapter
