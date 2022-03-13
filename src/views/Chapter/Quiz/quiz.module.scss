@@ -1,0 +1,22 @@
+.question {
+  width: 100%;
+  .response {
+    width: 100%;
+    margin: 10px 0px;
+    label {
+      &:hover {
+        font-weight: 700;
+      }
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-inline-end: 10px;
+
+      &:checked {
+        & ~ span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
