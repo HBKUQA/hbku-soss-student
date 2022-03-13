@@ -14,6 +14,7 @@ import Attachements from './Attachements'
 import Layout from './Layout'
 
 function Chapter(props) {
+  const { id, chapterId } = props?.match?.params
   const [data, setData] = useState({})
   const [program, setProgram] = useState({})
   // const [loading, setLoading] = useState(true)
@@ -34,7 +35,7 @@ function Chapter(props) {
   const documentRef = useRef()
   const sideBarRef = useRef()
   const userID = useSelector(state => state.User?.user?.uid)
-  const { id, chapterId } = props?.match?.params
+
   const refreshReview = data => {
     setHasReview(true)
     setReview(data.field_review[0].value)
