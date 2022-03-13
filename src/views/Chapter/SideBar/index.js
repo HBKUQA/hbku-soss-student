@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import SideBarItem from './SideBarItem'
 import Toogler from './Toogler'
 import Actions from './Actions'
+import Progress from './Progress'
 
 function SideBar(props) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
@@ -50,13 +51,7 @@ function SideBar(props) {
     <aside ref={props.useRef}>
       <Toogler toogler={props.toogler} />
       <Actions nextUrl={props.nextUrl} percent={percent} />
-
-      <div className='py-3'>
-        <div className='progress'>
-          <div className='progress-bar' style={{ width: `${percent}%` }}></div>
-          <span className='progress-label'>{percent.toFixed(0)}%</span>
-        </div>
-      </div>
+      <Progress percent={percent} />
       <div>
         <div className='header'>
           <div>
