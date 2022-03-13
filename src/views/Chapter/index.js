@@ -12,12 +12,19 @@ import parse from 'html-react-parser'
 import ChapterActions from './ChapterActions'
 import Attachements from './Attachements'
 import Layout from './Layout'
+import { useQuery } from 'react-query'
 
 function Chapter(props) {
   const { id, chapterId } = props?.match?.params
-  const [data, setData] = useState({})
-  const [program, setProgram] = useState({})
-  // const [loading, setLoading] = useState(true)
+
+  const { data = {} } = useQuery(`get-chapter-${chapterId}`, () =>
+    axios.get(`/api/chapter/${chapterId}`).then(res => res.data[0])
+  )
+
+  const { data: program } = useQuery(`get-chapter-${chapterId}-program`, () =>
+    axios.get(`/api/program/${id}`).then(res => res.data[0])
+  )
+
   const [error, setError] = useState(false)
   const [courses, setCourses] = useState([])
   const [loadingcourses, setLoadingCourses] = useState(true)
@@ -63,19 +70,6 @@ function Chapter(props) {
   }, [chapterId])
 
   useEffect(() => {
-    setLoadingCourses(true)
-    axios
-      .get(url)
-      .then(res => {
-        setError(false)
-        // setLoading(false)
-        setProgram(res.data[0])
-      })
-      .catch(() => {
-        // setLoading(false)
-        setError(true)
-      })
-
     axios
       .get(`/api/student/program/${id}/progress`)
       .then(res => {
