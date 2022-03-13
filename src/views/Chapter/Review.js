@@ -2,32 +2,31 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-
+import { useMutation } from 'react-query'
 import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
 import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
 
-function Review(props) {
+function Review({ refetchReview, review, show, isLastProgram, nextUrl, programId }) {
   const [rate, setRate] = useState(0)
   const user = useSelector(state => state.User.user)
-  const sendReview = () => {
-    const data = {
-      type: 'student_review',
-      title: [{ value: `student review ${props.programId}-${user.uid}` }],
-      field_program: [{ target_id: props.programId }],
-      field_review: [{ value: rate }],
-    }
-    axios
-      .post('/node?_format=json', data)
-      .then(res => {
-        props.refreshReview(res.data)
+  console.log(review)
+  const sendRevew = useMutation(
+    () => {
+      return axios.post('/node?_format=json', {
+        type: 'student_review',
+        title: [{ value: `student review ${programId}-${user.uid}` }],
+        field_program: [{ target_id: programId }],
+        field_review: [{ value: rate }],
       })
-      .catch(() => {})
-  }
-  if (!props.add) return <></>
+    },
+    {
+      onSuccess: () => refetchReview(),
+    }
+  )
 
-  if (props.isLastProgram && props.hasReview)
+  if (isLastProgram && review)
     return (
-      <div className={`modal${props.show ? ' show' : ''}`}>
+      <div className={`modal${show ? ' show' : ''}`}>
         <div className='modal-content text-start'>
           <div className='text-start pt-4'>
             <p className='pb-4'>Dear Student,</p>
@@ -57,17 +56,21 @@ function Review(props) {
       </div>
     )
 
-  if (props.hasReview)
+  if (review)
     return (
-      <div className={`modal${props.show ? ' show' : ''}`}>
+      <div className={`modal${show ? ' show' : ''}`}>
         <div className='modal-content'>
           <h3>Thank you for your review</h3>
           <div className='review text-primary'>
             {Array.from({ length: 5 }).map((e, k) => (
-              <i key={k} className={`${k + 1 <= props.review ? 'fas fa-star' : 'far fa-star'}`}></i>
+              <i
+                key={k}
+                className={`${
+                  k + 1 <= parseInt(review.field_review, 10) ? 'fas fa-star' : 'far fa-star'
+                }`}></i>
             ))}
           </div>
-          <a href={props.nextUrl} className='btn btn-primary hover-outline'>
+          <a href={nextUrl} className='btn btn-primary hover-outline'>
             <ChapterIcon />
             <span className='ms-2'>Go to next chapter</span>
           </a>
@@ -79,7 +82,7 @@ function Review(props) {
       </div>
     )
   return (
-    <div className={`modal${props.show ? ' show' : ''}`}>
+    <div className={`modal${show ? ' show' : ''}`}>
       <div className='modal-content'>
         <h3>Do you want to review this chapter ?</h3>
         <div className='review text-primary'>
@@ -90,7 +93,7 @@ function Review(props) {
               className={`${k + 1 <= rate ? 'fas fa-star' : 'far fa-star'}`}></i>
           ))}
         </div>
-        <button onClick={sendReview} disabled={rate === 0} className='btn btn-dark'>
+        <button onClick={sendRevew.mutate} disabled={rate === 0} className='btn btn-dark'>
           Send review
         </button>
       </div>

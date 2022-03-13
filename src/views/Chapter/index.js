@@ -13,7 +13,6 @@ import CourseDetails from './CourseDetails'
 
 function Chapter(props) {
   const { id, chapterId } = props?.match?.params
-
   const {
     data = {},
     refetch: refetchData,
@@ -24,6 +23,10 @@ function Chapter(props) {
 
   const { data: program } = useQuery(`get-chapter-${chapterId}-program`, () =>
     axios.get(`/api/program/${id}`).then(res => res.data[0])
+  )
+
+  const { data: review, refetch: refetchReview } = useQuery(`get-program-review-${id}`, () =>
+    axios.get(`/api/student/program/${id}/review`).then(res => res.data[0])
   )
 
   const {
@@ -43,31 +46,15 @@ function Chapter(props) {
 
   const [showReview, setShowReview] = useState(false)
   const [hasReview, setHasReview] = useState(false)
-  const [review, setReview] = useState(0)
   const [nextUrl, setNextUrl] = useState('')
 
   const loadingcourses = isLoadingcourses || isFetchingcourses
-
-  const refreshReview = data => {
-    setHasReview(true)
-    setReview(data.field_review[0].value)
-  }
 
   useEffect(() => {
     refetchData()
   }, [refetchData, chapterId])
 
   useEffect(() => {
-    axios
-      .get(`/api/student/program/${id}/review`)
-      .then(res => {
-        if (res.data?.[0]) {
-          setHasReview(true)
-          setReview(res.data?.[0].field_review)
-        }
-      })
-      .catch(() => {})
-
     axios
       .get('/api/programs')
       .then(res => {
@@ -103,13 +90,10 @@ function Chapter(props) {
   return (
     <Layout programId={id} chapterId={chapterId}>
       <Review
-        refreshReview={refreshReview}
+        refetchReview={refetchReview}
         review={review}
-        add={isLast}
-        hasReview={hasReview}
-        show={showReview}
+        show={isLast && showReview}
         isLastProgram={isLastProgram}
-        nextUrl={nextUrl}
       />
       <TopBar
         prefix={`${parse(program?.title ?? '')} >  Section ${sectionNumber}`}

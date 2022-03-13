@@ -67,7 +67,8 @@ function Layout({ programId, chapterId, children }) {
   const { data: list = [] } = useQuery('get-programs-list', () =>
     axios.get('/api/programs').then(res => res.data.map(e => e.nid))
   )
-  const nextProgram = list[list.indexOf(id) + 1]
+
+  const nextProgram = list[list.indexOf(programId) + 1]
 
   useEffect(() => {
     axios
