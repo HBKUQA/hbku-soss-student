@@ -155,7 +155,15 @@ function Chapter(props) {
         loadingcourses={loadingcourses}
         currentChapter={chapterId}
       />
-      <CoursVideo field_video={data?.field_video} />
+      <CoursVideo
+        progress={progress}
+        nextProgress={nextProgress}
+        isLast={isLast}
+        progressID={progressID}
+        setProgress={setProgress}
+        setShowReview={setShowReview}
+        field_video={data?.field_video}
+      />
       <ChapterActions />
       <CourseDetails id={id} sections={sections} />
     </Layout>
