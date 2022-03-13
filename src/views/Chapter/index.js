@@ -5,14 +5,12 @@ import axios from 'axios'
 import CoursVideo from './CoursVideo'
 import Review from './Review'
 import { useSelector } from 'react-redux'
-import { professorData } from '../Landing/data'
-import Professor from '../Landing/Professor'
 import { LAST_PROGRAM_ID } from '../../params'
 import parse from 'html-react-parser'
 import ChapterActions from './ChapterActions'
-import Attachements from './Attachements'
 import Layout from './Layout'
 import { useQuery } from 'react-query'
+import CourseDetails from './CourseDetails'
 
 function Chapter(props) {
   const { id, chapterId } = props?.match?.params
@@ -233,18 +231,7 @@ function Chapter(props) {
       />
       <CoursVideo {...videoData} />
       <ChapterActions />
-      <div className='container course-detail'>
-        <div ref={documentRef}>
-          {sections.map((e, k) => (
-            <React.Fragment key={k}>
-              <h2>{parse(e.title)}</h2>
-              <p dangerouslySetInnerHTML={{ __html: parse(e.description) }}></p>
-            </React.Fragment>
-          ))}
-          <Attachements id={id} />
-          <Professor {...professorData} />
-        </div>
-      </div>
+      <CourseDetails documentRef={documentRef} id={id} sections={sections} />
     </Layout>
   )
 }
