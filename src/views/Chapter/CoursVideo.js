@@ -1,18 +1,16 @@
 import { BASE_URL } from '../../params'
-function CoursVideo(props) {
-  if (props.field_video === undefined)
-    return (
-      <div className='vider-container'>
-        <div className='container'>
-          <div ref={props.videoRef}></div>
-        </div>
-      </div>
-    )
+
+function CoursVideo({ videoRef, field_video }) {
+  const end = () => {
+  }
+
   return (
     <div className='vider-container'>
       <div className='container'>
-        <div ref={props.videoRef}>
-          <video onEnded={props.end} src={BASE_URL + props.field_video} controls autoPlay></video>
+        <div ref={videoRef}>
+          {field_video === undefined ? null : (
+            <video onEnded={end} src={BASE_URL + field_video} controls autoPlay></video>
+          )}
         </div>
       </div>
     </div>

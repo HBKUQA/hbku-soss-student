@@ -198,7 +198,7 @@ function Chapter(props) {
         loadingcourses={loadingcourses}
         currentChapter={chapterId}
       />
-      <CoursVideo videoRef={videoRef} field_video={data?.field_video} {...videoData} />
+      <CoursVideo videoRef={videoRef} field_video={data?.field_video} />
       <ChapterActions />
       <CourseDetails documentRef={documentRef} id={id} sections={sections} />
     </Layout>
