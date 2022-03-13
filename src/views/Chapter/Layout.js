@@ -3,13 +3,43 @@ import axios from 'axios'
 import { useQuery } from 'react-query'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import { useSelector } from 'react-redux'
 
 function Layout({ programId, chapterId, children }) {
   const [nextUrl, setNextUrl] = useState('')
+  const [progress, setProgress] = useState(0)
+  const [progressID, setProgressID] = useState(null)
+  const userID = useSelector(state => state.User?.user?.uid)
 
   const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
+
+  axios
+    .get(`/api/student/program/${programId}/progress`)
+    .then(res => {
+      const progress = res.data.sort((a, b) => a.nid - b.nid)
+      setProgress(
+        isNaN(progress[0].field_process) || progress[0].field_process === ''
+          ? 0
+          : progress[0].field_process
+      )
+      setProgressID(progress[0].nid)
+    })
+    .catch(() => {
+      axios
+        .post('/node?_format=json', {
+          type: 'student_progress',
+          title: [{ value: `student progess ${programId}-${userID}` }],
+          field_program: [{ target_id: programId }],
+          field_process: [{ value: 0 }],
+        })
+        .then(newProgress => newProgress.data)
+        .then(newProgress => {
+          setProgress(0)
+          setProgressID(newProgress.nid[0].value)
+        })
+    })
 
   const updatePosition = () => {
     const sidebarDOM = sideBarRef?.current
@@ -60,6 +90,9 @@ function Layout({ programId, chapterId, children }) {
           documentRef,
           sideBarRef,
           updatePosition,
+          progress,
+          setProgress,
+          progressID,
         })
       })}
       <Footer />

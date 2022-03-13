@@ -4,7 +4,6 @@ import SideBar from './SideBar'
 import axios from 'axios'
 import CoursVideo from './CoursVideo'
 import Review from './Review'
-import { useSelector } from 'react-redux'
 import { LAST_PROGRAM_ID } from '../../params'
 import parse from 'html-react-parser'
 import ChapterActions from './ChapterActions'
@@ -39,8 +38,7 @@ function Chapter(props) {
   )
 
   const [error, setError] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [progressID, setProgressID] = useState(null)
+
   const [showReview, setShowReview] = useState(false)
   const [hasReview, setHasReview] = useState(false)
   const [review, setReview] = useState(0)
@@ -48,8 +46,6 @@ function Chapter(props) {
   const [percent, setPercent] = useState(0)
 
   const loadingcourses = isLoadingcourses || isFetchingcourses
-
-  const userID = useSelector(state => state.User?.user?.uid)
 
   const refreshReview = data => {
     setHasReview(true)
@@ -63,32 +59,6 @@ function Chapter(props) {
   }, [refetchData, chapterId])
 
   useEffect(() => {
-    axios
-      .get(`/api/student/program/${id}/progress`)
-      .then(res => {
-        const progress = res.data.sort((a, b) => a.nid - b.nid)
-        setProgress(
-          isNaN(progress[0].field_process) || progress[0].field_process === ''
-            ? 0
-            : progress[0].field_process
-        )
-        setProgressID(progress[0].nid)
-      })
-      .catch(() => {
-        axios
-          .post('/node?_format=json', {
-            type: 'student_progress',
-            title: [{ value: `student progess ${id}-${userID}` }],
-            field_program: [{ target_id: id }],
-            field_process: [{ value: 0 }],
-          })
-          .then(newProgress => newProgress.data)
-          .then(newProgress => {
-            setProgress(0)
-            setProgressID(newProgress.nid[0].value)
-          })
-      })
-
     axios
       .get(`/api/student/program/${id}/review`)
       .then(res => {
@@ -147,20 +117,15 @@ function Chapter(props) {
         title={parse(data?.title ?? '')}
       />
       <SideBar
-        progress={progress}
         setPercent={setPercent}
-        progressID={progressID}
         items={courses}
         program={program}
         loadingcourses={loadingcourses}
         currentChapter={chapterId}
       />
       <CoursVideo
-        progress={progress}
         nextProgress={nextProgress}
         isLast={isLast}
-        progressID={progressID}
-        setProgress={setProgress}
         setShowReview={setShowReview}
         field_video={data?.field_video}
       />
