@@ -25,9 +25,22 @@ function Chapter(props) {
     axios.get(`/api/program/${id}`).then(res => res.data[0])
   )
 
+  const {
+    data: courses = [],
+    isLoading: isLoadingcourses,
+    isFetching: isFetchingcourses,
+  } = useQuery(`get-chapter-${chapterId}-courses`, () =>
+    axios.get(`/api/program/${id}/chapters`).then(res =>
+      res.data.map(e => ({
+        id: e.nid,
+        title: e.title,
+        time: e.field_video_duration,
+        done: false,
+      }))
+    )
+  )
+
   const [error, setError] = useState(false)
-  const [courses, setCourses] = useState([])
-  const [loadingcourses, setLoadingCourses] = useState(true)
   const [progress, setProgress] = useState(0)
   const [progressID, setProgressID] = useState(null)
   const [showReview, setShowReview] = useState(false)
@@ -37,6 +50,8 @@ function Chapter(props) {
   const [loadingAttachements, setLoadingAttachements] = useState(true)
   const [nextUrl, setNextUrl] = useState('')
   const [percent, setPercent] = useState(0)
+
+  const loadingcourses = isLoadingcourses || isFetchingcourses
 
   const videoRef = useRef()
   const documentRef = useRef()
