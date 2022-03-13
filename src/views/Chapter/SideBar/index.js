@@ -1,11 +1,10 @@
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import parse from 'html-react-parser'
 
-import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
-import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
 import { useEffect, useRef } from 'react'
 import SideBarItem from './SideBarItem'
 import Toogler from './Toogler'
+import Actions from './Actions'
 
 function SideBar(props) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
@@ -20,6 +19,7 @@ function SideBar(props) {
   const percent = (progressValue * 100) / progressMax
 
   const { setPercent } = props
+
   useEffect(() => {
     if (oldPercent.current === percent) return
     setPercent(percent)
@@ -39,6 +39,7 @@ function SideBar(props) {
   if (!props.loadingcourses) {
     const accesible = sidebarList.filter(e => e.link)
     const current = sidebarList.filter(e => e.id === props.currentChapter)[0]
+
     if (current === undefined) return <Redirect to='/programs'></Redirect>
     if (!current.link && props.progressID !== null) {
       return <Redirect to={`/program/17/${accesible[accesible.length - 1].id}`} />
@@ -48,24 +49,8 @@ function SideBar(props) {
   return (
     <aside ref={props.useRef}>
       <Toogler toogler={props.toogler} />
-      <div className='actions'>
-        <Link to='/programs' className='btn btn-outline-dark'>
-          <ListIcon />
-          <span className='ms-2'>All chapters</span>
-        </Link>
+      <Actions nextUrl={props.nextUrl} percent={percent} />
 
-        {percent === 100 ? (
-          <a href={props.nextUrl} className='btn btn-outline-dark' disabled>
-            <ChapterIcon />
-            <span className='ms-2'>Next Chapter</span>
-          </a>
-        ) : (
-          <button className='btn btn-outline-dark' disabled>
-            <ChapterIcon />
-            <span className='ms-2'>Next Chapter</span>
-          </button>
-        )}
-      </div>
       <div className='py-3'>
         <div className='progress'>
           <div className='progress-bar' style={{ width: `${percent}%` }}></div>
