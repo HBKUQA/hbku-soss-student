@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 
-function Layout({ id, children }) {
+function Layout({ programId, chapterId, children }) {
   const [nextUrl, setNextUrl] = useState('')
 
   const { data: list = [] } = useQuery('get-programs-list', () =>
@@ -25,9 +25,7 @@ function Layout({ id, children }) {
     <>
       <Header />
       {Children.map(children, child => {
-        return cloneElement(child, {
-          nextUrl,
-        })
+        return cloneElement(child, { nextUrl, programId, chapterId })
       })}
       <Footer />
     </>

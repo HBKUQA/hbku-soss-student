@@ -167,14 +167,14 @@ function Chapter(props) {
   if (error) return <></>
 
   const sectionNumber = courses.findIndex(e => e.id === data?.nid) + 1
-
   const isLastProgram = localStorage.getItem(LAST_PROGRAM_ID) === data.field_program
+
   document.title = `${data?.title} - HBKU-SOOS`
+
   return (
-    <Layout id={id}>
+    <Layout programId={id} chapterId={chapterId}>
       <Review
         refreshReview={refreshReview}
-        programId={id}
         review={review}
         add={isLast}
         hasReview={hasReview}
@@ -190,7 +190,6 @@ function Chapter(props) {
         progress={progress}
         useRef={sideBarRef}
         toogler={toogler}
-        programId={id}
         setPercent={setPercent}
         progressID={progressID}
         items={courses}
