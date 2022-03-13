@@ -9,7 +9,7 @@ import { professorData } from '../Landing/data'
 import Professor from '../Landing/Professor'
 import { LAST_PROGRAM_ID } from '../../params'
 import parse from 'html-react-parser'
-import { Link } from 'react-router-dom'
+import ChapterActions from './ChapterActions'
 import Attachements from './Attachements'
 
 import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
@@ -230,7 +230,6 @@ function Chapter(props) {
         progress={progress}
         useRef={sideBarRef}
         toogler={toogler}
-        nextUrl={nextUrl}
         programId={id}
         setPercent={setPercent}
         progressID={progressID}
@@ -240,24 +239,7 @@ function Chapter(props) {
         currentChapter={currentChapter}
       />
       <CoursVideo {...videoData} />
-      <div className='container video-action'>
-        <Link to='/programs' className='btn btn-dark'>
-          <ListIcon />
-          <span className='ms-2'>All chapters</span>
-        </Link>
-
-        {percent === 100 ? (
-          <a href={nextUrl} className='btn btn-dark' disabled>
-            <ChapterIcon />
-            <span className='ms-2'>Next Chapter</span>
-          </a>
-        ) : (
-          <button className='btn btn-dark' disabled>
-            <ChapterIcon />
-            <span className='ms-2'>Next Chapter</span>
-          </button>
-        )}
-      </div>
+      <ChapterActions />
       <div className='container course-detail'>
         <div ref={documentRef}>
           {sections.map((e, k) => (
