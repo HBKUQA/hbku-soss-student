@@ -46,8 +46,6 @@ function Chapter(props) {
   const [showReview, setShowReview] = useState(false)
   const [hasReview, setHasReview] = useState(false)
   const [review, setReview] = useState(0)
-  const [attachements, setAttachements] = useState([])
-  const [loadingAttachements, setLoadingAttachements] = useState(true)
   const [nextUrl, setNextUrl] = useState('')
   const [percent, setPercent] = useState(0)
 
@@ -109,17 +107,6 @@ function Chapter(props) {
             setProgress(0)
             setProgressID(newProgress.nid[0].value)
           })
-      })
-
-    axios
-      .get(`/api/program/${id}/attachments`)
-      .then(res => {
-        setAttachements(res.data)
-        setLoadingAttachements(false)
-      })
-      .catch(() => {
-        setAttachements([])
-        setLoadingAttachements(false)
       })
 
     axios
