@@ -10,7 +10,7 @@ import Professor from '../Landing/Professor'
 import { LAST_PROGRAM_ID } from '../../params'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
-import { BASE_URL } from '../../params'
+import Attachements from './Attachements'
 
 import { ReactComponent as ChapterIcon } from '../../assets/svg/chapter.svg'
 import { ReactComponent as ListIcon } from '../../assets/svg/bullet-list-marked.svg'
@@ -31,34 +31,6 @@ function Chapter(props) {
   const [loadingAttachements, setLoadingAttachements] = useState(true)
   const [nextUrl, setNextUrl] = useState('')
   const [percent, setPercent] = useState(0)
-  const Attachements = () => {
-    if (loadingAttachements) {
-      return (
-        <div className='text-center'>
-          <i className='fas fa-spinner fa-spin'></i>
-        </div>
-      )
-    }
-    if (attachements.length !== 0) {
-      return (
-        <>
-          <h2>Attachments</h2>
-          <ul>
-            {attachements.map((e, k) => (
-              <li key={k} className='py-1'>
-                <a href={BASE_URL + e.field_attachment} target='_blank' rel='noreferrer'>
-                  <i className='fas fa-download me-2'></i>
-                  {e.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )
-    } else {
-      return <></>
-    }
-  }
 
   const videoRef = useRef()
   const documentRef = useRef()
@@ -92,26 +64,7 @@ function Chapter(props) {
   }, [chapterId])
 
   useEffect(() => {
-    setAttachements([])
-    setLoadingAttachements(true)
     setLoadingCourses(true)
-    axios
-      .get(`/api/program/${id}/chapters`)
-      .then(res => {
-        setCourses(
-          res.data.map(e => ({
-            id: e.nid,
-            title: e.title,
-            time: e.field_video_duration,
-            done: false,
-          }))
-        )
-        setLoadingCourses(false)
-      })
-      .catch(() => {
-        setLoadingCourses(false)
-      })
-
     axios
       .get(url)
       .then(res => {
@@ -313,7 +266,7 @@ function Chapter(props) {
               <p dangerouslySetInnerHTML={{ __html: parse(e.description) }}></p>
             </React.Fragment>
           ))}
-          <Attachements />
+          <Attachements id={id} />
           <Professor {...professorData} />
         </div>
       </div>
