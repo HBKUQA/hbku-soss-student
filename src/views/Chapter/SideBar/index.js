@@ -1,5 +1,5 @@
 import { Redirect } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import SideBarItem from './SideBarItem'
 import Toogler from './Toogler'
 import Actions from './Actions'
@@ -10,20 +10,12 @@ function SideBar({ sideBarRef, videoRef, documentRef, updatePosition, ...props }
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
   const numberOfChapters = props.items.length === 0 ? 1 : props.items.length
   const chapterProgress = 1 / numberOfChapters
-  const oldPercent = useRef(0)
   const progressValue = props.items.filter(
     (_, k) => (chapterProgress * k).toFixed(2) < progress
   ).length
 
   const progressMax = props.items.length === 0 ? 1 : props.items.length
   const percent = (progressValue * 100) / progressMax
-
-  const { setPercent } = props
-
-  useEffect(() => {
-    if (oldPercent.current === percent) return
-    setPercent(percent)
-  }, [percent, setPercent])
 
   const cleanData = (e, k) => ({
     ...e,

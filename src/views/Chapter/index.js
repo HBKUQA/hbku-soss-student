@@ -43,7 +43,6 @@ function Chapter(props) {
   const [hasReview, setHasReview] = useState(false)
   const [review, setReview] = useState(0)
   const [nextUrl, setNextUrl] = useState('')
-  const [percent, setPercent] = useState(0)
 
   const loadingcourses = isLoadingcourses || isFetchingcourses
 
@@ -83,7 +82,7 @@ function Chapter(props) {
           .catch(() => null)
       })
       .catch(() => null)
-  }, [id, url, userID])
+  }, [id])
 
   const sections = data?.field_paragraphs_export ?? []
 
@@ -117,7 +116,6 @@ function Chapter(props) {
         title={parse(data?.title ?? '')}
       />
       <SideBar
-        setPercent={setPercent}
         items={courses}
         program={program}
         loadingcourses={loadingcourses}
