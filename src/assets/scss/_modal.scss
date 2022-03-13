@@ -16,13 +16,14 @@
 
   .modal-content {
     max-width: 70%;
+    max-height: calc(100vh - 20px);
+    overflow: auto;
     padding: 1rem 3rem;
     background: $white;
     border: 2px solid $primary-dark;
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: $default-gap;
     .review {
