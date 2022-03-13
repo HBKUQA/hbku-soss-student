@@ -6,7 +6,7 @@ import Actions from './Actions'
 import Progress from './Progress'
 import SidebarHeader from './SidebarHeader'
 
-function SideBar(props) {
+function SideBar({ sideBarRef, ...props }) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
   const numberOfChapters = props.items.length === 0 ? 1 : props.items.length
   const chapterProgress = 1 / numberOfChapters
@@ -47,7 +47,7 @@ function SideBar(props) {
   }
 
   return (
-    <aside ref={props.useRef}>
+    <aside ref={sideBarRef}>
       <Toogler toogler={props.toogler} />
       <Actions nextUrl={props.nextUrl} percent={percent} />
       <Progress percent={percent} />
