@@ -38,7 +38,7 @@ function SideBar({ sideBarRef, videoRef, documentRef, updatePosition, ...props }
     updatePosition()
   }
 
-  useEffect(toogler, [documentRef, sideBarRef, updatePosition, videoRef])
+  useEffect(updatePosition, [updatePosition])
 
   const sidebarList = props.items.map(cleanData)
   if (!props.loadingcourses) {

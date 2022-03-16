@@ -1,5 +1,16 @@
+.title {
+  margin: 16px 0px;
+  text-align: center;
+}
+
+.errorDiv {
+  color: red;
+  font-weight: 700;
+  font-size: 12px;
+}
 .question {
   width: 100%;
+  margin: 15px 0px;
   .response {
     width: 100%;
     margin: 10px 0px;
@@ -9,7 +20,7 @@
       }
       cursor: pointer;
     }
-    input[type="radio"] {
+    input[type="checkbox"] {
       margin-inline-end: 10px;
 
       &:checked {

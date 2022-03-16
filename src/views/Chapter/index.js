@@ -46,6 +46,7 @@ function Chapter(props) {
   )
 
   const [showReview, setShowReview] = useState(false)
+  const [showQuiz, setShowQuiz] = useState(false)
 
   const loadingcourses = isLoadingcourses || isFetchingcourses
 
@@ -77,7 +78,7 @@ function Chapter(props) {
         show={isLast && showReview}
         isLastProgram={isLastProgram}
       />
-      <Quiz />
+      <Quiz show={showQuiz} setShowQuiz={setShowQuiz} setShowReview={setShowReview} />
       <TopBar
         prefix={`${parse(program?.title ?? '')} >  Section ${sectionNumber}`}
         title={parse(data?.title ?? '')}
@@ -91,7 +92,7 @@ function Chapter(props) {
       <CoursVideo
         nextProgress={nextProgress}
         isLast={isLast}
-        setShowReview={setShowReview}
+        setShowQuiz={setShowQuiz}
         field_video={data?.field_video}
       />
       <ChapterActions />

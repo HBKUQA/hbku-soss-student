@@ -9,29 +9,20 @@ function CoursVideo({
   field_video,
   isLast,
   progressID,
-  setShowReview,
+  setShowQuiz,
 }) {
   const end = () => {
     if (isLast) {
-      setShowReview(true)
+      setShowQuiz(true)
       axios
-        .patch(`/node/${progressID}`, {
-          type: 'student_progress',
-          field_process: [{ value: 100 }],
-        })
-        .then(() => {
-          setProgress(100)
-        })
+        .patch(`/node/${progressID}`, { type: 'student_progress', field_process: [{ value: 100 }] })
+        .then(() => setProgress(100))
         .catch(() => null)
     } else if (nextProgress * 100 > progress) {
+      const value = nextProgress * 100
       axios
-        .patch(`/node/${progressID}`, {
-          type: 'student_progress',
-          field_process: [{ value: nextProgress * 100 }],
-        })
-        .then(() => {
-          setProgress(nextProgress * 100)
-        })
+        .patch(`/node/${progressID}`, { type: 'student_progress', field_process: [{ value }] })
+        .then(() => setProgress(value))
         .catch(() => null)
     }
   }

@@ -14,32 +14,33 @@ function Layout({ programId, chapterId, children }) {
   const videoRef = useRef()
   const documentRef = useRef()
   const sideBarRef = useRef()
-
-  axios
-    .get(`/api/student/program/${programId}/progress`)
-    .then(res => {
-      const progress = res.data.sort((a, b) => a.nid - b.nid)
-      setProgress(
-        isNaN(progress[0].field_process) || progress[0].field_process === ''
-          ? 0
-          : progress[0].field_process
-      )
-      setProgressID(progress[0].nid)
-    })
-    .catch(() => {
-      axios
-        .post('/node?_format=json', {
-          type: 'student_progress',
-          title: [{ value: `student progess ${programId}-${userID}` }],
-          field_program: [{ target_id: programId }],
-          field_process: [{ value: 0 }],
-        })
-        .then(newProgress => newProgress.data)
-        .then(newProgress => {
-          setProgress(0)
-          setProgressID(newProgress.nid[0].value)
-        })
-    })
+  useEffect(() => {
+    axios
+      .get(`/api/student/program/${programId}/progress`)
+      .then(res => {
+        const progress = res.data.sort((a, b) => a.nid - b.nid)
+        setProgress(
+          isNaN(progress[0].field_process) || progress[0].field_process === ''
+            ? 0
+            : progress[0].field_process
+        )
+        setProgressID(progress[0].nid)
+      })
+      .catch(() => {
+        axios
+          .post('/node?_format=json', {
+            type: 'student_progress',
+            title: [{ value: `student progess ${programId}-${userID}` }],
+            field_program: [{ target_id: programId }],
+            field_process: [{ value: 0 }],
+          })
+          .then(newProgress => newProgress.data)
+          .then(newProgress => {
+            setProgress(0)
+            setProgressID(newProgress.nid[0].value)
+          })
+      })
+  }, [programId, userID])
 
   const updatePosition = () => {
     const sidebarDOM = sideBarRef?.current
