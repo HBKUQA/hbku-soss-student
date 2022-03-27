@@ -12,22 +12,22 @@ function QuizSection({
     <div className={style.question}>
       <h3>{parse(quiz_question)}</h3>
       {error && <span className={style.errorDiv}>{error}</span>}
-      {quiz_answers.map(answer => (
-        <div className={style.response} key={answer}>
+      {quiz_answers.map(({ id, quiz_answer, ...answer }) => (
+        <div className={style.response} key={id}>
           <label>
             <input
-              checked={responses.includes(answer)}
-              value={answer}
+              checked={responses.includes(id)}
+              value={quiz_answer}
               type='checkbox'
               onChange={() => {
                 let newResponses = JSON.parse(JSON.stringify(responses))
-                if (newResponses.includes(answer))
-                  newResponses = newResponses.filter(answ => answ !== answer)
-                else newResponses.push(answer)
+                if (newResponses.includes(id))
+                  newResponses = newResponses.filter(answ => answ !== id)
+                else newResponses.push(id)
                 setResponses(newResponses)
               }}
             />
-            <span>{answer}</span>
+            <span>{quiz_answer}</span>
           </label>
         </div>
       ))}
