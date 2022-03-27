@@ -69,15 +69,19 @@ function Quiz({ programId, show, setShowQuiz, setShowReview }) {
           quiz_id: nid,
           program_id: programId,
           student_id: user.uid,
-          quiz_multiple_questions: questions.map(({ quiz_question, id: qid }) => ({
+          quiz_multiple_questions: questions.map(({ quiz_question, id: qid, answers }) => ({
             quiz_question: quiz_question,
-            quiz_answers: responses[qid],
+            quiz_answers: answers.map(({ id: answerId, quiz_answer, quiz_answer_is_correct }) => ({
+              answer: quiz_answer,
+              correct: !(quiz_answer_is_correct ^ responses[qid].includes(answerId)),
+            })),
           })),
         })
         .then(() => {
           setShowQuiz(false)
           setShowReview(true)
         })
+        .catch(() => null)
   }
 
   return (
