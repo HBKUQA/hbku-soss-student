@@ -5,6 +5,8 @@ import Toogler from './Toogler'
 import Actions from './Actions'
 import Progress from './Progress'
 import SidebarHeader from './SidebarHeader'
+import { useSelector } from "react-redux"
+import { SUPER_ADMINS } from "../../../params"
 
 function SideBar({ sideBarRef, videoRef, documentRef, updatePosition, ...props }) {
   const progress = ((parseInt(props.progress) ?? 0) / 100).toFixed(2)
@@ -15,15 +17,23 @@ function SideBar({ sideBarRef, videoRef, documentRef, updatePosition, ...props }
   ).length
 
   const progressMax = props.items.length === 0 ? 1 : props.items.length
-  const percent = (progressValue * 100) / progressMax
+  const percent = (progressValue * 100) / progressMax;
+
+  const userID = useSelector(state => state.User?.user?.uid)
+  let superAdmin = false
+
+
+  if(SUPER_ADMINS.includes(userID)){
+    superAdmin = true
+  }
 
   const cleanData = (e, k) => ({
     ...e,
     currentChapter: e.id === props.currentChapter,
     checked: (chapterProgress * k).toFixed(2) < progress,
-    link:
-      (chapterProgress * k).toFixed(2) < progress ||
-      (chapterProgress * (k - 1)).toFixed(2) < progress,
+    link: superAdmin ? true :
+        ((chapterProgress * k).toFixed(2) < progress ||
+      (chapterProgress * (k - 1)).toFixed(2) < progress) ,
     programId: props.programId,
   })
 
